@@ -6,11 +6,14 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 11:59:31 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/01/17 15:20:03 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/01/17 17:43:21 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+//count_op - runs through the string and counts each operator found
+//Probably needs fix to account for >> and <<
 
 int	count_op(char *str)
 {
@@ -28,6 +31,9 @@ int	count_op(char *str)
 	return (count);
 }
 
+//alloc_sep - allocates the memory for new string with spaces
+// between each operator (strlen + operator x 2 + \0)
+
 char	*alloc_sep(char *str)
 {
 	int		len;
@@ -41,6 +47,10 @@ char	*alloc_sep(char *str)
 		return (NULL);
 	return (ptr);
 }
+
+//separate - function that adds a space before and after each operator
+// takes into account if it's just > or if it's >>
+// NEEDS FIXING - also adds space when between " or ' 
 
 char	*separate(char *str)
 {
@@ -69,6 +79,7 @@ char	*separate(char *str)
 	}
 	return (ptr);
 }
+//lexer - runs everything else, separate then split, and frees everything.
 
 char	**lexer(char *str)
 {
@@ -80,8 +91,9 @@ char	**lexer(char *str)
 	free (sep);
 	return (lex);
 }
+// main for testing lexer
 
-int	main(int argc, char **argv)
+/* int	main(int argc, char **argv)
 {
 	char	**lex;
 	int		i;
@@ -105,4 +117,4 @@ int	main(int argc, char **argv)
 		free(lex);
 	}
 	return (0);
-}
+} */
