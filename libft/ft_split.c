@@ -6,11 +6,13 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 19:34:57 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/01/17 16:11:55 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/01/17 17:35:00 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+//inv_comma - runs the string when the first " or ' is found until the next one.
 
 int	inv_comma(char const *ptr, int i, char c)
 {
@@ -25,6 +27,9 @@ int	inv_comma(char const *ptr, int i, char c)
 	}
 	return (count);
 }
+
+//ft_wcount - counts number of words in the string using char c as separator
+// and running inv_comma when " or ' is found to skip that part.
 
 int	ft_wcount(char const *s, char c)
 {
@@ -50,6 +55,7 @@ int	ft_wcount(char const *s, char c)
 	}
 	return (count);
 }
+//ft_wlen - counts the size of the word, using char c (separator) as end point.
 
 int	ft_wlen(char const *s, char c, int i)
 {
@@ -63,6 +69,11 @@ int	ft_wlen(char const *s, char c, int i)
 	}
 	return (len);
 }
+
+//ft_split - breaks the string into several using char c as separator and
+// using inv_comma to respect " and ' functionality.
+//In the case with inv_comma, +1 is added to j + i because inv_comma ends
+//at the position of the last comma, which would make split run inv_comma again.
 
 char	**ft_split(char const *s, char c)
 {
