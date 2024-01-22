@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 11:59:31 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/01/22 16:17:45 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/01/22 16:20:07 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,9 +94,7 @@ char	*separate(char *str)
 			ptr[j] = str[i];
 		j++;
 		i++;
-		printf("i = %d\n", i);
 	}
-	printf("\nstring = %s\n", ptr);
 	return (ptr);
 }
 //lexer - runs everything else, separate then split, and frees everything.
@@ -113,7 +111,7 @@ char	**lexer(char *str)
 }
 // main for testing lexer
 
-int	main(int argc, char **argv)
+/* int	main(int argc, char **argv)
 {
 	char	**lex;
 	int		i;
@@ -122,7 +120,6 @@ int	main(int argc, char **argv)
 	lex = NULL;
 	if (argc == 2)
 	{
-		printf("Operator count: %d\n", count_op(argv[1]));
 		lex = lexer(argv[1]);
 		while (lex[i])
 		{
@@ -138,4 +135,4 @@ int	main(int argc, char **argv)
 		free(lex);
 	}
 	return (0);
-}
+} */
