@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 11:59:31 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/01/17 17:43:21 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/01/22 16:17:45 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,15 @@ int	count_op(char *str)
 	count = 0;
 	while (str[i])
 	{
-		if (str[i] == '|' || str[i] == '<' || str[i] == '>')
+		if (str[i] == 34 || str[i] == 39)
+			i = i + (inv_comma(str, i, str[i])) + 1;
+		if ((str[i] == '<' && str[i + 1] == '<') || \
+			(str[i] == '>' && str[i + 1] == '>'))
+		{
+			count++;
+			i++;
+		}
+		else if (str[i] == '|' || str[i] == '<' || str[i] == '>')
 			count++;
 		i++;
 	}
@@ -49,20 +57,30 @@ char	*alloc_sep(char *str)
 }
 
 //separate - function that adds a space before and after each operator
-// takes into account if it's just > or if it's >>
-// NEEDS FIXING - also adds space when between " or ' 
+// takes into account if it's just > or if it's >> 
 
 char	*separate(char *str)
 {
 	int		i;
 	int		j;
+	int		k;
 	char	*ptr;
 
 	i = 0;
 	j = 0;
+	k = 0;
 	ptr = alloc_sep(str);
 	while (str[i])
 	{
+		if (str[i] == 34 || str[i] == 39)
+			k = (inv_comma(str, i, str[i])) + 1;
+		while (k > 0)
+		{
+			ptr[j] = str[i];
+			j++;
+			i++;
+			k--;
+		}
 		if (str[i] == '|' || str[i] == '<' || str[i] == '>')
 		{
 			ptr[j++] = ' ';
@@ -76,7 +94,9 @@ char	*separate(char *str)
 			ptr[j] = str[i];
 		j++;
 		i++;
+		printf("i = %d\n", i);
 	}
+	printf("\nstring = %s\n", ptr);
 	return (ptr);
 }
 //lexer - runs everything else, separate then split, and frees everything.
@@ -93,7 +113,7 @@ char	**lexer(char *str)
 }
 // main for testing lexer
 
-/* int	main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	char	**lex;
 	int		i;
@@ -102,6 +122,7 @@ char	**lexer(char *str)
 	lex = NULL;
 	if (argc == 2)
 	{
+		printf("Operator count: %d\n", count_op(argv[1]));
 		lex = lexer(argv[1]);
 		while (lex[i])
 		{
@@ -117,4 +138,4 @@ char	**lexer(char *str)
 		free(lex);
 	}
 	return (0);
-} */
+}

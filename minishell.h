@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 11:43:38 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/01/12 14:21:08 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/01/22 15:39:28 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ typedef struct s_fd
 }				t_fd;
 
 //libft
+
+int		inv_comma(char const *ptr, int i, char c);
 
 char	**ft_split(char const *s, char c);
 
