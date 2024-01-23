@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 11:59:31 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/01/22 16:20:07 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/01/22 17:18:06 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char	*alloc_sep(char *str)
 }
 
 //separate - function that adds a space before and after each operator
-// takes into account if it's just > or if it's >> 
+// takes into account if it's just > or if it's >> and ignores stuff in ""
 
 char	*separate(char *str)
 {
