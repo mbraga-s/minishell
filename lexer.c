@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 11:59:31 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/01/22 17:18:06 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/01/24 19:54:57 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,28 +59,21 @@ char	*alloc_sep(char *str)
 //separate - function that adds a space before and after each operator
 // takes into account if it's just > or if it's >> and ignores stuff in ""
 
-char	*separate(char *str)
+char	*separate(char *str, char *ptr)
 {
 	int		i;
 	int		j;
 	int		k;
-	char	*ptr;
 
 	i = 0;
 	j = 0;
 	k = 0;
-	ptr = alloc_sep(str);
 	while (str[i])
 	{
 		if (str[i] == 34 || str[i] == 39)
 			k = (inv_comma(str, i, str[i])) + 1;
-		while (k > 0)
-		{
-			ptr[j] = str[i];
-			j++;
-			i++;
-			k--;
-		}
+		while (k-- > 0)
+			ptr[j++] = str[i++];
 		if (str[i] == '|' || str[i] == '<' || str[i] == '>')
 		{
 			ptr[j++] = ' ';
@@ -101,17 +94,19 @@ char	*separate(char *str)
 
 char	**lexer(char *str)
 {
+	char	*ptr;
 	char	*sep;
 	char	**lex;
 
-	sep = separate(str);
+	ptr = alloc_sep(str);
+	sep = separate(str, ptr);
 	lex = ft_split(sep, ' ');
 	free (sep);
 	return (lex);
 }
 // main for testing lexer
 
-/* int	main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	char	**lex;
 	int		i;
@@ -135,4 +130,4 @@ char	**lexer(char *str)
 		free(lex);
 	}
 	return (0);
-} */
+}

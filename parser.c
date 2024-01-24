@@ -6,11 +6,13 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 16:30:04 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/01/24 16:13:01 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/01/24 18:05:33 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+//add_args - appends a string to an already existing array of strings
 
 char	**add_args(char **args, char *token)
 {
@@ -34,6 +36,8 @@ char	**add_args(char **args, char *token)
 	free(args);
 	return (ptr);
 }
+
+//parser - takes the tokens given by lexer and assigns them to a linked list
 
 t_data	*parser(char **token)
 {
@@ -78,7 +82,6 @@ int	main(int argc, char **argv)
 
 	tokens = NULL;
 	data = NULL;
-
 	if (argc == 2)
 	{
 		tokens = lexer(argv[1]);
@@ -86,7 +89,7 @@ int	main(int argc, char **argv)
 		while (data)
 		{
 			printf("\ncmd = %s\n", data->cmd);
-			printf("\nargs = ");
+			printf("args = ");
 			i = 0;
 			while (data->args && data->args[i])
 			{
