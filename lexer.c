@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 11:59:31 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/01/24 19:54:57 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/01/24 20:19:54 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,16 +77,13 @@ char	*separate(char *str, char *ptr)
 		if (str[i] == '|' || str[i] == '<' || str[i] == '>')
 		{
 			ptr[j++] = ' ';
-			ptr[j++] = str[i];
-			if ((str[i] == '<' && str[i + 1] == '<') || \
-				(str[i] == '>' && str[i + 1] == '>'))
-				ptr[j++] = str[++i];
-			ptr[j] = ' ';
+			ptr[j++] = str[i++];
+			if ((str[i] != '|' && str[i] == str[i - 1]))
+				ptr[j++] = str[i++];
+			ptr[j++] = ' ';
 		}
 		else
-			ptr[j] = str[i];
-		j++;
-		i++;
+			ptr[j++] = str[i++];
 	}
 	return (ptr);
 }
@@ -106,7 +103,7 @@ char	**lexer(char *str)
 }
 // main for testing lexer
 
-int	main(int argc, char **argv)
+/* int	main(int argc, char **argv)
 {
 	char	**lex;
 	int		i;
@@ -130,4 +127,4 @@ int	main(int argc, char **argv)
 		free(lex);
 	}
 	return (0);
-}
+} */
