@@ -6,37 +6,64 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 16:30:04 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/01/23 18:18:23 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/01/24 16:13:01 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_data	*parser(char **tokens)
+char	**add_args(char **args, char *token)
+{
+	int		i;
+	int		len;
+	char	**ptr;
+
+	i = 0;
+	len = 0;
+	while (args && args[len])
+		len++;
+	ptr = ft_calloc((len + 2), sizeof(char *));
+	if (!ptr)
+		return (NULL);
+	while (i < len)
+	{
+		ptr[i] = args[i];
+		i++;
+	}
+	ptr[i] = token;
+	free(args);
+	return (ptr);
+}
+
+t_data	*parser(char **token)
 {
 	t_data	*data;
+	t_data	*current;
 	int		i;
 
 	i = 0;
-	data = ft_calloc(1, sizeof(t_data));
-	init_data(data);
-	while (tokens[i])
+	data = ft_lstnew();
+	current = data;
+	while (token[i])
 	{
-		while (ft_strncmp(tokens[i], "|", 2))
+		while (token[i] && ft_strncmp(token[i], "|", 2))
 		{
-			if (!ft_strncmp(tokens[i], "<", 2))
-				data->infile = tokens[++i];
-			else if (!ft_strncmp(tokens[i], ">", 2))
-				data->outfile = tokens[++i];
-			else if (!data->cmd)
-				data->cmd = tokens[i];
+			if (!ft_strncmp(token[i], "<", 2))
+				current->infile = token[++i];
+			else if (!ft_strncmp(token[i], ">", 2))
+				current->outfile = token[++i];
+			else if (!current->cmd)
+				current->cmd = token[i];
 			else
-				printf("Args\n");
-				//data->args = tokens[i];
+				current->args = add_args(current->args, token[i]);
 			i++;
 		}
-		ft_lstadd_back(&data, ft_lstnew());
-		i++;
+		if (token[i] && !ft_strncmp(token[i], "|", 2))
+		{
+			ft_lstadd_back(&current, ft_lstnew());
+			current = current->next;
+			i++;
+		}
 	}
 	return (data);
 }
@@ -45,20 +72,30 @@ t_data	*parser(char **tokens)
 
 int	main(int argc, char **argv)
 {
- 	char	**tokens;
+	char	**tokens;
 	t_data	*data;
-	
+	int		i;
+
 	tokens = NULL;
 	data = NULL;
+
 	if (argc == 2)
 	{
 		tokens = lexer(argv[1]);
 		data = parser(tokens);
-		while (data->next)
+		while (data)
 		{
-			printf("cmd = %s\n", data->cmd);
+			printf("\ncmd = %s\n", data->cmd);
+			printf("\nargs = ");
+			i = 0;
+			while (data->args && data->args[i])
+			{
+				printf("%s ", data->args[i]);
+				i++;
+			}
+			printf("\n");
 			printf("infile = %s\n", data->infile);
-			printf("outile = %s\n", data->outfile);
+			printf("outfile = %s\n", data->outfile);
 			data = data->next;
 		}
 	}
