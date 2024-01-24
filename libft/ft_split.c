@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 19:34:57 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/01/17 17:35:00 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/01/24 20:56:26 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,14 +72,13 @@ int	ft_wlen(char const *s, char c, int i)
 
 //ft_split - breaks the string into several using char c as separator and
 // using inv_comma to respect " and ' functionality.
-//In the case with inv_comma, +1 is added to j + i because inv_comma ends
-//at the position of the last comma, which would make split run inv_comma again.
+//Check earlier versions of this function to better understand what's happening
+// because to follow norm, code had to become a bit spaghetti
 
 char	**ft_split(char const *s, char c)
 {
 	char	**ptr;
 	int		i;
-	int		j;
 	int		k;
 
 	i = 0;
@@ -93,18 +92,14 @@ char	**ft_split(char const *s, char c)
 			i++;
 		if (s[i] == 34 || s[i] == 39)
 		{
-			j = inv_comma(s, i, s[i]);
-			i++;
-			ptr[k] = ft_substr(s, i, j);
-			i = i + j + 1;
+			ptr[k++] = ft_substr(s, (i + 1), inv_comma(s, i, s[i]));
+			i = i + inv_comma(s, i, s[i]) + 2;
 		}
 		else
 		{
-			j = ft_wlen(s, c, i);
-			ptr[k] = ft_substr(s, i, j);
-			i = i + j;
+			ptr[k++] = ft_substr(s, i, ft_wlen(s, c, i));
+			i = i + ft_wlen(s, c, i);
 		}
-		k++;
 	}
 	return (ptr);
 }

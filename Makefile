@@ -6,13 +6,13 @@
 #    By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/22 15:43:04 by mbraga-s          #+#    #+#              #
-#    Updated: 2024/01/24 20:19:58 by mbraga-s         ###   ########.fr        #
+#    Updated: 2024/01/24 20:22:26 by mbraga-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
-SRCS = lexer parse
+SRCS = lexer parser
 
 SRCS_LIBFT = ft_bzero ft_calloc ft_split ft_strlcpy\
 	ft_strlen ft_substr ft_lstadd_back ft_lstnew ft_lstlast\
