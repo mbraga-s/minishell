@@ -24,9 +24,9 @@ INPUT → LEXER → PARSER → EXPANDER → REDIRECTIONS →  EXECUTOR
 
 ### Lexer
 The lexer's function is to tokenize the received input. It does this by separating the operators from any words — adding a *space* before and after each operator. Afterwards, it procceds to split each word into tokens, respecting inverted commas.
-
+<div  align="center">
 `ls -l|"grep a">outfile` → `ls -l | "grep a" > outfile` →`ls` `-l` `|` `"grep a"` `>` `outfile`
-
+</div>
 ### Parser
 >In development
 ### Expander

@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 19:34:57 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/01/24 20:56:26 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/01/25 12:45:20 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ char	**ft_split(char const *s, char c)
 			i++;
 		if (s[i] == 34 || s[i] == 39)
 		{
-			ptr[k++] = ft_substr(s, (i + 1), inv_comma(s, i, s[i]));
+			ptr[k++] = ft_substr(s, (i), inv_comma(s, i, s[i]) + 2);
 			i = i + inv_comma(s, i, s[i]) + 2;
 		}
 		else

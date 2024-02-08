@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 16:30:04 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/01/24 18:05:33 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/02/07 16:51:28 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	**add_args(char **args, char *token)
 		ptr[i] = args[i];
 		i++;
 	}
-	ptr[i] = token;
+	ptr[i] = ft_strdup(token);
 	free(args);
 	return (ptr);
 }
@@ -53,54 +53,28 @@ t_data	*parser(char **token)
 		while (token[i] && ft_strncmp(token[i], "|", 2))
 		{
 			if (!ft_strncmp(token[i], "<", 2))
-				current->infile = token[++i];
+			{
+				i++;
+				current->infile = ft_strdup(token[i]);
+			}
 			else if (!ft_strncmp(token[i], ">", 2))
-				current->outfile = token[++i];
+			{
+				i++;
+				current->outfile = ft_strdup(token[i]);
+			}
 			else if (!current->cmd)
-				current->cmd = token[i];
+				current->cmd = ft_strdup(token[i]);
 			else
 				current->args = add_args(current->args, token[i]);
 			i++;
 		}
 		if (token[i] && !ft_strncmp(token[i], "|", 2))
 		{
+			current->pipe_flag = 1;
 			ft_lstadd_back(&current, ft_lstnew());
 			current = current->next;
 			i++;
 		}
 	}
 	return (data);
-}
-
-// main for testing lexer
-
-int	main(int argc, char **argv)
-{
-	char	**tokens;
-	t_data	*data;
-	int		i;
-
-	tokens = NULL;
-	data = NULL;
-	if (argc == 2)
-	{
-		tokens = lexer(argv[1]);
-		data = parser(tokens);
-		while (data)
-		{
-			printf("\ncmd = %s\n", data->cmd);
-			printf("args = ");
-			i = 0;
-			while (data->args && data->args[i])
-			{
-				printf("%s ", data->args[i]);
-				i++;
-			}
-			printf("\n");
-			printf("infile = %s\n", data->infile);
-			printf("outfile = %s\n", data->outfile);
-			data = data->next;
-		}
-	}
-	return (0);
 }

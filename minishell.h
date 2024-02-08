@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 11:43:38 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/01/23 18:11:38 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/02/07 16:30:52 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 # include <fcntl.h>
 # include <sys/types.h>
 # include <sys/wait.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 
 //struct used to store the command to execute, arguments for said command
 // the stdin and stdout of said command and a flag to recognise a pipe
@@ -37,6 +39,18 @@ typedef struct s_data
 	struct s_data	*next;
 	struct s_data	*prev;
 }				t_data;
+
+void	init_data(t_data *node);
+
+//expander.c
+
+void	expander(t_data *data);
+
+//parser.c
+
+t_data	*parser(char **token);
+
+char	**add_args(char **args, char *token);
 
 //lexer.c
 
@@ -68,6 +82,8 @@ t_data	*ft_lstlast(t_data *lst);
 
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 
-void	init_data(t_data *node);
+char	*ft_strdup(const char *s);
+
+void	*ft_memcpy(void *dest, const void *src, size_t n);
 
 #endif
