@@ -6,11 +6,11 @@ void	execution(t_data *data, char **envp);
 
 int	main(int argc, char **argv, char **env)
 {
-	//int		i;
+	int		i;
 	char	**tokens;
 	t_data	*data;
-	//t_data 	*current;
-	//i = 0;
+	t_data 	*current;
+	i = 0;
 
 	tokens = NULL;
 	data = NULL;
@@ -20,7 +20,7 @@ int	main(int argc, char **argv, char **env)
 		data = parser(tokens);
 		expander(data);
 		execution(data, env);
-		/* current = data;
+		current = data;
 		while (current)
 		{
 			printf("\ncmd = %s\n", current->cmd);
@@ -36,7 +36,7 @@ int	main(int argc, char **argv, char **env)
 			printf("outfile = %s\n", current->outfile);
 			printf("pipe flag = %d\n", current->pipe_flag);
 			current = current->next;
-		} */
+		}
 		free_all(data, tokens);
 	}
 	return (0);

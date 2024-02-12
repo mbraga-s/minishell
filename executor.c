@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 12:31:02 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/02/12 14:37:52 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/02/12 14:55:08 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,12 +118,14 @@ void	execution(t_data *data, char **envp)
 	int		fd2[2];
 	int		pid[2];
 	int		flag;
+	t_data	*current;
 
 	fds[0] = fd1;
 	fds[1] = fd2;
 	flag = 1;
 	fd1[0] = 0;
 	fd1[1] = 1;
+	current = data;
 	if (data->next)
 	{
 		if (pipe(fd1) == -1)
@@ -164,6 +166,11 @@ void	execution(t_data *data, char **envp)
 			last_fork(data, envp, fds[flag]);
 		close_fd(fds[flag]);
 	}
+	while (current)
+	{
+		waitpid(-1, NULL, 0);
+		current = current->next;
+	}
 }
 
 void	mid_fork(t_data *data, char **envp, int **fds, int flag)
@@ -183,6 +190,7 @@ void	mid_fork(t_data *data, char **envp, int **fds, int flag)
 	close_fd(fds[i]);
 	if (path)
 		execve(path, data->args, envp);
+	printf("\nERROR MID FORK\n");
 	close_fd(dups);
 	free(path);
 	exit(1);
@@ -195,6 +203,7 @@ void	first_fork(t_data *data, char **envp, int *fd)
 
 	printf("\nFIRST FORK\n");
 	path = check_path(data->cmd, envp);
+	printf("\nPATH = %s\n", path);
 	if (fd[0] != 0)
 	{
 		printf ("fd");
@@ -214,6 +223,7 @@ void	first_fork(t_data *data, char **envp, int *fd)
 	}
 	if (path)
 		execve(path, data->args, envp);
+	printf("\nERROR FIRST FORK\n");
 	close_fd(dups);
 	free(path);
 	exit(1);
@@ -244,6 +254,7 @@ void	last_fork(t_data *data, char **envp, int *fd)
 	}
 	if (path)
 		execve(path, data->args, envp);
+	printf("\nERROR LAST FORK\n");
 	close_fd(dups);
 	free(path);
 	exit(1);
