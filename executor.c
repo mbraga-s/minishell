@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 12:31:02 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/02/12 01:09:31 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/02/12 14:37:52 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,7 +160,8 @@ void	execution(t_data *data, char **envp)
 		else
 			flag = 1;
 		pid[1] = fork();
-		last_fork(data, envp, fds[flag]);
+		if (pid[1] == 0)
+			last_fork(data, envp, fds[flag]);
 		close_fd(fds[flag]);
 	}
 }
@@ -171,6 +172,7 @@ void	mid_fork(t_data *data, char **envp, int **fds, int flag)
 	int		i;
 	int		dups[2];
 
+	printf("\nMID FORK\n");
 	i = 0;
 	if (flag == 0)
 		i = 1;
@@ -191,6 +193,7 @@ void	first_fork(t_data *data, char **envp, int *fd)
 	char	*path;
 	int		dups[2];
 
+	printf("\nFIRST FORK\n");
 	path = check_path(data->cmd, envp);
 	if (fd[0] != 0)
 	{
@@ -200,7 +203,7 @@ void	first_fork(t_data *data, char **envp, int *fd)
 	}
 	if (data->infile)
 	{
-		fd[0] =  open(data->infile, O_RDONLY);
+		fd[0] = open(data->infile, O_RDONLY);
 		if (fd[0] < 0)
 		{
 			perror(data->infile);
@@ -221,6 +224,7 @@ void	last_fork(t_data *data, char **envp, int *fd)
 	char	*path;
 	int		dups[2];
 
+	printf("\nLAST FORK\n");
 	path = check_path(data->cmd, envp);
 	if (fd)
 	{
@@ -229,7 +233,7 @@ void	last_fork(t_data *data, char **envp, int *fd)
 	}
 	if (data->outfile)
 	{
-		fd[1] =  open(data->outfile, O_RDWR | O_CREAT | O_TRUNC, 0644);
+		fd[1] = open(data->outfile, O_RDWR | O_CREAT | O_TRUNC, 0644);
 		if (fd[1] < 0)
 		{
 			perror(data->outfile);

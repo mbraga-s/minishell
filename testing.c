@@ -4,22 +4,23 @@ void	free_all(t_data *node, char **tokens);
 
 void	execution(t_data *data, char **envp);
 
-/* int	main(int argc, char **argv)
+int	main(int argc, char **argv, char **env)
 {
-	int		i;
+	//int		i;
 	char	**tokens;
 	t_data	*data;
-	t_data 	*current;
-	i = 0;
+	//t_data 	*current;
+	//i = 0;
 
 	tokens = NULL;
 	data = NULL;
-	if (argc == 2)
+	if (argc >= 2)
 	{
 		tokens = lexer(argv[1]);
 		data = parser(tokens);
 		expander(data);
-		current = data;
+		execution(data, env);
+		/* current = data;
 		while (current)
 		{
 			printf("\ncmd = %s\n", current->cmd);
@@ -35,15 +36,15 @@ void	execution(t_data *data, char **envp);
 			printf("outfile = %s\n", current->outfile);
 			printf("pipe flag = %d\n", current->pipe_flag);
 			current = current->next;
-		}
+		} */
 		free_all(data, tokens);
 	}
 	return (0);
-} */
+}
 
 // main for testing parser
 
-int	main(int argc, char **argv, char **env)
+/* int	main(int argc, char **argv, char **env)
 {
 	(void)argc;
 	(void)argv;
@@ -66,7 +67,7 @@ int	main(int argc, char **argv, char **env)
 			data = parser(tokens);
 			expander(data);
 			execution(data, env);
-			/* current = data;
+			current = data;
 			while (current)
 			{
 				printf("\ncmd = %s\n", current->cmd);
@@ -82,12 +83,12 @@ int	main(int argc, char **argv, char **env)
 				printf("outfile = %s\n", current->outfile);
 				printf("pipe flag = %d\n", current->pipe_flag);
 				current = current->next;
-			} */
+			}
 			free_all(data, tokens);
 		}
 	}
 	return (0);
-}
+} */
 
 void	free_all(t_data *node, char **tokens)
 {
