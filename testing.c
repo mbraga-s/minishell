@@ -2,6 +2,8 @@
 
 void	free_all(t_data *node, char **tokens);
 
+void	execution(t_data *data, char **envp);
+
 /* int	main(int argc, char **argv)
 {
 	int		i;
@@ -41,42 +43,48 @@ void	free_all(t_data *node, char **tokens);
 
 // main for testing parser
 
-int	main(void)
+int	main(int argc, char **argv, char **env)
 {
-	int		i;
+	(void)argc;
+	(void)argv;
+	//int		i;
 	char	*input;
 	char	**tokens;
 	t_data	*data;
-	t_data 	*current;
+	//t_data 	*current;
 
 	tokens = NULL;
 	data = NULL;
 	while (1)
 	{
 		input =	readline("$ ");
-		if(!input)
+		if (!input)
 			exit(0);
-		tokens = lexer(input);
-		data = parser(tokens);
-		expander(data);
-		current = data;
-		while (current)
+		if (input[0] != '\0')
 		{
-			printf("\ncmd = %s\n", current->cmd);
-			printf("args = ");
-			i = 0;
-			while (current->args && current->args[i])
+			tokens = lexer(input);
+			data = parser(tokens);
+			expander(data);
+			execution(data, env);
+			/* current = data;
+			while (current)
 			{
-				printf("%s || ", current->args[i]);
-				i++;
-			}
-			printf("\n");
-			printf("infile = %s\n", current->infile);
-			printf("outfile = %s\n", current->outfile);
-			printf("pipe flag = %d\n", current->pipe_flag);
-			current = current->next;
+				printf("\ncmd = %s\n", current->cmd);
+				printf("args = ");
+				i = 0;
+				while (current->args && current->args[i])
+				{
+					printf("%s || ", current->args[i]);
+					i++;
+				}
+				printf("\n");
+				printf("infile = %s\n", current->infile);
+				printf("outfile = %s\n", current->outfile);
+				printf("pipe flag = %d\n", current->pipe_flag);
+				current = current->next;
+			} */
+			free_all(data, tokens);
 		}
-		free_all(data, tokens);
 	}
 	return (0);
 }

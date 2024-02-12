@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 11:43:38 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/02/07 16:30:52 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/02/12 00:28:44 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,5 +85,7 @@ int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_strdup(const char *s);
 
 void	*ft_memcpy(void *dest, const void *src, size_t n);
+
+char	*ft_strjoin(char const *s1, char const *s2);
 
 #endif
