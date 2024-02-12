@@ -6,11 +6,11 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 12:31:37 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/02/08 20:01:58 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/02/12 16:49:45 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../minishell.h"
 
 char	*rem_quotes(char *str);
 
@@ -48,9 +48,9 @@ char	*rem_quotes(char *str)
 
 	len = ft_strlen(str);
 	i = 0;
-	if(!str)
-		return(NULL);
-	while(str[i] && i < (len - 2))
+	if (!str)
+		return (NULL);
+	while (str[i] && i < (len - 2))
 	{
 		str[i] = str[i + 1];
 		i++;
@@ -59,7 +59,6 @@ char	*rem_quotes(char *str)
 	str[i++] = '\0';
 	return (str);
 }
-
 
 /* int	main(void)
 {

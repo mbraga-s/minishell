@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 11:43:38 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/02/12 00:28:44 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/02/12 16:56:19 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,30 @@ typedef struct s_data
 }				t_data;
 
 void	init_data(t_data *node);
+
+//ex_utils.c
+
+int		pcheck(char *ptr);
+
+char	*pathtest(char *env, char *arg);
+
+char	*check_path(char *arg, char **envp);
+
+int		dupcheck(int file_fd, int fd);
+
+void	close_fd(int *fd);
+
+//executor.c
+
+//forks.c
+
+void	file_check(int dups[2], t_data *data);
+
+void	first_fork(t_data *data, char **envp, int *fd);
+
+void	mid_fork(t_data *data, char **envp, int **fds, int flag);
+
+void	last_fork(t_data *data, char **envp, int *fd);
 
 //expander.c
 
