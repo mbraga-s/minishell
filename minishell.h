@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 11:43:38 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/02/13 17:26:12 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/02/13 17:57:37 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,9 @@ typedef struct s_data
 	struct s_data	*prev;
 }				t_data;
 
-void	init_data(t_data *node);
+//utils.c
+
+void	free_all(t_data *node);
 
 //ex_utils.c
 
