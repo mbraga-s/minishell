@@ -6,49 +6,37 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 14:50:46 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/02/12 00:28:30 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/02/13 15:40:16 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
-	size_t	len1;
-	size_t	len2;
-	size_t	i;
-	size_t	j;
+	int		i;
+	int		j;
 	char	*ptr;
 
-	len1 = ft_strlen(s1);
-	len2 = ft_strlen(s2);
 	i = 0;
 	j = 0;
-	ptr = (char *)malloc(len1 + len2 + 1);
+	ptr = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
 	if (!ptr)
-		return (NULL);
-	while (i < len1)
+		return (0);
+	while (s1 && s1[i])
 	{
 		ptr[i] = s1[i];
 		i++;
 	}
-	while ((i + j) < (len1 + len2))
+	free(s1);
+	while (s2[j])
 	{
-		ptr[i + j] = s2[j];
+		ptr[i] = s2[j];
+		i++;
+		if (s2[j] == '\n')
+			break ;
 		j++;
 	}
-	ptr[i + j] = '\0';
+	ptr[i] = '\0';
 	return (ptr);
 }
-
-/*int	main(void)
-{
-	char	*ptr1 = "Em teoria";
-	char	*ptr2 = " esta a funcionar.";
-	char	*ptr3;
-
-	ptr3 = ft_strjoin(ptr1, ptr2);
-	printf("\nptr1 = %s\n", ptr1);
-	printf("ptr2 = %s\n", ptr2);
-	printf("\nft_strjoin = %s\n", ptr3);
-}*/

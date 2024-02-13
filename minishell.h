@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 11:43:38 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/02/12 16:56:19 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/02/13 17:26:12 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,8 @@
 
 typedef struct s_data
 {
-	char			*cmd;
 	char			**args;
 	int				fd[2];
-	int				pipe_flag;
 	char			*infile;
 	char			*outfile;
 	struct s_data	*next;
@@ -60,11 +58,11 @@ void	close_fd(int *fd);
 
 void	file_check(int dups[2], t_data *data);
 
-void	first_fork(t_data *data, char **envp, int *fd);
+void	first_fork(t_data *data, char **envp);
 
-void	mid_fork(t_data *data, char **envp, int **fds, int flag);
+void	mid_fork(t_data *data, char **envp);
 
-void	last_fork(t_data *data, char **envp, int *fd);
+void	last_fork(t_data *data, char **envp);
 
 //expander.c
 
@@ -110,6 +108,6 @@ char	*ft_strdup(const char *s);
 
 void	*ft_memcpy(void *dest, const void *src, size_t n);
 
-char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strjoin(char *s1, char *s2);
 
 #endif

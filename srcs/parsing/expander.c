@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 12:31:37 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/02/12 16:49:45 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/02/13 16:41:02 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ void	expander(t_data *current)
 
 	while (current)
 	{
-		if (current->cmd[0] == 34 || current->cmd[0] == 39)
+		if (current->args[0][0] == 34 || current->args[0][0] == 39)
 		{
-			if (current->cmd[0] == 34)
+			if (current->args[0][0] == 34)
 				printf("\nEXPANDER\n");
-			current->cmd = rem_quotes(current->cmd);
+			current->args[0] = rem_quotes(current->args[0]);
 		}
 		j = 0;
 		while (current->args && current->args[j])

@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:41:19 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/02/12 18:12:44 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/02/13 17:54:04 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	file_check(int dups[2], t_data *data)
 		if (fd[0] < 0)
 		{
 			perror(data->infile);
-			fd[0] = open("temp", O_CREAT, 0644);
+			//fd[0] = open("temp", O_CREAT, 0644);
 		}
 		dups[0] = dupcheck(fd[0], dups[0]);
 		close(fd[0]);
@@ -51,20 +51,16 @@ void	file_check(int dups[2], t_data *data)
 	}
 }
 
-void	mid_fork(t_data *data, char **envp, int **fds, int flag)
+void	mid_fork(t_data *data, char **envp)
 {
 	char	*path;
-	int		i;
 	int		dups[2];
 
-	i = 0;
-	if (flag == 0)
-		i = 1;
-	path = check_path(data->cmd, envp);
-	dups[0] = dupcheck(fds[i][0], 0);
-	dups[1] = dupcheck(fds[flag][1], 1);
-	close_fd(fds[flag]);
-	close_fd(fds[i]);
+	path = check_path(data->args[0], envp);
+	dups[0] = dupcheck(data->prev->fd[0], 0);
+	dups[1] = dupcheck(data->fd[1], 1);
+	close_fd(data->prev->fd);
+	close_fd(data->fd);
 	file_check(dups, data);
 	if (path)
 		execve(path, data->args, envp);
@@ -75,18 +71,18 @@ void	mid_fork(t_data *data, char **envp, int **fds, int flag)
 	exit(1);
 }
 
-void	first_fork(t_data *data, char **envp, int *fd)
+void	first_fork(t_data *data, char **envp)
 {
 	char	*path;
 	int		dups[2];
 
 	dups[0] = 0;
 	dups[1] = 1;
-	path = check_path(data->cmd, envp);
-	if (fd[0] != 0)
+	path = check_path(data->args[0], envp);
+	if (data->fd[0] != 0)
 	{
-		dups[1] = dupcheck(fd[1], 1);
-		close_fd(fd);
+		dups[1] = dupcheck(data->fd[1], 1);
+		close_fd(data->fd);
 	}
 	file_check(dups, data);
 	if (path)
@@ -98,14 +94,14 @@ void	first_fork(t_data *data, char **envp, int *fd)
 	exit(1);
 }
 
-void	last_fork(t_data *data, char **envp, int *fd)
+void	last_fork(t_data *data, char **envp)
 {
 	char	*path;
 	int		dups[2];
-
-	path = check_path(data->cmd, envp);
-	dups[1] = dupcheck(fd[0], 0);
-	close_fd(fd);
+	
+	path = check_path(data->args[0], envp);
+	dups[1] = dupcheck(data->prev->fd[0], 0);
+	close_fd(data->prev->fd);
 	file_check(dups, data);
 	if (path)
 		execve(path, data->args, envp);

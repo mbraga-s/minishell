@@ -91,7 +91,7 @@ void	execution(t_data *data, char **envp);
 
 // main for testing executor (with argv, argc)
 
-int	main(int argc, char **argv, char **env)
+/* int	main(int argc, char **argv, char **env)
 {
 	char	**tokens;
 	t_data	*data;
@@ -107,11 +107,11 @@ int	main(int argc, char **argv, char **env)
 		free_all(data);
 	}
 	return (0);
-}
+} */
 
 // main for testing executor (with readline)
 
-/* int	main(int argc, char **argv, char **env)
+int	main(int argc, char **argv, char **env)
 {
 	char	*input;
 	char	**tokens;
@@ -136,7 +136,7 @@ int	main(int argc, char **argv, char **env)
 		}
 	}
 	return (0);
-} */
+}
 
 void	free_all(t_data *node)
 {
@@ -147,7 +147,6 @@ void	free_all(t_data *node)
 	{
 		current = node;
 		node = node->next;
-		free (current->cmd);
 		i = 0;
 		while (current->args && current->args[i])
 			free (current->args[i++]);

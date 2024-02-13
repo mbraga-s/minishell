@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 16:30:04 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/02/12 16:49:06 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/02/13 16:43:22 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,18 +62,17 @@ t_data	*parser(char **token)
 				i++;
 				current->outfile = ft_strdup(token[i]);
 			}
-			else if (!current->cmd)
-			{
-				current->cmd = ft_strdup(token[i]);
-				current->args = add_args(current->args, token[i]);
-			}
+			// else if (!current->cmd)
+			// {
+			// 	current->cmd = ft_strdup(token[i]);
+			// 	current->args = add_args(current->args, token[i]);
+			// }
 			else
 				current->args = add_args(current->args, token[i]);
 			i++;
 		}
 		if (token[i] && !ft_strncmp(token[i], "|", 2))
 		{
-			current->pipe_flag = 1;
 			ft_lstadd_back(&current, ft_lstnew());
 			current = current->next;
 			i++;
