@@ -6,22 +6,11 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:41:19 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/02/13 17:54:04 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/02/13 18:19:40 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
-
-void	free_all(t_data *node);
-
-t_data	*ft_lstfirst(t_data *lst)
-{
-	if (!lst)
-		return (NULL);
-	while (lst->prev != NULL)
-		lst = lst->prev;
-	return (lst);
-}
 
 void	file_check(int dups[2], t_data *data)
 {
@@ -46,29 +35,9 @@ void	file_check(int dups[2], t_data *data)
 			perror(data->outfile);
 			exit(1);
 		}
-		dups[0] = dupcheck(fd[1], dups[1]);
+		dups[1] = dupcheck(fd[1], dups[1]);
 		close(fd[1]);
 	}
-}
-
-void	mid_fork(t_data *data, char **envp)
-{
-	char	*path;
-	int		dups[2];
-
-	path = check_path(data->args[0], envp);
-	dups[0] = dupcheck(data->prev->fd[0], 0);
-	dups[1] = dupcheck(data->fd[1], 1);
-	close_fd(data->prev->fd);
-	close_fd(data->fd);
-	file_check(dups, data);
-	if (path)
-		execve(path, data->args, envp);
-	close_fd(dups);
-	data = ft_lstfirst(data);
-	free_all(data);
-	free(path);
-	exit(1);
 }
 
 void	first_fork(t_data *data, char **envp)
@@ -94,13 +63,35 @@ void	first_fork(t_data *data, char **envp)
 	exit(1);
 }
 
+void	mid_fork(t_data *data, char **envp)
+{
+	char	*path;
+	int		dups[2];
+
+	path = check_path(data->args[0], envp);
+	dups[0] = dupcheck(data->prev->fd[0], 0);
+	dups[1] = dupcheck(data->fd[1], 1);
+	close_fd(data->prev->fd);
+	close_fd(data->fd);
+	file_check(dups, data);
+	if (path)
+		execve(path, data->args, envp);
+	close_fd(dups);
+	data = ft_lstfirst(data);
+	free_all(data);
+	free(path);
+	exit(1);
+}
+
 void	last_fork(t_data *data, char **envp)
 {
 	char	*path;
 	int		dups[2];
 	
+	dups[0] = 0;
+	dups[1] = 1;
 	path = check_path(data->args[0], envp);
-	dups[1] = dupcheck(data->prev->fd[0], 0);
+	dups[0] = dupcheck(data->prev->fd[0], 0);
 	close_fd(data->prev->fd);
 	file_check(dups, data);
 	if (path)
