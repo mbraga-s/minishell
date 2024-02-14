@@ -6,17 +6,18 @@
 #    By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/22 15:43:04 by mbraga-s          #+#    #+#              #
-#    Updated: 2024/02/13 18:13:38 by mbraga-s         ###   ########.fr        #
+#    Updated: 2024/02/14 14:57:38 by mbraga-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
-SRCS = testing ./srcs/utils
+SRCS = testing ./srcs/utils ./srcs/builtins
 
 SRCS_LIBFT = ft_bzero ft_calloc ft_split ft_strlcpy\
 	ft_strlen ft_substr ft_lstadd_back ft_lstnew ft_lstlast\
-	ft_strncmp ft_strdup ft_memcpy ft_strjoin
+	ft_strncmp ft_strdup ft_memcpy ft_strjoin ft_isdigit \
+	ft_atoi
 
 SRCS_EXECUTION = executor forks ex_utils
 
@@ -37,8 +38,7 @@ PARSE = $(addprefix $(PARSE_PATH)/, $(SRCS_PARSING))
 LIBFT = $(addprefix $(LIBFT_PATH)/, $(SRCS_LIBFT))
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g -lreadline -fsanitize=address
-
+CFLAGS = -Wall -Wextra -Werror -g -lreadline -fsanitize=threads
 RM = rm -fr
 
 all: $(NAME)

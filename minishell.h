@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 11:43:38 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/02/13 18:09:52 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/02/14 14:17:22 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdlib.h>
 # include <string.h>
 # include <limits.h>
+# include <linux/limits.h>
 # include <stdarg.h>
 # include <fcntl.h>
 # include <sys/types.h>
@@ -56,7 +57,13 @@ int		dupcheck(int file_fd, int fd);
 
 void	close_fd(int *fd);
 
-//executor.c
+//builtins.c
+
+void	exec_pwd(void);
+
+void	exec_cd(t_data *data);
+
+void	exec_exit(t_data *data);
 
 //forks.c
 
@@ -113,5 +120,9 @@ char	*ft_strdup(const char *s);
 void	*ft_memcpy(void *dest, const void *src, size_t n);
 
 char	*ft_strjoin(char *s1, char *s2);
+
+int		ft_isdigit(char *str);
+
+int		ft_atoi(char *nptr);
 
 #endif
