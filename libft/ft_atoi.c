@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 16:34:11 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/02/14 14:06:18 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/02/14 16:17:57 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	ft_atoi(char *nptr)
 {
 	size_t		i;
 	size_t		sign;
-	int		nbr;
+	int			nbr;
 
 	nbr = 0;
 	i = 0;

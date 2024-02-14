@@ -40,22 +40,21 @@ void	exec_exit(t_data *data)
 	exitcode = 0;
 	while (data->args[i])
 		i++;
-	if (i == 2 && ft_isdigit(data->args[1]))
+	printf("exit\n");
+	if (i <= 2)
 	{
-		printf("exit\nexit : %s: numeric argument required\n", data->args[1]);
-		exitcode = 255;
-	}
-	else if (i == 2 && !ft_isdigit(data->args[1]))
-	{
-		printf("exit\n");
-		exitcode = ft_atoi(data->args[1]);
+		if (i == 2 && ft_isdigit(data->args[1]))
+		{
+			printf("exit : %s: numeric argument required\n", data->args[1]);
+			exitcode = 255;
+		}
+		else if (i == 2 && !ft_isdigit(data->args[1]))
+		{
+			exitcode = ft_atoi(data->args[1]);
+		}
+		free_all(ft_lstfirst(data));
 		exit(exitcode);
 	}
-	else if (i > 2)
-	{
+	else
 		printf("exit: too many arguments\n");
-		exit(1);
-	}
-	printf("exit\n");
-	exit(exitcode);
 }

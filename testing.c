@@ -1,9 +1,5 @@
 #include "minishell.h"
 
-void	free_all(t_data *node);
-
-void	execution(t_data *data, char **envp);
-
 // main for testing parsing and expander (with argv, argc)
 
 /* int	main(int argc, char **argv)
@@ -24,7 +20,6 @@ void	execution(t_data *data, char **envp);
 		current = data;
 		while (current)
 		{
-			printf("\ncmd = %s\n", current->cmd);
 			printf("args = ");
 			i = 0;
 			while (current->args && current->args[i])
@@ -34,8 +29,7 @@ void	execution(t_data *data, char **envp);
 			}
 			printf("\n");
 			printf("infile = %s\n", current->infile);
-			printf("outfile = %s\n", current->outfile);
-			printf("pipe flag = %d\n", current->pipe_flag);
+			printf("outfile = %s\n\n", current->outfile);
 			current = current->next;
 		}
 		free_all(data);
@@ -123,7 +117,7 @@ int	main(int argc, char **argv, char **env)
 	data = NULL;
 	while (1)
 	{
-		input = readline("$ ");
+		input = readline("minishell$ ");
 		if (!input)
 			exit(0);
 		if (input[0] != '\0')

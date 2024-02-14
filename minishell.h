@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 11:43:38 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/02/14 14:17:22 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/02/14 16:35:00 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ typedef struct s_data
 
 void	free_all(t_data *node);
 
+void	free_tokens(char **tokens);
+
 t_data	*ft_lstfirst(t_data *lst);
 
 //ex_utils.c
@@ -56,6 +58,10 @@ char	*check_path(char *arg, char **envp);
 int		dupcheck(int file_fd, int fd);
 
 void	close_fd(int *fd);
+
+//executor.c
+
+void	execution(t_data *data, char **envp);
 
 //builtins.c
 
@@ -107,7 +113,7 @@ size_t	ft_strlen(const char *str);
 
 t_data	*ft_lstnew(void);
 
-void	ft_lstadd_back(t_data **lst, t_data *new);
+t_data	*ft_lstadd_back(t_data **lst, t_data *new);
 
 int		ft_lstsize(t_data *lst);
 

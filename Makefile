@@ -6,7 +6,7 @@
 #    By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/22 15:43:04 by mbraga-s          #+#    #+#              #
-#    Updated: 2024/02/14 14:57:38 by mbraga-s         ###   ########.fr        #
+#    Updated: 2024/02/14 17:14:06 by mbraga-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ PARSE = $(addprefix $(PARSE_PATH)/, $(SRCS_PARSING))
 LIBFT = $(addprefix $(LIBFT_PATH)/, $(SRCS_LIBFT))
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g -lreadline -fsanitize=threads
+CFLAGS = -Wall -Wextra -Werror -g -lreadline -fsanitize=thread
 RM = rm -fr
 
 all: $(NAME)

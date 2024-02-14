@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 16:30:04 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/02/14 11:58:42 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/02/14 16:35:54 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,40 +42,28 @@ char	**add_args(char **args, char *token)
 t_data	*parser(char **token)
 {
 	t_data	*data;
-	t_data	*current;
 	int		i;
 
 	i = 0;
 	data = ft_lstnew();
-	current = data;
 	while (token[i])
 	{
 		while (token[i] && ft_strncmp(token[i], "|", 2))
 		{
-			if (!ft_strncmp(token[i], "<", 2))
-			{
-				i++;
-				current->infile = ft_strdup(token[i]);
-			}
-			else if (!ft_strncmp(token[i], ">", 2))
-			{
-				i++;
-				current->outfile = ft_strdup(token[i]);
-			}
+			if (!ft_strncmp(token[i], "<", 2) && ++i)
+				data->infile = ft_strdup(token[i]);
+			else if (!ft_strncmp(token[i], ">", 2) && ++i)
+				data->outfile = ft_strdup(token[i]);
 			else
-				current->args = add_args(current->args, token[i]);
+				data->args = add_args(data->args, token[i]);
 			i++;
 		}
 		if (token[i] && !ft_strncmp(token[i], "|", 2))
 		{
-			ft_lstadd_back(&current, ft_lstnew());
-			current = current->next;
+			data = ft_lstadd_back(&data, ft_lstnew());
 			i++;
 		}
 	}
-	i = 0;
-	while (token[i])
-		free (token[i++]);
-	free (token);
-	return (data);
+	free_tokens(token);
+	return (ft_lstfirst(data));
 }
