@@ -117,17 +117,19 @@ int	main(int argc, char **argv, char **env)
 	data = NULL;
 	while (1)
 	{
-		input = readline("minishell$ ");
+		input = readline("\x1B[36mminishell$ \x1B[0m");
 		if (!input)
 			exit(0);
 		if (input[0] != '\0')
 		{
+			add_history(input);
 			tokens = lexer(input);
 			data = parser(tokens);
 			expander(data);
 			execution(data, env);
 			free_all(data);
 		}
+		free(input);
 	}
 	return (0);
 }

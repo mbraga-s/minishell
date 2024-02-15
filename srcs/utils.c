@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 17:56:04 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/02/14 16:35:38 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/02/15 15:53:17 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,13 @@ void	free_all(t_data *node)
 		while (current->args && current->args[i])
 			free (current->args[i++]);
 		free (current->args);
+		i = 0;
+		while (current->infile && current->infile[i])
+			free (current->infile[i++]);
 		free (current->infile);
+		i = 0;
+		while (current->outfile && current->outfile[i])
+			free (current->outfile[i++]);
 		free (current->outfile);
 		free (current);
 	}

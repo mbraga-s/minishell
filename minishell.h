@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 11:43:38 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/02/14 16:35:00 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/02/15 15:53:44 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ typedef struct s_data
 {
 	char			**args;
 	int				fd[2];
-	char			*infile;
-	char			*outfile;
+	char			**infile;
+	char			**outfile;
 	struct s_data	*next;
 	struct s_data	*prev;
 }				t_data;
@@ -47,7 +47,7 @@ void	free_tokens(char **tokens);
 
 t_data	*ft_lstfirst(t_data *lst);
 
-//ex_utils.c
+//ex_utils1.c
 
 int		pcheck(char *ptr);
 
@@ -59,9 +59,15 @@ int		dupcheck(int file_fd, int fd);
 
 void	close_fd(int *fd);
 
+//ex_utils2.c
+
+int		file_check(int dups[2], t_data *data);
+
 //executor.c
 
 void	execution(t_data *data, char **envp);
+
+int		check_builtin(t_data *data);
 
 //builtins.c
 
@@ -72,8 +78,6 @@ void	exec_cd(t_data *data);
 void	exec_exit(t_data *data);
 
 //forks.c
-
-void	file_check(int dups[2], t_data *data);
 
 void	first_fork(t_data *data, char **envp);
 

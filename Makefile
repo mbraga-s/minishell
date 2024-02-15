@@ -6,7 +6,7 @@
 #    By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/22 15:43:04 by mbraga-s          #+#    #+#              #
-#    Updated: 2024/02/14 17:14:06 by mbraga-s         ###   ########.fr        #
+#    Updated: 2024/02/15 16:01:49 by mbraga-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ SRCS_LIBFT = ft_bzero ft_calloc ft_split ft_strlcpy\
 	ft_strncmp ft_strdup ft_memcpy ft_strjoin ft_isdigit \
 	ft_atoi
 
-SRCS_EXECUTION = executor forks ex_utils
+SRCS_EXECUTION = executor forks ex_utils1 ex_utils2
 
 SRCS_PARSING = lexer parser expander
 
@@ -38,7 +38,7 @@ PARSE = $(addprefix $(PARSE_PATH)/, $(SRCS_PARSING))
 LIBFT = $(addprefix $(LIBFT_PATH)/, $(SRCS_LIBFT))
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g -lreadline -fsanitize=thread
+CFLAGS = -Wall -Wextra -Werror -g -lreadline -fsanitize=address
 RM = rm -fr
 
 all: $(NAME)

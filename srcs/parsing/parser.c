@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 16:30:04 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/02/14 16:35:54 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/02/15 15:52:16 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ t_data	*parser(char **token)
 		while (token[i] && ft_strncmp(token[i], "|", 2))
 		{
 			if (!ft_strncmp(token[i], "<", 2) && ++i)
-				data->infile = ft_strdup(token[i]);
+				data->infile = add_args(data->infile, token[i]);
 			else if (!ft_strncmp(token[i], ">", 2) && ++i)
-				data->outfile = ft_strdup(token[i]);
+				data->outfile = add_args(data->outfile, token[i]);
 			else
 				data->args = add_args(data->args, token[i]);
 			i++;
