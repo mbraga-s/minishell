@@ -45,7 +45,7 @@ The parser assigns the tokens provided by the lexer (and checked by the syntax c
     struct data
     {
     	char			**args;
-    	int				fd[2];
+    	int			fd[2];
     	char			**infile;
     	char			**outfile;
     	struct s_data	*next;
@@ -57,15 +57,15 @@ Tokens are assigned following these rules:
  2. if a **word token** is found, it is added to the *args* array — where the first string of that array will be the command name, and all other will be the command arguments.
  3. if a **operator token** is found and it is a pipe ( | ) a new node is created and the *next* and *prev* pointers are set accordingly.
 ```
-data1										data2
-{											{
-	char			**args = [ls , -l]			char			**args = ["grep a"]
-	int				fd[2] = [0 , 1]				int				fd[2] = [0 , 1]
-	char			**infile = NULL				char			**infile = NULL
-	char			**outfile = NULL			char			**outfile = outfile
+data1							data2
+{							{
+	char			**args = [ls , -l]		char			**args = ["grep a"]
+	int			fd[2] = [0 , 1]			int			fd[2] = [0 , 1]
+	char			**infile = NULL			char			**infile = NULL
+	char			**outfile = NULL		char			**outfile = outfile
 	struct s_data	*next = &data2				struct s_data	*next = NULL
 	struct s_data	*prev = NULL				struct s_data	*prev = &data1
-}											}	
+}							}	
 ```
 ### Expander
 >In development
@@ -74,15 +74,15 @@ After the linked list is contructed each string in the *args* array of each node
 Any quoted string has its quotes removed.
 
 ```
-data1										data2
-{											{
-	char			**args = [ls , -l]			char			**args = [grep a]
-	int				fd[2] = [0 , 1]				int				fd[2] = [0 , 1]
-	char			**infile = NULL				char			**infile = NULL
-	char			**outfile = NULL			char			**outfile = outfile
+data1							data2
+{							{
+	char			**args = [ls , -l]		char			**args = [grep a]
+	int			fd[2] = [0 , 1]			int			fd[2] = [0 , 1]
+	char			**infile = NULL			char			**infile = NULL
+	char			**outfile = NULL		char			**outfile = outfile
 	struct s_data	*next = &data2				struct s_data	*next = NULL
 	struct s_data	*prev = NULL				struct s_data	*prev = &data1
-}											}	
+}							}	
 ```
 
 ### Executor
