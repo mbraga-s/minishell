@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 11:43:38 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/02/16 10:59:07 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/02/16 15:40:28 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	last_fork(t_data *data, char **envp);
 
 //expander.c
 
-void	expander(t_data *data);
+void	expander(t_data *data, char **envp);
 
 //parser.c
 

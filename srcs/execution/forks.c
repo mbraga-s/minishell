@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:41:19 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/02/15 16:08:47 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/02/16 16:13:52 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	first_fork(t_data *data, char **envp)
 		dups[1] = dupcheck(data->fd[1], 1);
 		close_fd(data->fd);
 	}
-	if (file_check(dups, data))
+	if (file_check(dups, data) && data->args[0])
 	{
 		if (!check_builtin(data))
 			path = check_path(data->args[0], envp);
@@ -49,7 +49,7 @@ void	mid_fork(t_data *data, char **envp)
 	dups[1] = dupcheck(data->fd[1], 1);
 	close_fd(data->prev->fd);
 	close_fd(data->fd);
-	if (file_check(dups, data))
+	if (file_check(dups, data) && data->args[0])
 	{
 		if (!check_builtin(data))
 			path = check_path(data->args[0], envp);
@@ -73,7 +73,7 @@ void	last_fork(t_data *data, char **envp)
 	dups[1] = 1;
 	dups[0] = dupcheck(data->prev->fd[0], 0);
 	close_fd(data->prev->fd);
-	if (file_check(dups, data))
+	if (file_check(dups, data) && data->args[0])
 	{
 		if (!check_builtin(data))
 			path = check_path(data->args[0], envp);

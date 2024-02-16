@@ -150,7 +150,7 @@ int	main(int argc, char **argv, char **env)
 			add_history(input);
 			tokens = lexer(input);
 			data = parser(tokens);
-			expander(data);
+			expander(data, env);
 			execution(data, env);
 			free_all(data);
 		}
