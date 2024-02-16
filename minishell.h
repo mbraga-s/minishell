@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 11:43:38 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/02/16 15:40:28 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/02/16 18:34:42 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,10 @@ char	**add_args(char **args, char *token);
 //lexer.c
 
 char	**lexer(char *str);
+
+//syntax.c
+
+int		syntax_checker(char **tokens);
 
 //libft
 

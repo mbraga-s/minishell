@@ -149,10 +149,13 @@ int	main(int argc, char **argv, char **env)
 		{
 			add_history(input);
 			tokens = lexer(input);
-			data = parser(tokens);
-			expander(data, env);
-			execution(data, env);
-			free_all(data);
+			if (syntax_checker(tokens))
+			{
+				data = parser(tokens);
+				expander(data, env);
+				execution(data, env);
+				free_all(data);
+			}
 		}
 		free(input);
 	}
