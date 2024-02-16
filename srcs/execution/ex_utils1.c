@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:45:54 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/02/15 15:46:52 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/02/16 14:33:52 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,5 +110,7 @@ int	pcheck(char *ptr)
 		}
 		i++;
 	}
+	if (flag == 1 && !access(ptr, X_OK) == 0)
+		perror(ptr);
 	return (flag);
 }

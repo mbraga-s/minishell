@@ -6,13 +6,20 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 16:30:04 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/02/15 15:52:16 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/02/16 11:00:02 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
 //add_args - appends a string to an already existing array of strings
+/* 
+int	*add_int(int *array, int value)
+{
+	int	size;
+
+	while (array && array[len])
+} */
 
 char	**add_args(char **args, char *token)
 {
@@ -53,7 +60,15 @@ t_data	*parser(char **token)
 			if (!ft_strncmp(token[i], "<", 2) && ++i)
 				data->infile = add_args(data->infile, token[i]);
 			else if (!ft_strncmp(token[i], ">", 2) && ++i)
+			{
 				data->outfile = add_args(data->outfile, token[i]);
+				data->outflag = add_args(data->outflag, "0");
+			}
+			else if (!ft_strncmp(token[i], ">>", 3) && ++i)
+			{
+				data->outfile = add_args(data->outfile, token[i]);
+				data->outflag = add_args(data->outflag, "1");
+			}
 			else
 				data->args = add_args(data->args, token[i]);
 			i++;

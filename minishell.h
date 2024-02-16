@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 11:43:38 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/02/15 15:53:44 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/02/16 10:59:07 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct s_data
 	int				fd[2];
 	char			**infile;
 	char			**outfile;
+	char			**outflag;
 	struct s_data	*next;
 	struct s_data	*prev;
 }				t_data;

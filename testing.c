@@ -20,7 +20,7 @@
 		current = data;
 		while (current)
 		{
-			printf("args = ");
+			printf("\nargs = ");
 			i = 0;
 			while (current->args && current->args[i])
 			{
@@ -28,8 +28,33 @@
 				i++;
 			}
 			printf("\n");
-			printf("infile = %s\n", current->infile);
-			printf("outfile = %s\n\n", current->outfile);
+			printf("infiles = ");
+			i = 0;
+			while (current->infile && current->infile[i])
+			{
+				printf("%s | ", current->infile[i]);
+				i++;
+			}
+			printf("\n");
+			printf("outfiles = ");
+			i = 0;
+			while (current->outfile && current->outfile[i])
+			{
+				printf("%s | ", current->outfile[i]);
+				i++;
+			}
+			printf("\n");
+			printf("outflags = ");
+			i = 0;
+			while (current->outflag && current->outflag[i])
+			{
+				if (!ft_strncmp(current->outflag[i], "0", 1))
+					printf("0 |");
+				else
+					printf("1 |");
+				i++;
+			}
+			printf("\n\n");
 			current = current->next;
 		}
 		free_all(data);
