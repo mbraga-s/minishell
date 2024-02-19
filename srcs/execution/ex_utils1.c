@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:45:54 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/02/19 15:12:07 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/02/19 17:00:16 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,9 @@ char	*check_path(char *arg, char **envp)
 
 char	*pathtest(char *env, char *arg)
 {
-	int			i;
-	char		**ptr;
-	char		*path;
+	int		i;
+	char	**ptr;
+	char	*path;
 
 	i = 0;
 	ptr = NULL;
