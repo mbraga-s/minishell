@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:41:19 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/02/16 16:13:52 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/02/19 16:12:47 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,11 @@ void	first_fork(t_data *data, char **envp)
 	if (file_check(dups, data) && data->args[0])
 	{
 		if (!check_builtin(data))
+		{
 			path = check_path(data->args[0], envp);
-		if (path)
 			execve(path, data->args, envp);
+			check_error(data->args[0]);
+		}
 	}
 	close_fd(dups);
 	data = ft_lstfirst(data);
@@ -52,9 +54,11 @@ void	mid_fork(t_data *data, char **envp)
 	if (file_check(dups, data) && data->args[0])
 	{
 		if (!check_builtin(data))
+		{
 			path = check_path(data->args[0], envp);
-		if (path)
 			execve(path, data->args, envp);
+			check_error(data->args[0]);
+		}
 	}
 	close_fd(dups);
 	data = ft_lstfirst(data);
@@ -76,9 +80,11 @@ void	last_fork(t_data *data, char **envp)
 	if (file_check(dups, data) && data->args[0])
 	{
 		if (!check_builtin(data))
+		{
 			path = check_path(data->args[0], envp);
-		if (path)
 			execve(path, data->args, envp);
+			check_error(data->args[0]);
+		}
 	}
 	close_fd(dups);
 	data = ft_lstfirst(data);

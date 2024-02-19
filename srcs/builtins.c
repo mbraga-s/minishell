@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 18:18:32 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/02/15 18:18:40 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/02/19 16:49:47 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,30 @@ void	exec_exit(t_data *data)
 	}
 	else
 		printf("exit: too many arguments\n");
+}
+
+void	exec_echo(t_data *data)
+{
+	int	newline;
+	int	i;
+
+	newline = 0;
+	i = 0;
+	while (data->args && data->args[i])
+		i++;
+	if (i > 1)
+	{
+		i = 1;
+		if (!ft_strncmp(data->args[i], "-n", 2) && i++)
+			newline = 1;
+		while (data->args[i])
+		{
+			printf("%s", data->args[i]);
+			i++;
+			if (data->args[i])
+				printf(" ");
+		}
+	}
+	if (newline == 0)
+		printf("\n");
 }

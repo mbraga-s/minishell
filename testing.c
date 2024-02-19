@@ -119,11 +119,14 @@
 	data = NULL;
 	if (argc >= 2)
 	{
-		tokens = lexer(argv[1]);
-		data = parser(tokens);
-		expander(data);
-		execution(data, env);
-		free_all(data);
+			tokens = lexer(argv[1]);
+			if (syntax_checker(tokens))
+			{
+				data = parser(tokens);
+				expander(data, env);
+				execution(data, env);
+				free_all(data);
+			}
 	}
 	return (0);
 } */

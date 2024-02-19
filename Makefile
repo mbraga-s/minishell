@@ -6,18 +6,18 @@
 #    By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/22 15:43:04 by mbraga-s          #+#    #+#              #
-#    Updated: 2024/02/16 18:08:40 by mbraga-s         ###   ########.fr        #
+#    Updated: 2024/02/19 16:58:52 by mbraga-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
-SRCS = testing ./srcs/utils ./srcs/builtins
+SRCS = ./srcs/utils ./srcs/builtins main
 
 SRCS_LIBFT = ft_bzero ft_calloc ft_split ft_strlcpy\
 	ft_strlen ft_substr ft_lstadd_back ft_lstnew ft_lstlast\
 	ft_strncmp ft_strdup ft_memcpy ft_strjoin ft_isdigit \
-	ft_atoi
+	ft_atoi ft_strchr
 
 SRCS_EXECUTION = executor forks ex_utils1 ex_utils2
 

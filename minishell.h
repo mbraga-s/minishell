@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 11:43:38 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/02/16 18:34:42 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/02/19 16:16:04 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <stdarg.h>
 # include <fcntl.h>
 # include <sys/types.h>
+# include <sys/stat.h>
 # include <sys/wait.h>
 # include <readline/readline.h>
 # include <readline/history.h>
@@ -48,6 +49,8 @@ void	free_tokens(char **tokens);
 
 t_data	*ft_lstfirst(t_data *lst);
 
+void	check_error(char *str);
+
 //ex_utils1.c
 
 int		pcheck(char *ptr);
@@ -64,6 +67,10 @@ void	close_fd(int *fd);
 
 int		file_check(int dups[2], t_data *data);
 
+int		infile_check(int dups[2], t_data *data);
+
+int		outfile_check(int dups[2], t_data *data);
+
 //executor.c
 
 void	execution(t_data *data, char **envp);
@@ -77,6 +84,8 @@ void	exec_pwd(void);
 void	exec_cd(t_data *data);
 
 void	exec_exit(t_data *data);
+
+void	exec_echo(t_data *data);
 
 //forks.c
 
@@ -139,5 +148,7 @@ char	*ft_strjoin(char *s1, char *s2);
 int		ft_isdigit(char *str);
 
 int		ft_atoi(char *nptr);
+
+char	*ft_strchr(const char *s, int c);
 
 #endif

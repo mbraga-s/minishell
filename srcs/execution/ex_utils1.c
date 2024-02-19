@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:45:54 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/02/18 14:44:40 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/02/19 15:12:07 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char	*check_path(char *arg, char **envp)
 	i = 0;
 	env = NULL;
 	if (!arg)
-		printf("command not found: %s\n", arg);
+		printf("%s: command not found\n", arg);
 	else if (pcheck(arg) == 0)
 	{
 		while (envp && envp[i])
@@ -69,9 +69,9 @@ char	*check_path(char *arg, char **envp)
 
 char	*pathtest(char *env, char *arg)
 {
-	int		i;
-	char	**ptr;
-	char	*path;
+	int			i;
+	char		**ptr;
+	char		*path;
 
 	i = 0;
 	ptr = NULL;
@@ -83,13 +83,14 @@ char	*pathtest(char *env, char *arg)
 		path = ft_strjoin(path, arg);
 		if (access(path, X_OK) == 0)
 		{
+			while (ptr && ptr[i++])
+				free (ptr[i]);
+			free(ptr);
 			return (path);
-			break ;
 		}
 		free(path);
 		i++;
 	}
-	printf("command not found: %s\n", arg);
 	free(ptr);
 	return (NULL);
 }
@@ -112,7 +113,5 @@ int	pcheck(char *ptr)
 		}
 		i++;
 	}
-	if (flag == 1 && !access(ptr, X_OK) == 0)
-		perror(ptr);
 	return (flag);
 }
