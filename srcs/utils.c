@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 17:56:04 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/02/19 16:53:57 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/02/20 12:05:11 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	free_tokens(char **tokens)
 	int		i;
 
 	i = 0;
-	while (tokens[i])
+	while (tokens && tokens[i])
 		free (tokens[i++]);
 	free (tokens);
 }
