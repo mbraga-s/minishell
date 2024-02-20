@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:54:25 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/02/16 18:48:55 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/02/20 11:59:52 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int	syntax_checker(char **tokens)
 	int	i;
 
 	i = 0;
+	if (!tokens || !tokens[i])
+		return (0);
 	if (!ft_strncmp(tokens[i], "|", 2))
 	{
 		syn_error(tokens, i);
