@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 15:51:55 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/01/12 14:18:18 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/02/20 20:27:57 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ size_t	ft_strlen(const char *str)
 	size_t	i;
 
 	i = 0;
-	while (str[i] != '\0')
+	while (str && str[i])
 		i++;
 	return (i);
 }
