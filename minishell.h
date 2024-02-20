@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 11:43:38 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/02/19 16:16:04 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/02/20 15:04:03 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,10 +145,16 @@ void	*ft_memcpy(void *dest, const void *src, size_t n);
 
 char	*ft_strjoin(char *s1, char *s2);
 
-int		ft_isdigit(char *str);
+int		ft_isdigit(int c);
 
 int		ft_atoi(char *nptr);
 
 char	*ft_strchr(const char *s, int c);
+
+int		ft_isalnum(int c);
+
+int		ft_strdigit(char *str);
+
+int		ft_isalpha(int c);
 
 #endif

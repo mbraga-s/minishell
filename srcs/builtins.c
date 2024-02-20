@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 18:18:32 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/02/19 16:49:47 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/02/20 15:02:29 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,12 @@ void	exec_exit(t_data *data)
 	printf("exit\n");
 	if (i <= 2)
 	{
-		if (i == 2 && ft_isdigit(data->args[1]))
+		if (i == 2 && ft_strdigit(data->args[1]))
 		{
 			printf("exit : %s: numeric argument required\n", data->args[1]);
 			exitcode = 255;
 		}
-		else if (i == 2 && !ft_isdigit(data->args[1]))
+		else if (i == 2 && !ft_strdigit(data->args[1]))
 		{
 			exitcode = ft_atoi(data->args[1]);
 		}

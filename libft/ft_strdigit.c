@@ -5,17 +5,23 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/24 15:06:22 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/02/20 15:03:42 by mbraga-s         ###   ########.fr       */
+/*   Created: 2024/01/22 11:13:33 by manumart          #+#    #+#             */
+/*   Updated: 2024/02/20 15:02:03 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	ft_isdigit(int c)
+int	ft_strdigit(char *str)
 {
-	if (c >= '0' && c <= '9')
-		return (1);
-	else
-		return (0);
+	int	i;
+
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] >= '0' && str[i] <= '9')
+			return (0);
+		i++;
+	}
+	return (1);
 }

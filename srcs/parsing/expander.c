@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 12:31:37 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/02/16 16:52:43 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/02/20 15:50:02 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,30 @@ void	expander(t_data *current, char **envp)
 		current = current->next;
 	}
 }
+
+/* void	expander(t_data *current, char **envp)
+{
+	int		j;
+
+	while (current)
+	{
+		j = 0;
+		while (current->args && current->args[j])
+		{
+			if (current->args[j][0] == 34)
+			{
+				current->args[j] = rem_quotes(current->args[j]);
+				current->args[j] = expand(current->args[j], envp);
+			}
+			else if (current->args[j][0] == 39)
+				current->args[j] = rem_quotes(current->args[j]);
+			else
+				current->args[j] = expand(current->args[j], envp);
+			j++;
+		}
+		current = current->next;
+	}
+} */
 
 //Removes quotes from the string by moving every character one position
 //to the left and setting the last 2 to NULLs
@@ -89,3 +113,56 @@ char	*expand(char *str, char **envp)
 	free(str1);
 	return (env);
 }
+
+/* char	*expand(char *str, char **envp)
+{
+	int		i;
+	int		j;
+	int		len;
+	char	*temp;
+	char	*new;
+
+	i = 0;
+	len = 0;
+	new = NULL;
+	if (!envp)
+		return (NULL);
+	while (str && str[i])
+	{
+		if (str[i] == 36)
+		{
+			j = i + 1;
+			while (str[j] && ft_isalnum(str[j++]))
+				len++;
+			j = 0;
+			len++;
+			temp = ft_calloc((len), sizeof(char));
+			ft_strlcpy(temp, &str[i + 1], (len));
+			temp = ft_strjoin(temp, "=");
+			while (envp[j] && ft_strncmp(temp, envp[j], len))
+				j++;
+			if (envp[j] && !ft_strncmp(temp, envp[j], len))
+				new = ft_strdup(&envp[j][len]);
+			free(str);
+			free (temp);
+			return (new);
+		}
+		i++;
+	}
+	return (str);
+} */
+
+/* int	main(int argc, char **argv, char **env)
+{
+	char	*ptr;
+	char	*temp;
+
+	ptr = NULL;
+	if (argc >= 2)
+	{
+		temp = ft_strdup(argv[1]);
+		ptr = expand(temp, env);
+		printf("\n%s\n", ptr);
+	}
+	return (0);
+} */
