@@ -6,20 +6,13 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 16:30:04 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/02/16 11:00:02 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/02/22 19:29:28 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
 //add_args - appends a string to an already existing array of strings
-/* 
-int	*add_int(int *array, int value)
-{
-	int	size;
-
-	while (array && array[len])
-} */
 
 char	**add_args(char **args, char *token)
 {
@@ -58,7 +51,10 @@ t_data	*parser(char **token)
 		while (token[i] && ft_strncmp(token[i], "|", 2))
 		{
 			if (!ft_strncmp(token[i], "<", 2) && ++i)
+			{
 				data->infile = add_args(data->infile, token[i]);
+				data->inflag = add_args(data->inflag, "0");
+			}
 			else if (!ft_strncmp(token[i], ">", 2) && ++i)
 			{
 				data->outfile = add_args(data->outfile, token[i]);
@@ -68,6 +64,11 @@ t_data	*parser(char **token)
 			{
 				data->outfile = add_args(data->outfile, token[i]);
 				data->outflag = add_args(data->outflag, "1");
+			}
+			else if (!ft_strncmp(token[i], "<<", 3) && ++i)
+			{
+				data->infile = add_args(data->infile, ft_heredoc(token[i]));
+				data->inflag = add_args(data->inflag, "1");
 			}
 			else
 				data->args = add_args(data->args, token[i]);

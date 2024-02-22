@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 16:51:40 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/01/23 18:05:03 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/02/22 18:39:32 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	size_t			i;
 
 	i = 0;
-	if (n == 0)
+	if (n == 0 || !s1 || !s2)
 		return (0);
 	while (s1[i] == s2[i] && s1[i] != '\0' && s2[i] != '\0' && i < n)
 		i++;

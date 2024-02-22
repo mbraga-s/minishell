@@ -6,7 +6,7 @@
 #    By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/22 15:43:04 by mbraga-s          #+#    #+#              #
-#    Updated: 2024/02/22 14:11:24 by mbraga-s         ###   ########.fr        #
+#    Updated: 2024/02/22 20:06:17 by mbraga-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ SRCS_LIBFT = ft_bzero ft_calloc ft_split ft_strlcpy\
 
 SRCS_EXECUTION = executor forks ex_utils1 ex_utils2
 
-SRCS_PARSING = lexer parser syntax expander exp_utils
+SRCS_PARSING = lexer parser syntax expander exp_utils heredoc
 
 LIB = $(NAME).a
 

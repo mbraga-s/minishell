@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 11:43:38 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/02/20 15:04:03 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/02/22 19:59:54 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct s_data
 	char			**infile;
 	char			**outfile;
 	char			**outflag;
+	char			**inflag;
 	struct s_data	*next;
 	struct s_data	*prev;
 }				t_data;
@@ -104,6 +105,12 @@ void	expander(t_data *data, char **envp);
 t_data	*parser(char **token);
 
 char	**add_args(char **args, char *token);
+
+//heredoc.c
+
+char	*ft_heredoc(char *str);
+
+int		openhdoc(char *str);
 
 //lexer.c
 
