@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 12:31:37 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/02/21 17:35:42 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/02/22 12:01:11 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ char	*rem_quotes(char *str)
 	return (str);
 }
 
-int main(int argc, char **argv, char **env)
+/* int main(int argc, char **argv, char **env)
 {
 	char *ptr;
 	char *temp;
@@ -78,4 +78,4 @@ int main(int argc, char **argv, char **env)
 		free(ptr);
 	}
 	return (0);
-}
+} */

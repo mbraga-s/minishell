@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:21:44 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/02/21 17:37:12 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/02/22 12:21:53 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,27 +44,20 @@ char	*new_funct2(char *str, char *nenv, int pos, int len)
 	i = 0;
 	j = 0;
 	h = 0;
-	total = ft_strlen(nenv) + ft_strlen(str) - len + 2;
+	total = ft_strlen(nenv) + ft_strlen(str) - len + 1;
 	ptr = ft_calloc(total, sizeof(char));
-	while (str[i]) //&& total > 0)
-	{
-		while (i < pos)
-			ptr[j++] = str[i++];
-		if (h == 0 && nenv)
-		{
-			while (nenv && nenv[h])
-				ptr[j++] = nenv[h++];
-			i = i + (len);
-			//total = total - h;
-		}
-		if (h == 0 && !nenv)
-		{
-			i = i + (len);
-			h++;
-		}
+	while (str[i] && i < pos)
 		ptr[j++] = str[i++];
-		//total--;
+	if (nenv)
+	{
+		while (nenv && nenv[h])
+			ptr[j++] = nenv[h++];
+		i = i + (len);
 	}
+	else if (!nenv)
+		i = i + (len);
+	while (str[i])
+			ptr[j++] = str[i++];
 	free(nenv);
 	free(str);
 	return (ptr);
