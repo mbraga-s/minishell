@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:21:44 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/02/22 12:21:53 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/02/22 14:05:27 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,25 +33,37 @@ char	*get_newenv(int len, int i, char *str, char **env)
 	return (new_env);
 }
 
+int	new_funct(char *ptr, char *nenv, int j)
+{
+	int	h;
+
+	h = 0;
+	while (nenv && nenv[h])
+			ptr[j++] = nenv[h++];
+	return (j);
+}
+
+//Allocates and 'builds' the string resulting from the replacement
+//of the $NAME with it's value
+//len indicates the size of $NAME (5 in this case) and nenv
+//is the value in the environment variables
+
 char	*new_funct2(char *str, char *nenv, int pos, int len)
 {
 	int		i;
 	int		j;
-	int		h;
 	int		total;
 	char	*ptr;
 
 	i = 0;
 	j = 0;
-	h = 0;
 	total = ft_strlen(nenv) + ft_strlen(str) - len + 1;
 	ptr = ft_calloc(total, sizeof(char));
 	while (str[i] && i < pos)
 		ptr[j++] = str[i++];
 	if (nenv)
 	{
-		while (nenv && nenv[h])
-			ptr[j++] = nenv[h++];
+		j = new_funct(ptr, nenv, j);
 		i = i + (len);
 	}
 	else if (!nenv)
@@ -62,6 +74,10 @@ char	*new_funct2(char *str, char *nenv, int pos, int len)
 	free(str);
 	return (ptr);
 }
+
+//Runs through the string seaching for a $. When found, replaces
+//the expandable variable with it's value and returns the resulting
+//string
 
 char	*expand(char *str, char **env)
 {
