@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 16:30:04 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/02/22 19:29:28 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/02/23 13:19:38 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,11 @@ char	**add_args(char **args, char *token)
 t_data	*parser(char **token)
 {
 	t_data	*data;
+	char	*heredoc;
 	int		i;
 
 	i = 0;
+	heredoc = NULL;
 	data = ft_lstnew();
 	while (token[i])
 	{
@@ -67,7 +69,9 @@ t_data	*parser(char **token)
 			}
 			else if (!ft_strncmp(token[i], "<<", 3) && ++i)
 			{
-				data->infile = add_args(data->infile, ft_heredoc(token[i]));
+				heredoc = ft_heredoc(token[i]);
+				data->infile = add_args(data->infile, heredoc);
+				free(heredoc);
 				data->inflag = add_args(data->inflag, "1");
 			}
 			else

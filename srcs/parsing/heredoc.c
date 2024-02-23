@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:07:27 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/02/22 20:11:02 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/02/23 14:18:34 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,16 @@
 
 int	openhdoc(char *str)
 {
-	int	fd;
+	int	fd[2];
 
-	fd = open(".", __O_TMPFILE | O_RDWR);
-	write(fd, str, ft_strlen(str));
-	return (fd);
+	if (pipe(fd) == -1)
+	{
+		perror(NULL);
+		return (0);
+	}
+	write(fd[1], str, ft_strlen(str));
+	close(fd[1]);
+	return (fd[0]);
 }
 
 char	*ft_heredoc(char *str)
@@ -37,5 +42,7 @@ char	*ft_heredoc(char *str)
 		input = readline("> ");
 	}
 	free(input);
+	if (!ptr)
+		ptr = ft_strdup("");
 	return (ptr);
 }
