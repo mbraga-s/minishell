@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:21:44 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/02/22 14:05:27 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/02/26 16:00:14 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,33 @@ char	*new_funct2(char *str, char *nenv, int pos, int len)
 	return (ptr);
 }
 
+char	*new_funct3(char *str, int pos, int len)
+{
+	int		i;
+	int		j;
+	int		total;
+	char	*ptr;
+	char	*temp;
+
+	i = 0;
+	j = 0;
+	temp = ft_itoa(g_data.status);
+	total = ft_strlen(temp) + ft_strlen(str) - len + 1;
+	ptr = ft_calloc(total, sizeof(char));
+	while (str[i] && i < pos)
+		ptr[j++] = str[i++];
+	if (temp)
+	{
+		j = new_funct(ptr, temp, j);
+		i = i + (len);
+	}
+	while (str[i])
+			ptr[j++] = str[i++];
+	free(temp);
+	free(str);
+	return (ptr);
+}
+
 //Runs through the string seaching for a $. When found, replaces
 //the expandable variable with it's value and returns the resulting
 //string
@@ -89,7 +116,7 @@ char	*expand(char *str, char **env)
 	i = 0;
 	while (str && str[i] != '\0')
 	{
-		if (str[i] == 36)
+		if (str[i] == 36 && str[i + 1] != 63)
 		{
 			j = i + 1;
 			len = 0;
@@ -102,6 +129,8 @@ char	*expand(char *str, char **env)
 				i--;
 			}
 		}
+		else if (str[i] == 36 && str[i + 1] == 63)
+			str = new_funct3(str, i, 2);
 		i++;
 	}
 	return (str);

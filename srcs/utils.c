@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 17:56:04 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/02/22 19:10:32 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/02/26 16:02:24 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,13 +68,25 @@ void	check_error(char *str)
 {
 	write(2, str, ft_strlen(str));
 	if (!ft_strchr(str, '/'))
+	{
 		write(2, ": command not found\n", 20);
+		g_data.status = 127;
+	}
 	else if (ft_strchr(str, '/') && access(str, X_OK) == 0)
+	{
 		write(2, ": Is a directory\n", 17);
+		g_data.status = 126;
+	}
 	else if (access(str, F_OK) != 0)
+	{
 		write(2, ": No such file or directory\n", 28);
+		g_data.status = 127;
+	}
 	else if (access(str, X_OK) != 0)
+	{
 		write(2, ": Permission denied\n", 20);
+		g_data.status = 126;
+	}
 	else
 		perror("");
 }

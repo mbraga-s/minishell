@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 18:18:32 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/02/20 15:02:29 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/02/26 14:57:04 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,10 @@ void	exec_cd(t_data *data)
 
 void	exec_exit(t_data *data)
 {
-	int	exitcode;
 	int	i;
 
 	i = 0;
-	exitcode = 0;
+	g_data.status = 0;
 	while (data->args[i])
 		i++;
 	printf("exit\n");
@@ -58,14 +57,14 @@ void	exec_exit(t_data *data)
 		if (i == 2 && ft_strdigit(data->args[1]))
 		{
 			printf("exit : %s: numeric argument required\n", data->args[1]);
-			exitcode = 255;
+			g_data.status = 255;
 		}
 		else if (i == 2 && !ft_strdigit(data->args[1]))
 		{
-			exitcode = ft_atoi(data->args[1]);
+			g_data.status = ft_atoi(data->args[1]);
 		}
 		free_all(ft_lstfirst(data));
-		exit(exitcode);
+		exit(g_data.status);
 	}
 	else
 		printf("exit: too many arguments\n");

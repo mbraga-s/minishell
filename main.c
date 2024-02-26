@@ -6,13 +6,15 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 16:58:29 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/02/20 12:04:46 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/02/26 16:20:03 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 // main for testing executor (with readline)
+
+struct s_global	g_data;
 
 int	main(int argc, char **argv, char **env)
 {
@@ -28,7 +30,7 @@ int	main(int argc, char **argv, char **env)
 	{
 		input = readline("\x1B[36mminishell$ \x1B[0m");
 		if (!input)
-			exit(0);
+			exit(1);
 		if (input[0] != '\0')
 		{
 			add_history(input);

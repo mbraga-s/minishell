@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:54:25 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/02/22 15:47:07 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/02/26 15:01:42 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	syn_error(char **tokens, int i)
 		printf("syntax error near unexpected token `newline'\n");
 	else
 		printf("syntax error near unexpected token `%s'\n", tokens[i]);
+	g_data.status = 2;
 	free_tokens(tokens);
 }
 

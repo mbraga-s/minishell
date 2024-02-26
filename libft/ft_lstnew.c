@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 14:15:27 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/02/22 15:51:16 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/02/26 15:42:03 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	init_data(t_data *node)
 	node->outfile = NULL;
 	node->outflag = NULL;
 	node->inflag = NULL;
+	node->pid = 0;
 	node->next = NULL;
 	node->prev = NULL;
 }

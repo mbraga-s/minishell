@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 11:43:38 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/02/22 19:59:54 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/02/26 15:40:35 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,17 @@ typedef struct s_data
 	char			**outfile;
 	char			**outflag;
 	char			**inflag;
+	int				pid;
 	struct s_data	*next;
 	struct s_data	*prev;
 }				t_data;
+
+typedef struct s_global
+{
+	int				status;
+}				t_global;
+
+extern struct s_global	g_data;
 
 //utils.c
 
@@ -163,5 +171,7 @@ int		ft_isalnum(int c);
 int		ft_strdigit(char *str);
 
 int		ft_isalpha(int c);
+
+char	*ft_itoa(int n);
 
 #endif
