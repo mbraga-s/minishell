@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:41:19 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/02/26 16:07:45 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/02/26 17:59:58 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	first_fork(t_data *data, char **envp)
 		dups[1] = dupcheck(data->fd[1], 1);
 		close_fd(data->fd);
 	}
-	if (file_check(dups, data) && data->args[0])
+	if (file_check(dups, data) && data->args && data->args[0])
 	{
 		if (!check_builtin(data))
 		{
@@ -51,7 +51,7 @@ void	mid_fork(t_data *data, char **envp)
 	dups[1] = dupcheck(data->fd[1], 1);
 	close_fd(data->prev->fd);
 	close_fd(data->fd);
-	if (file_check(dups, data) && data->args[0])
+	if (file_check(dups, data) && data->args && data->args[0])
 	{
 		if (!check_builtin(data))
 		{
@@ -77,7 +77,7 @@ void	last_fork(t_data *data, char **envp)
 	dups[1] = 1;
 	dups[0] = dupcheck(data->prev->fd[0], 0);
 	close_fd(data->prev->fd);
-	if (file_check(dups, data) && data->args[0])
+	if (file_check(dups, data) && data->args && data->args[0])
 	{
 		if (!check_builtin(data))
 		{
