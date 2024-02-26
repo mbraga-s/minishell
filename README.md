@@ -1,6 +1,8 @@
 # Minishell
 
-The minishell project requires students to build their own smaller version of shell following the established guidelines and requirements. It is the first project of the 42 cursus that is developed with another student. To make this project happen, Manuel and I paired up and put our skills to the test.
+<img src="https://raw.githubusercontent.com/mbraga-s/42-project-badges/main/covers/cover-minishell.png" alt="Minishell">
+
+The minishell project requires students to build their own simple shell (using bash as reference) following the established guidelines and requirements. It is the first project of the 42 cursus that is developed with another student. To make this project happen, Manuel and I paired up and put our skills to the test.
 
 The bulk of the work was divided as follows:
 >[Miguel](https://github.com/mbraga-s):
