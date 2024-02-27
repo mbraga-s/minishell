@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 17:56:04 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/02/26 16:02:24 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/02/27 16:32:12 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,44 +15,28 @@
 void	free_all(t_data *node)
 {
 	t_data	*current;
-	int		i;
 
 	while (node)
 	{
 		current = node;
 		node = node->next;
-		i = 0;
-		while (current->args && current->args[i])
-			free (current->args[i++]);
-		free (current->args);
-		i = 0;
-		while (current->infile && current->infile[i])
-			free (current->infile[i++]);
-		free (current->infile);
-		i = 0;
-		while (current->inflag && current->inflag[i])
-			free (current->inflag[i++]);
-		free (current->inflag);
-		i = 0;
-		while (current->outfile && current->outfile[i])
-			free (current->outfile[i++]);
-		free (current->outfile);
-		i = 0;
-		while (current->outflag && current->outflag[i])
-			free (current->outflag[i++]);
-		free (current->outflag);
-		free (current);
+		free_array(current->args);
+		free_array(current->infile);
+		free_array(current->inflag);
+		free_array(current->outfile);
+		free_array(current->outflag);
+		free(current);
 	}
 }
 
-void	free_tokens(char **tokens)
+void	free_array(char **array)
 {
 	int		i;
 
 	i = 0;
-	while (tokens && tokens[i])
-		free (tokens[i++]);
-	free (tokens);
+	while (array && array[i])
+		free (array[i++]);
+	free (array);
 }
 
 t_data	*ft_lstfirst(t_data *lst)

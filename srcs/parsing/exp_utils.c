@@ -6,32 +6,11 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:21:44 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/02/26 16:00:14 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/02/27 16:41:46 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
-
-char	*get_newenv(int len, int i, char *str, char **env)
-{
-	char	*temp;
-	char	*new_env;
-	int		j;
-
-	j = 0;
-	new_env = NULL;
-	if (!env)
-		return (NULL);
-	temp = ft_calloc((len + 1), sizeof(char));
-	ft_strlcpy(temp, &str[i + 1], (len + 1));
-	temp = ft_strjoin(temp, "=");
-	while (env[j] && ft_strncmp(temp, env[j], len + 1))
-		j++;
-	if (env[j] && !ft_strncmp(temp, env[j], len + 1))
-		new_env = ft_strdup(&env[j][len + 1]);
-	free(temp);
-	return (new_env);
-}
 
 int	new_funct(char *ptr, char *nenv, int j)
 {
@@ -41,6 +20,16 @@ int	new_funct(char *ptr, char *nenv, int j)
 	while (nenv && nenv[h])
 			ptr[j++] = nenv[h++];
 	return (j);
+}
+
+int	new_funct1(char *str, int j)
+{
+	int	len;
+
+	len = 0;
+	while (str[j] && ft_isalnum(str[j++]))
+		len++;
+	return (len);
 }
 
 //Allocates and 'builds' the string resulting from the replacement
@@ -119,9 +108,7 @@ char	*expand(char *str, char **env)
 		if (str[i] == 36 && str[i + 1] != 63)
 		{
 			j = i + 1;
-			len = 0;
-			while (str[j] && ft_isalnum(str[j++]))
-				len++;
+			len = new_funct1(str, j);
 			if (len > 0)
 			{
 				nenv = get_newenv(len, i, str, env);

@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:54:25 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/02/26 15:01:42 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/02/27 16:33:21 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	syn_error(char **tokens, int i)
 	else
 		printf("syntax error near unexpected token `%s'\n", tokens[i]);
 	g_data.status = 2;
-	free_tokens(tokens);
+	free_array(tokens);
 }
 
 int	syntax_part1(char **tokens, int *i)
@@ -92,7 +92,7 @@ int	syntax_checker(char **tokens)
 	i = 0;
 	if (!tokens || !tokens[i])
 	{
-		free_tokens(tokens);
+		free_array(tokens);
 		return (0);
 	}
 	if (!ft_strncmp(tokens[i], "|", 2))

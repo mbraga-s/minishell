@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 11:43:38 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/02/26 15:40:35 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/02/27 16:41:08 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ extern struct s_global	g_data;
 
 void	free_all(t_data *node);
 
-void	free_tokens(char **tokens);
+void	free_array(char **array);
 
 t_data	*ft_lstfirst(t_data *lst);
 
@@ -104,9 +104,11 @@ void	mid_fork(t_data *data, char **envp);
 
 void	last_fork(t_data *data, char **envp);
 
-//expander.c
+//expander.c && exp_utils1.c
 
 void	expander(t_data *data, char **envp);
+
+char	*get_newenv(int len, int i, char *str, char **env);
 
 //parser.c
 

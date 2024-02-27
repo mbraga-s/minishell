@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 16:30:04 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/02/23 13:19:38 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/02/27 16:55:45 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,43 +37,62 @@ char	**add_args(char **args, char *token)
 	return (ptr);
 }
 
+int	parser_pt1(char **token, t_data *data, int *i)
+{
+	if (!ft_strncmp(token[*i], "<", 2) && ++*i)
+	{
+		data->infile = add_args(data->infile, token[*i]);
+		data->inflag = add_args(data->inflag, "0");
+		return (1);
+	}
+	else if (!ft_strncmp(token[*i], ">", 2) && ++*i)
+	{
+		data->outfile = add_args(data->outfile, token[*i]);
+		data->outflag = add_args(data->outflag, "0");
+		return (1);
+	}
+	else if (!ft_strncmp(token[*i], ">>", 3) && ++*i)
+	{
+		data->outfile = add_args(data->outfile, token[*i]);
+		data->outflag = add_args(data->outflag, "1");
+		return (1);
+	}
+	return (0);
+}
+
+int	parser_pt2(char **token, t_data *data, int *i)
+{
+	char	*heredoc;
+
+	heredoc = NULL;
+	if (!ft_strncmp(token[*i], "<<", 3) && ++*i)
+	{
+		heredoc = ft_heredoc(token[*i]);
+		data->infile = add_args(data->infile, heredoc);
+		free(heredoc);
+		data->inflag = add_args(data->inflag, "1");
+		return (1);
+	}
+	return (0);
+}
+
 //parser - takes the tokens given by lexer and assigns them to a linked list
 
 t_data	*parser(char **token)
 {
 	t_data	*data;
-	char	*heredoc;
 	int		i;
 
 	i = 0;
-	heredoc = NULL;
 	data = ft_lstnew();
 	while (token[i])
 	{
 		while (token[i] && ft_strncmp(token[i], "|", 2))
 		{
-			if (!ft_strncmp(token[i], "<", 2) && ++i)
-			{
-				data->infile = add_args(data->infile, token[i]);
-				data->inflag = add_args(data->inflag, "0");
-			}
-			else if (!ft_strncmp(token[i], ">", 2) && ++i)
-			{
-				data->outfile = add_args(data->outfile, token[i]);
-				data->outflag = add_args(data->outflag, "0");
-			}
-			else if (!ft_strncmp(token[i], ">>", 3) && ++i)
-			{
-				data->outfile = add_args(data->outfile, token[i]);
-				data->outflag = add_args(data->outflag, "1");
-			}
-			else if (!ft_strncmp(token[i], "<<", 3) && ++i)
-			{
-				heredoc = ft_heredoc(token[i]);
-				data->infile = add_args(data->infile, heredoc);
-				free(heredoc);
-				data->inflag = add_args(data->inflag, "1");
-			}
+			if (parser_pt1(token, data, &i))
+				i++;
+			else if (parser_pt2(token, data, &i))
+				i++;
 			else
 				data->args = add_args(data->args, token[i]);
 			i++;
@@ -84,6 +103,6 @@ t_data	*parser(char **token)
 			i++;
 		}
 	}
-	free_tokens(token);
+	free_array(token);
 	return (ft_lstfirst(data));
 }
