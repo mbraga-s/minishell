@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 18:18:32 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/05 11:15:22 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/05 19:18:06 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void	exec_echo(t_data *data)
 		printf("\n");
 }
 
-/* void	exec_env(t_data *data)
+void	exec_env(t_data *data)
 {
 	int	i;
 
@@ -113,4 +113,6 @@ void	exec_echo(t_data *data)
 			i++;
 		}
 	}
-} */
+}
+
+

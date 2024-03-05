@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 16:58:29 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/05 11:12:22 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/05 19:26:16 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 struct s_global	g_data;
 
-char	**dup_envs(char **env)
+char	**dup_array(char **env)
 {
 	int		i;
 	char	**env_copy;
@@ -56,7 +56,7 @@ int	main(int argc, char **argv, char **env)
 	(void)argc;
 	(void)argv;
 	tokens = NULL;
-	env_copy = dup_envs(env);
+	env_copy = dup_array(env);
 	while (1)
 	{
 		input = readline("\x1B[36mminishell$ \x1B[0m");
@@ -71,5 +71,6 @@ int	main(int argc, char **argv, char **env)
 		}
 		free(input);
 	}
+	free_array(env_copy);
 	return (0);
 }

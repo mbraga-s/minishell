@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 19:34:57 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/01/25 12:45:20 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/05 15:37:01 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,23 @@
 int	inv_comma(char const *ptr, int i, char c)
 {
 	int	count;
+	int	flag;
 
 	count = 0;
+	flag = 0;
 	while (ptr[++i])
 	{
 		if (ptr[i] == c)
+		{
+			flag = 1;
 			break ;
+		}
 		count++;
 	}
-	return (count);
+	if (flag == 1)
+		return (count);
+	else
+		return (0);
 }
 
 //ft_wcount - counts number of words in the string using char c as separator

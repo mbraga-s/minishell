@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 11:43:38 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/05 11:13:26 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/05 19:21:03 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,8 @@ void	exec_cd(t_data *data);
 void	exec_exit(t_data *data);
 
 void	exec_echo(t_data *data);
+
+void	exec_env(t_data *data);
 
 //forks.c
 
