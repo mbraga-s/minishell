@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 18:18:32 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/02/26 14:57:04 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/05 11:15:22 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,3 +95,22 @@ void	exec_echo(t_data *data)
 	if (newline == 0)
 		printf("\n");
 }
+
+/* void	exec_env(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	if (data->args[1])
+	{
+		printf("env: '%s': No such file or directory", data->args[1]);
+	}
+	else
+	{
+		while (data->nenv[i])
+		{
+			printf("%s\n", data->nenv[i]);
+			i++;
+		}
+	}
+} */

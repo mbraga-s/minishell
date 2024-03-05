@@ -53,7 +53,11 @@ INPUT → LEXER → SYNTAX CHECKER → PARSER → EXPANDER  → EXECUTOR
 
 In this *README*, we'll look into the following example to illustrate how the input is handled throughout our minishell.
 
+<div  align="center">
+
 `<infile cat|"wc -w">>outfile`
+
+</div>
 
 ### Lexer
 

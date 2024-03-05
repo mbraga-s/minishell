@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 11:43:38 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/02/27 16:41:08 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/05 11:13:26 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct s_data
 	char			**outfile;
 	char			**outflag;
 	char			**inflag;
+	char			**nenv;
 	int				pid;
 	struct s_data	*next;
 	struct s_data	*prev;
@@ -82,7 +83,7 @@ int		outfile_check(int dups[2], t_data *data);
 
 //executor.c
 
-void	execution(t_data *data, char **envp);
+void	execution(t_data *data);
 
 int		check_builtin(t_data *data);
 
@@ -106,13 +107,13 @@ void	last_fork(t_data *data, char **envp);
 
 //expander.c && exp_utils1.c
 
-void	expander(t_data *data, char **envp);
+void	expander(t_data *data);
 
 char	*get_newenv(int len, int i, char *str, char **env);
 
 //parser.c
 
-t_data	*parser(char **token);
+t_data	*parser(char **token, char **env_copy);
 
 char	**add_args(char **args, char *token);
 
@@ -146,7 +147,7 @@ void	ft_bzero(void *s, size_t n);
 
 size_t	ft_strlen(const char *str);
 
-t_data	*ft_lstnew(void);
+t_data	*ft_lstnew(char **env_copy);
 
 t_data	*ft_lstadd_back(t_data **lst, t_data *new);
 

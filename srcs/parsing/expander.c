@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 12:31:37 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/02/22 15:12:19 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/05 11:10:14 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	check_args(char **args, int pos)
 
 // Checks if there are quoted or expandable strings
 
-void	expander(t_data *current, char **envp)
+void	expander(t_data *current)
 {
 	int	j;
 
@@ -44,14 +44,14 @@ void	expander(t_data *current, char **envp)
 			if (current->args[j][0] == 34)
 			{
 				current->args[j] = rem_quotes(current->args[j]);
-				current->args[j] = expand(current->args[j], envp);
+				current->args[j] = expand(current->args[j], current->nenv);
 				check_args(current->args, j);
 			}
 			else if (current->args[j][0] == 39)
 				current->args[j] = rem_quotes(current->args[j]);
 			else
 			{
-				current->args[j] = expand(current->args[j], envp);
+				current->args[j] = expand(current->args[j], current->nenv);
 				check_args(current->args, j);
 			}
 			j++;
