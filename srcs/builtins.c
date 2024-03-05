@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 18:18:32 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/05 19:18:06 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/05 19:30:20 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void	exec_exit(t_data *data)
 		{
 			g_data.status = ft_atoi(data->args[1]);
 		}
+		free_array(data->nenv);
 		free_all(ft_lstfirst(data));
 		exit(g_data.status);
 	}
