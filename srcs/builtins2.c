@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 14:07:50 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/06 16:25:02 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/06 23:17:20 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,7 @@
 	int	i;
 
 	if (str == NULL)
-	{
-		return ;cl
-	}
+		return ;
 	i = 0;
 	while (str[i])
 	{
@@ -28,36 +26,35 @@
 	}
 	free(str);
 } */
-
 // dup de variavel DP
-/* char	**dpdup(char **str)
+/* char	**dup_array(char **str)
 {
 	char	**dup;
 	size_t	i;
-
-	i = 0;
-	while (str[i] != NULL)
-		i++;
-	dup = ft_calloc(sizeof(char *), i + 1);
+	size_t  j;
+	
+	if(!str || !str[0])
+		return(NULL);
+	i = getdpsize(str);
+	dup = ft_calloc(i + 1,sizeof(char *));
 	if (!dup)
 		return (NULL);
-	i = 0;
-	while (str[i] != NULL)
+	j = 0;
+	while (str[j] != NULL)
 	{
-		dup[i] = ft_strdup(str[i]);
-		if (!dup[i])
+		dup[j] = ft_strdup(str[j]);
+		if (!dup[j])
 		{
 			free_array(dup);
 			return (NULL);
 		}
-		i++;
+		j++;
 	}
-	dup[i] = NULL;
 	return (dup);
 } */
 // obter tamanho de uma variavel double pointer (DP)
 
-char	**sortenvp(char **envpsorted, int envp_size)
+/* char	**sortenvp(char **envpsorted, int envp_size)
 {
 	int		swapped;
 	int		i;
@@ -82,23 +79,22 @@ char	**sortenvp(char **envpsorted, int envp_size)
 		envp_size--;
 	}
 	return (envpsorted);
-}
-
+} */
 int	searchforchar(char *str, char c)
 {
 	int	i;
 
 	i = 0;
-	while (str[i])
+	while (str && str[i])
 	{
 		if (str[i] == c)
-			return (1);
+			return (i);
 		i++;
 	}
-	return (0);
+	return (-1);
 }
 
-void	printenvpsorted(char **envpsorted)
+/* void	printenvpsorted(char **envpsorted)
 {
 	int		i;
 	char	previouschar;
@@ -113,7 +109,8 @@ void	printenvpsorted(char **envpsorted)
 		{
 			previouschar = envpsorted[i][j];
 			write(1, &envpsorted[i][j], 1);
-			if (previouschar == '=' || (envpsorted[i][j + 1] == '\0' && searchforchar(envpsorted[i], '=')))
+			if (previouschar == '=' || (envpsorted[i][j + 1] == '\0'
+					&& searchforchar(envpsorted[i], '=')))
 			{
 				write(1, "\"", 1);
 			}
@@ -122,30 +119,26 @@ void	printenvpsorted(char **envpsorted)
 		write(1, "\n", 1);
 		i++;
 	}
-	free_array(envpsorted);
 }
 
-int	getenvpsize(char **envp)
+int	getdpsize(char **dp)
 {
-	int	envp_size;
+	int	dp_size;
 
-	envp_size = 0;
-	while (envp[envp_size] != NULL)
-		envp_size++;
-	return (envp_size);
+	dp_size = 0;
+	while (dp[dp_size] != NULL)
+		dp_size++;
+	return (dp_size);
 }
-
 void	exportonly(char **envp)
 {
 	char	**envpsorted;
 	int		envp_size;
 
-	envp_size = getenvpsize(envp);
-	envpsorted = ft_calloc((envp_size + 1), sizeof(char *));
-	if (!envpsorted)
-		return ;
+	envp_size = getdpsize(envp);
 	envpsorted = sortenvp(dup_array(envp), envp_size);
 	printenvpsorted(envpsorted);
+	free_array(envpsorted);
 }
 
 void	exporterror(t_data *data, char **new, int i)
@@ -156,21 +149,20 @@ void	exporterror(t_data *data, char **new, int i)
 	free_array(new);
 }
 
-int	searchinenvp(char *input, char **nenv)
+int	searchinenvp(char *input, char **envp)
 {
 	int	i;
 
 	i = 0;
-	while (nenv[i])
+	while (envp[i])
 	{
-		if (ft_strncmp(nenv[i], input, ft_strlen(input)))
+		if (ft_strncmp(envp[i], input, ft_strlen(input)) != 0)
 			i++;
 		else
 			return (i);
 	}
 	return (-1);
 }
-
 char	*rem_allquotes(char *str)
 {
 	int	i;
@@ -189,57 +181,57 @@ char	*rem_allquotes(char *str)
 		}
 		i++;
 	}
-	str[j] = '\0';
+	str[j] = '\0'; // Null-terminate the modified string
 	return (str);
 }
-
 void	exportwithargs(t_data *data, char **new, int i)
 {
-	int	flag;
-
 	if (!new || !new[0])
 	{
 		exporterror(data, new, i);
 		return ;
 	}
-	flag = searchinenvp(new[0], minishellenv()->envp);
-	if (flag == -1)
-		minishellenv()->envp = add_args(minishellenv()->envp, data->args[i]);
-	else if (flag != 1)
+	if (searchinenvp(new[0], minishelldata()->envp) == -1)
+		minishelldata()->envp = add_args(minishelldata()->envp, data->args[i]);
+	if (searchinenvp(new[0], minishelldata()->envp) != 1)
 	{
 		if (new[1])
 		{
 			if (new[1][0] == '\"')
 			{
-				free(minishellenv()->envp[flag]);
-				minishellenv()->envp[flag] = ft_strdup(rem_allquotes(data->args[i]));
+				free_array(minishelldata()->envp);
+				minishelldata()->envp[getdpsize(minishelldata()->envp) - 1] = ft_strdup(rem_allquotes(data->args[i]));
 			}
 			else
 			{
-				free(minishellenv()->envp[flag]);
-				minishellenv()->envp[flag] = ft_strdup(data->args[i]);
+				free_array(minishelldata()->envp);
+				minishelldata()->envp[getdpsize(minishelldata()->envp) - 1] = ft_strdup(data->args[i]);
 			}
 		}
 	}
 }
 
+int	digitquestionmark(int str)
+{
+	if (str >= '0' && str <= '9')
+		return (1);
+	return (0);
+}
 void	exec_export(t_data *data)
 {
 	char	**new;
 	int		i;
 
-	i = 0;
-	while (data->args && data->args[i])
-		i++;
-	if (i < 2)
-		exportonly(minishellenv()->envp);
+	i = 1;
+	if (!data->args[1] || data->args[1][0] == '\0')
+		exportonly(minishelldata()->envp);
 	else
 	{
-		i = 1;
 		while (data->args[i])
 		{
 			new = ft_split(data->args[i], '=');
-			if (data->args[i][0] == '=' || (new && !ft_strisalpha(new[0])))
+			if (data->args[i][0] == '=' || (new && !ft_isalnum(new[0]))
+				|| digitquestionmark(data->args[i][0]))
 			{
 				exporterror(data, new, i);
 				printf("dei erro\n");
@@ -247,10 +239,10 @@ void	exec_export(t_data *data)
 			else
 			{
 				exportwithargs(data, new, i);
-				free_array(new);
 				printf("dei certo\n");
 			}
 			i++;
+			free_array(new);
 		}
 	}
-}
+} */

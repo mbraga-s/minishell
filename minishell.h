@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 11:43:38 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/06 16:37:16 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/06 22:54:22 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,8 @@ void	exec_exit(t_data *data);
 void	exec_echo(t_data *data);
 
 void	exec_env(t_data *data);
+
+int		searchforchar(char *str, char c);
 
 //forks.c
 
