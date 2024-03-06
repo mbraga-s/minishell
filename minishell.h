@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 11:43:38 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/05 19:21:03 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/06 16:37:16 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,14 @@ typedef struct s_global
 	int				status;
 }				t_global;
 
+typedef struct s_envs
+{
+	char			**envp;
+}				t_envs;
+
 extern struct s_global	g_data;
+
+t_envs	*minishelldata(void);
 
 //utils.c
 
@@ -60,6 +67,8 @@ void	free_array(char **array);
 t_data	*ft_lstfirst(t_data *lst);
 
 void	check_error(char *str);
+
+char	**dup_array(char **env);
 
 //ex_utils1.c
 

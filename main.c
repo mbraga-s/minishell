@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 16:58:29 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/05 19:26:16 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/06 16:37:43 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,11 @@
 
 struct s_global	g_data;
 
-char	**dup_array(char **env)
+t_envs	*minishelldata(void)
 {
-	int		i;
-	char	**env_copy;
+	static t_envs	data;
 
-	i = 0;
-	if (!env)
-		return (NULL);
-	while (env[i])
-		i++;
-	env_copy = ft_calloc(i + 1, sizeof(char *));
-	i = 0;
-	while (env[i])
-	{
-		env_copy[i] = ft_strdup(env[i]);
-		i++;
-	}
-	return (env_copy);
+	return (&data);
 }
 
 void	inner_working(char **tokens, char **env_copy)
@@ -51,12 +38,11 @@ int	main(int argc, char **argv, char **env)
 {
 	char	*input;
 	char	**tokens;
-	char	**env_copy;
 
 	(void)argc;
 	(void)argv;
 	tokens = NULL;
-	env_copy = dup_array(env);
+	minishelldata()->envp = dup_array(env);
 	while (1)
 	{
 		input = readline("\x1B[36mminishell$ \x1B[0m");
@@ -67,10 +53,10 @@ int	main(int argc, char **argv, char **env)
 			add_history(input);
 			tokens = lexer(input);
 			if (syntax_checker(tokens))
-				inner_working(tokens, env_copy);
+				inner_working(tokens, minishelldata()->envp);
 		}
 		free(input);
 	}
-	free_array(env_copy);
+	free_array(minishelldata()->envp);
 	return (0);
 }

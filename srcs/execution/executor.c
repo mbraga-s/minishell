@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 12:31:02 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/05 19:20:47 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/06 16:38:37 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	execution(t_data *data)
 		return ;
 	data->pid = fork();
 	if (data->pid == 0)
-		first_fork(data, data->nenv);
+		first_fork(data, minishelldata()->envp);
 	data = data->next;
 	while (data && data->next)
 	{
@@ -95,7 +95,7 @@ void	execution(t_data *data)
 		}
 		data->pid = fork();
 		if (data->pid == 0)
-			mid_fork(data, data->nenv);
+			mid_fork(data, minishelldata()->envp);
 		close_fd(data->prev->fd);
 		data = data->next;
 	}
@@ -103,7 +103,7 @@ void	execution(t_data *data)
 	{
 		data->pid = fork();
 		if (data->pid == 0)
-			last_fork(data, data->nenv);
+			last_fork(data, minishelldata()->envp);
 		close_fd(data->prev->fd);
 	}
 	while (current)
