@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 14:07:50 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/06 23:17:20 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/07 04:28:49 by manumart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,21 +191,21 @@ void	exportwithargs(t_data *data, char **new, int i)
 		exporterror(data, new, i);
 		return ;
 	}
-	if (searchinenvp(new[0], minishelldata()->envp) == -1)
-		minishelldata()->envp = add_args(minishelldata()->envp, data->args[i]);
-	if (searchinenvp(new[0], minishelldata()->envp) != 1)
+	if (searchinenvp(new[0], msdata()->envp) == -1)
+		msdata()->envp = add_args(msdata()->envp, data->args[i]);
+	if (searchinenvp(new[0], msdata()->envp) != 1)
 	{
 		if (new[1])
 		{
 			if (new[1][0] == '\"')
 			{
-				free_array(minishelldata()->envp);
-				minishelldata()->envp[getdpsize(minishelldata()->envp) - 1] = ft_strdup(rem_allquotes(data->args[i]));
+				free_array(msdata()->envp);
+				msdata()->envp[getdpsize(msdata()->envp) - 1] = ft_strdup(rem_allquotes(data->args[i]));
 			}
 			else
 			{
-				free_array(minishelldata()->envp);
-				minishelldata()->envp[getdpsize(minishelldata()->envp) - 1] = ft_strdup(data->args[i]);
+				free_array(msdata()->envp);
+				msdata()->envp[getdpsize(msdata()->envp) - 1] = ft_strdup(data->args[i]);
 			}
 		}
 	}
@@ -224,7 +224,7 @@ void	exec_export(t_data *data)
 
 	i = 1;
 	if (!data->args[1] || data->args[1][0] == '\0')
-		exportonly(minishelldata()->envp);
+		exportonly(msdata()->envp);
 	else
 	{
 		while (data->args[i])

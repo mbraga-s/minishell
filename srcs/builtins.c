@@ -6,7 +6,7 @@
 /*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 18:18:32 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/07 04:21:59 by manumart         ###   ########.fr       */
+/*   Updated: 2024/03/07 04:30:14 by manumart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,10 +84,10 @@ void	exec_env(t_data *data)
 	}
 	else
 	{
-		while (minishelldata()->envp[i])
+		while (msdata()->envp[i])
 		{
-			if (ft_strchr(minishelldata()->envp[i], '='))
-				printf("%s\n", minishelldata()->envp[i]);
+			if (ft_strchr(msdata()->envp[i], '='))
+				printf("%s\n", msdata()->envp[i]);
 			i++;
 		}
 	}
@@ -104,7 +104,7 @@ void	exec_echo(t_data *data)
 
 	newline = 0;
 	i = 1;
-	if (data->numofargs >= 2)
+	if (data->args[1])
 	{
 		if (!ft_strncmp(data->args[1], "-n", 2))
 			newline = 1;
@@ -347,15 +347,15 @@ void	addtoenv(char *arg)
 	
 	temparg = ft_strdup(rem_allquotes(arg));
 	temp = ft_split(arg,'=');
-	output = searchinenvp(temp[0],minishelldata()->envp);
+	output = searchinenvp(temp[0],msdata()->envp);
 	if (output != -1)
 	{
-		replace_variablefor(minishelldata()->envp,temparg,output);
+		replace_variablefor(msdata()->envp,temparg,output);
 		free_array(temp);
 		free(temparg);
 		return ;
 	}
-	minishelldata()->envp = add_args(minishelldata()->envp,temparg);
+	msdata()->envp = add_args(msdata()->envp,temparg);
 	free_array(temp);
 	free(temparg);
 }
@@ -366,7 +366,7 @@ void	exec_export(t_data *data)
 
 	i = 1;
 	if (!data->args[1] || data->args[1][0] == '\0')
-		exportonly(minishelldata()->envp);
+		exportonly(msdata()->envp);
 	else
 	{
 		while (data->args[i])
@@ -394,11 +394,11 @@ void exec_unset(t_data *data)
 	i = 1;
 	while (data->args[i])
 	{
-		output = searchinenvp(data->args[i],minishelldata()->envp);
+		output = searchinenvp(data->args[i],msdata()->envp);
 		if (output != -1)
 		{
-			free(minishelldata()->envp[output]);
-			minishelldata()->envp[output] = NULL;
+			free(msdata()->envp[output]);
+			msdata()->envp[output] = NULL;
 		}
 		i++;
 	}

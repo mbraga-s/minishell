@@ -131,7 +131,7 @@ t_data	*minishelldata(void)
 }
 void clean_env()
 {
-	free_array(minishelldata()->envp);
+	free_array(msdata()->envp);
 }
 int	main(int argc, char **argv, char **env)
 {
@@ -142,7 +142,7 @@ int	main(int argc, char **argv, char **env)
 	(void)argc;
 	(void)argv;
 	tokens = NULL;
-	minishelldata()->envp = dpdup(env);
+	msdata()->envp = dpdup(env);
 	while (1)
 	{
 		input = readline("\x1B[36mminishell$ \x1B[0m");
@@ -157,7 +157,7 @@ int	main(int argc, char **argv, char **env)
 			tokens = lexer(input);
 			data = parser(tokens);
 			expander(data, env);
-			execution(data, minishelldata()->envp);
+			execution(data, msdata()->envp);
 			free_all(data);
 		}
 		free(input);
