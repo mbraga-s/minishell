@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 16:58:29 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/07 01:18:26 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/07 03:13:46 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,7 @@ int	check_input(char *input)
 		if (input[i] == 39 || input[i] == 34)
 		{
 			if (searchforchar(&input[i + 1], input[i]) != -1)
-			{
 				i = i + searchforchar(&input[i + 1], input[i]) + 1;
-			}
 			else
 				return (0);
 		}
@@ -63,8 +61,11 @@ void	miniloop(void)
 	tokens = NULL;
 	input = readline("\x1B[36mminishell$ \x1B[0m");
 	if (!input)
-		exit(1);
-	if (input && input[0] != '\0')
+	{
+		free_array(msdata()->envp);
+		exit(0);
+	}
+	if (*input)
 	{
 		add_history(input);
 		if (check_input(input))
@@ -85,9 +86,5 @@ int	main(int argc, char **argv, char **env)
 	(void)argv;
 	msdata()->envp = dup_array(env);
 	while (1)
-	{
 		miniloop();
-	}
-	free_array(msdata()->envp);
-	return (0);
 }

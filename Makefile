@@ -6,7 +6,7 @@
 #    By: manumart <manumart@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/22 15:43:04 by mbraga-s          #+#    #+#              #
-#    Updated: 2024/03/07 04:29:18 by manumart         ###   ########.fr        #
+#    Updated: 2024/03/07 04:37:38 by manumart         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,13 +38,13 @@ PARSE = $(addprefix $(PARSE_PATH)/, $(SRCS_PARSING))
 LIBFT = $(addprefix $(LIBFT_PATH)/, $(SRCS_LIBFT))
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address -lreadline
+CFLAGS = -Wall -Wextra -Werror -g #-fsanitize=address
 RM = rm -fr
 
 all: $(NAME)
 
 $(NAME): $(LIB)
-		$(CC) $(CFLAGS) $(LIB) -o $(NAME)
+		$(CC) $(CFLAGS) $(LIB) -lreadline -o $(NAME)
 
 $(LIB): $(SRCS:=.o) $(LIBFT:=.o) $(EXEC:=.o) $(PARSE:=.o)
 		ar rc $(LIB) $(SRCS:=.o) $(LIBFT:=.o) $(EXEC:=.o) $(PARSE:=.o)
@@ -61,3 +61,5 @@ fclean: clean lclean
 re:	fclean	$(NAME)
 
 .PHONY: clean fclean re lclean
+
+# valgrind --suppressions=readline.supp --track-fds=all --leak-check=full --show-leak-kinds=all --track-origins=yes ./minishell

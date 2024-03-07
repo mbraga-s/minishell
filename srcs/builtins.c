@@ -6,9 +6,10 @@
 /*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 18:18:32 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/07 04:30:14 by manumart         ###   ########.fr       */
+/*   Updated: 2024/03/07 04:38:34 by manumart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../minishell.h"
 
@@ -70,6 +71,7 @@ void	exec_exit(t_data *data)
 	}
 	else
 		printf("exit: too many arguments\n");
+}	
 }
 
 // env
