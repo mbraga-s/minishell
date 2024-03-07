@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 16:58:29 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/06 23:58:45 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/07 01:18:26 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 struct s_global	g_data;
 
-t_envs	*minishelldata(void)
+t_envs	*msdata(void)
 {
 	static t_envs	data;
 
@@ -44,12 +44,12 @@ int	check_input(char *input)
 	return (1);
 }
 
-void	inner_working(char **tokens, char **env_copy)
+void	inner_working(char **tokens)
 {
 	t_data	*data;
 
 	data = NULL;
-	data = parser(tokens, env_copy);
+	data = parser(tokens);
 	expander(data);
 	execution(data);
 	free_all(data);
@@ -71,7 +71,7 @@ void	miniloop(void)
 		{
 			tokens = lexer(input);
 			if (syntax_checker(tokens))
-				inner_working(tokens, minishelldata()->envp);
+				inner_working(tokens);
 		}
 		else
 			write(2, "Input error: unclosed quotes\n", 29);
@@ -83,11 +83,11 @@ int	main(int argc, char **argv, char **env)
 {
 	(void)argc;
 	(void)argv;
-	minishelldata()->envp = dup_array(env);
+	msdata()->envp = dup_array(env);
 	while (1)
 	{
 		miniloop();
 	}
-	free_array(minishelldata()->envp);
+	free_array(msdata()->envp);
 	return (0);
 }

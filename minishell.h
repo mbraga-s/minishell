@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 11:43:38 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/06 22:54:22 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/07 01:20:14 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ typedef struct s_data
 	char			**outfile;
 	char			**outflag;
 	char			**inflag;
-	char			**nenv;
 	int				pid;
 	struct s_data	*next;
 	struct s_data	*prev;
@@ -56,7 +55,7 @@ typedef struct s_envs
 
 extern struct s_global	g_data;
 
-t_envs	*minishelldata(void);
+t_envs	*msdata(void);
 
 //utils.c
 
@@ -126,7 +125,7 @@ char	*get_newenv(int len, int i, char *str, char **env);
 
 //parser.c
 
-t_data	*parser(char **token, char **env_copy);
+t_data	*parser(char **token);
 
 char	**add_args(char **args, char *token);
 
@@ -160,7 +159,7 @@ void	ft_bzero(void *s, size_t n);
 
 size_t	ft_strlen(const char *str);
 
-t_data	*ft_lstnew(char **env_copy);
+t_data	*ft_lstnew(void);
 
 t_data	*ft_lstadd_back(t_data **lst, t_data *new);
 

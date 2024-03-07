@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 18:18:32 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/05 19:30:20 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/07 01:20:27 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ void	exec_pwd(void)
 	char	cwd[PATH_MAX];
 
 	getcwd(cwd, sizeof(cwd));
-	if (cwd != NULL)
-		printf("%s\n", cwd);
+	write(1, &cwd, ft_strlen(cwd));
+	write(1, "\n", 1);
 }
 
 void	exec_cd(t_data *data)
@@ -37,10 +37,14 @@ void	exec_cd(t_data *data)
 		else if (!access(data->args[1], F_OK))
 			chdir(data->args[1]);
 		else
-			printf("cd : no such file or directory: %s\n", data->args[1]);
+		{
+			write(2, "cd : ", 5);
+			write(2, data->args[1], ft_strlen(data->args[1]));
+			write(2, ": No such file or directory\n", 28);
+		}
 	}
 	else
-		printf("cd: too many arguments\n");
+		write(2, "cd: too many arguments\n", 23);
 }
 
 void	exec_exit(t_data *data)
@@ -63,7 +67,7 @@ void	exec_exit(t_data *data)
 		{
 			g_data.status = ft_atoi(data->args[1]);
 		}
-		free_array(data->nenv);
+		free_array(msdata()->envp);
 		free_all(ft_lstfirst(data));
 		exit(g_data.status);
 	}
@@ -104,16 +108,17 @@ void	exec_env(t_data *data)
 	i = 0;
 	if (data->args[1])
 	{
-		printf("env: '%s': No such file or directory", data->args[1]);
+		write(2, "env: '", 6);
+		write(2, data->args[1], ft_strlen(data->args[1]));
+		write(2, "': No such file or directory\n", 29);
 	}
 	else
 	{
-		while (data->nenv[i])
+		while (msdata()->envp[i])
 		{
-			printf("%s\n", data->nenv[i]);
+			write(1, msdata()->envp[i], ft_strlen(msdata()->envp[i]));
+			write(1, "\n", 1);
 			i++;
 		}
 	}
 }
-
-
