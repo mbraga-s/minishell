@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_strisalpha.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/04 17:30:36 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/07 04:26:47 by manumart         ###   ########.fr       */
+/*   Created: 2022/10/24 15:23:17 by mbraga-s          #+#    #+#             */
+/*   Updated: 2024/03/06 16:02:20 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-char	*ft_strdup(const char *s)
+int	ft_strisalpha(char *str)
 {
-	char	*ptr;
-	size_t	len;
+	int	i;
 
-	len = ft_strlen(s);
-	ptr = ft_calloc(len + 1, sizeof (char));
-	if (!ptr)
-		return (NULL);
-	ft_memcpy(ptr, s, len + 1);
-	return (ptr);
+	i = 0;
+	while (str && str[i])
+	{
+		if ((str[i] >= 'A' && str[i] <= 'Z'))
+			return (1);
+		else if (str[i] >= 'a' && str[i] <= 'z')
+			return (1);
+		i++;
+	}
+	return (0);
 }

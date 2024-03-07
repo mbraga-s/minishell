@@ -5,21 +5,41 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/06 16:24:46 by manumart          #+#    #+#             */
-/*   Updated: 2024/03/06 16:25:12 by manumart         ###   ########.fr       */
+/*   Created: 2022/10/24 16:36:35 by mbraga-s          #+#    #+#             */
+/*   Updated: 2024/03/07 04:25:55 by manumart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-char	*ft_strchr(const char *str, int c)
+char	*ft_strchr(const char *s, int c)
 {
 	size_t	i;
+	char	*ptr;
 
-	i = 0;
-	while (str[i] != '\0' && (unsigned char)c != str[i])
-		i++;
-	if ((unsigned char)c == str[i])
-		return ((char *)str + i);
+	ptr = (char *)s;
+	i = ft_strlen(ptr) + 1;
+	while (i--)
+	{
+		if (*(ptr) == (char)c)
+		{
+			return (ptr);
+		}
+		ptr++;
+	}
 	return (0);
 }
+
+/*int	main(void)
+{
+	const char	*ptr;
+	char		*str;
+	int			c;
+
+	c = 'i';
+	ptr = "Isto e muito fixe moco";
+	str = ft_strchr(ptr, c);
+
+	printf("%s", str);
+}
+*/

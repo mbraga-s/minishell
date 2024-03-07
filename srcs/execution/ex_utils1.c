@@ -6,13 +6,13 @@
 /*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:45:54 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/05 12:31:28 by manumart         ###   ########.fr       */
+/*   Updated: 2024/03/07 04:27:53 by manumart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-// closes a pair of file descriptors
+//closes a pair of file descriptors
 
 void	close_fd(int *fd)
 {
@@ -20,7 +20,7 @@ void	close_fd(int *fd)
 	close(fd[1]);
 }
 
-// Protection for the dup2 command (separated from code to save lines)
+//Protection for the dup2 command (separated from code to save lines)
 
 int	dupcheck(int file_fd, int fd)
 {
@@ -32,7 +32,7 @@ int	dupcheck(int file_fd, int fd)
 	return (i);
 }
 
-// Runs through the environment variables looking for PATH.
+//Runs through the environment variables looking for PATH.
 
 char	*check_path(char *arg, char **envp)
 {
@@ -43,10 +43,10 @@ char	*check_path(char *arg, char **envp)
 	i = 0;
 	env = NULL;
 	if (!arg)
-		printf("command not found: %s\n", arg);
+		printf("%s: command not found\n", arg);
 	else if (pcheck(arg) == 0)
 	{
-		while (envp[i])
+		while (envp && envp[i])
 		{
 			if (!ft_strncmp("PATH=", envp[i], 5))
 			{
@@ -63,9 +63,9 @@ char	*check_path(char *arg, char **envp)
 	return (ft_strdup(arg));
 }
 
-// Goes through every path in PATH variable (from environment variables)
-// and joins the cmd to it. Then it tries to access that path.
-// If it succedes it returns that path otherwise it tries with the next
+//Goes through every path in PATH variable (from environment variables)
+//and joins the cmd to it. Then it tries to access that path.
+//If it succedes it returns that path otherwise it tries with the next
 
 char	*pathtest(char *env, char *arg)
 {
@@ -74,25 +74,28 @@ char	*pathtest(char *env, char *arg)
 	char	*path;
 
 	i = 0;
-	ptr = ft_split(env, ':');
-	while (ptr[i])
+	ptr = NULL;
+	if (env)
+		ptr = ft_split(env, ':');
+	while (ptr && ptr[i])
 	{
 		path = ft_strjoin(ptr[i], "/");
 		path = ft_strjoin(path, arg);
 		if (access(path, X_OK) == 0)
 		{
+			while (ptr && ptr[i++])
+				free (ptr[i]);
+			free(ptr);
 			return (path);
-			break ;
 		}
 		free(path);
 		i++;
 	}
-	printf("command not found: %s\n", arg);
 	free(ptr);
 	return (NULL);
 }
 
-// Checks if the cmd given was already a path (if it had a /)
+//Checks if the cmd given was already a path (if it had a /)
 
 int	pcheck(char *ptr)
 {
@@ -110,7 +113,5 @@ int	pcheck(char *ptr)
 		}
 		i++;
 	}
-	if (flag == 1 && !access(ptr, X_OK) == 0)
-		perror(ptr);
 	return (flag);
 }

@@ -5,21 +5,17 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/22 11:13:33 by manumart          #+#    #+#             */
-/*   Updated: 2024/02/22 20:17:45 by manumart         ###   ########.fr       */
+/*   Created: 2022/10/24 15:06:22 by mbraga-s          #+#    #+#             */
+/*   Updated: 2024/03/07 04:24:29 by manumart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isdigit(char *str)
-{
-	int	i;
+#include "../minishell.h"
 
-	i = 0;
-	while (str[i] != '\0')
-	{
-		if (str[i] >= '0' && str[i] <= '9')
-			return (0);
-		i++;
-	}
-	return (1);
+int	ft_isdigit(int c)
+{
+	if (c >= '0' && c <= '9')
+		return (1);
+	else
+		return (0);
 }

@@ -6,15 +6,15 @@
 /*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 15:41:51 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/05 12:31:26 by manumart         ###   ########.fr       */
+/*   Updated: 2024/03/07 04:28:06 by manumart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-// Checks if there is an infile and/or outfile on the node
-// If there is, opens them and dups the file descriptor to stdin or stdout
-// Works for multiple infiles and outfiles
+//Checks if there is an infile and/or outfile on the node
+//If there is, opens them and dups the file descriptor to stdin or stdout
+//Works for multiple infiles and outfiles
 
 int	infile_check(int dups[2], t_data *data);
 
@@ -35,7 +35,10 @@ int	infile_check(int dups[2], t_data *data)
 	i = 0;
 	while (data->infile && data->infile[i])
 	{
-		fd = open(data->infile[i], O_RDONLY);
+		if (!ft_strncmp(data->inflag[i], "0", 1))
+			fd = open(data->infile[i], O_RDONLY);
+		else
+			fd = openhdoc(data->infile[i]);
 		if (fd < 0)
 		{
 			perror(data->infile[i]);

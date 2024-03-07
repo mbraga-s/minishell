@@ -6,7 +6,7 @@
 /*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 14:15:27 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/02/23 15:52:51 by manumart         ###   ########.fr       */
+/*   Updated: 2024/03/07 04:23:19 by manumart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,10 @@ void	init_data(t_data *node)
 	node->infile = NULL;
 	node->outfile = NULL;
 	node->outflag = NULL;
+	node->inflag = NULL;
+	node->pid = 0;
 	node->next = NULL;
 	node->prev = NULL;
-	node->numofargs = 0;
 }
 
 t_data	*ft_lstnew(void)
