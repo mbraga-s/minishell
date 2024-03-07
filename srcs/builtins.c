@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 18:18:32 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/07 01:20:27 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/07 02:27:05 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	exec_exit(t_data *data)
 	}
 	else
 		printf("exit: too many arguments\n");
-}
+}	
 
 void	exec_echo(t_data *data)
 {
