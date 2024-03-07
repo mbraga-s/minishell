@@ -6,7 +6,7 @@
 /*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 18:18:32 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/07 04:38:34 by manumart         ###   ########.fr       */
+/*   Updated: 2024/03/07 04:42:38 by manumart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	exec_pwd(void)
 	char	cwd[PATH_MAX];
 
 	getcwd(cwd, sizeof(cwd));
-	if (cwd != NULL)
-		printf("%s\n", cwd);
+	write(1, &cwd, ft_strlen(cwd));
+	write(1, "\n", 1);
 }
 
 void	exec_cd(t_data *data)
@@ -38,43 +38,44 @@ void	exec_cd(t_data *data)
 		else if (!access(data->args[1], F_OK))
 			chdir(data->args[1]);
 		else
-			printf("cd : no such file or directory: %s\n", data->args[1]);
+		{
+			write(2, "cd : ", 5);
+			write(2, data->args[1], ft_strlen(data->args[1]));
+			write(2, ": No such file or directory\n", 28);
+		}
 	}
 	else
-		printf("cd: too many arguments\n");
+		write(2, "cd: too many arguments\n", 23);
 }
 
 void	exec_exit(t_data *data)
 {
-	int	exitcode;
 	int	i;
 
 	i = 0;
-	exitcode = 0;
+	g_data.status = 0;
 	while (data->args[i])
 		i++;
 	printf("exit\n");
 	if (i <= 2)
 	{
-		if (i == 2 && ft_isdigit(data->args[1]))
+		if (i == 2 && ft_strdigit(data->args[1]))
 		{
 			printf("exit : %s: numeric argument required\n", data->args[1]);
-			exitcode = 255;
+			g_data.status = 255;
 		}
-		else if (i == 2 && !ft_isdigit(data->args[1]))
+		else if (i == 2 && !ft_strdigit(data->args[1]))
 		{
-			exitcode = ft_atoi(data->args[1]);
+			g_data.status = ft_atoi(data->args[1]);
 		}
+		free_array(msdata()->envp);
 		free_all(ft_lstfirst(data));
-		clean_env();
-		exit(exitcode);
+		exit(g_data.status);
 	}
 	else
 		printf("exit: too many arguments\n");
-}	
 }
 
-// env
 void	exec_env(t_data *data)
 {
 	int	i;
@@ -82,19 +83,20 @@ void	exec_env(t_data *data)
 	i = 0;
 	if (data->args[1])
 	{
-		printf("env: '%s': No such file or directory", data->args[1]);
+		write(2, "env: '", 6);
+		write(2, data->args[1], ft_strlen(data->args[1]));
+		write(2, "': No such file or directory\n", 29);
 	}
 	else
 	{
 		while (msdata()->envp[i])
 		{
-			if (ft_strchr(msdata()->envp[i], '='))
-				printf("%s\n", msdata()->envp[i]);
+			write(1, msdata()->envp[i], ft_strlen(msdata()->envp[i]));
+			write(1, "\n", 1);
 			i++;
 		}
 	}
 }
-
 //
 
 // echo
@@ -128,7 +130,7 @@ void	exec_echo(t_data *data)
 }
 //
 
-int	ft_isalnum(char c)
+int	ft_isalnum(int c)
 {
 	if ((c >= '0' && c <= '9'))
 		return (1);
@@ -154,6 +156,16 @@ void	free_array(char **str)
 		i++;
 	}
 	free(str);
+}
+
+int	getdpsize(char **dp)
+{
+	int	dp_size;
+
+	dp_size = 0;
+	while (dp[dp_size] != NULL)
+		dp_size++;
+	return (dp_size);
 }
 // dup de variavel DP
 char	**dpdup(char **str)
@@ -251,15 +263,6 @@ void	printenvpsorted(char **envpsorted)
 	}
 }
 
-int	getdpsize(char **dp)
-{
-	int	dp_size;
-
-	dp_size = 0;
-	while (dp[dp_size] != NULL)
-		dp_size++;
-	return (dp_size);
-}
 void	exportonly(char **envp)
 {
 	char	**envpsorted;

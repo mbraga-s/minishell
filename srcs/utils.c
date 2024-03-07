@@ -6,7 +6,7 @@
 /*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 17:56:04 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/07 04:29:04 by manumart         ###   ########.fr       */
+/*   Updated: 2024/03/07 04:47:13 by manumart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,7 @@ void	free_all(t_data *node)
 	}
 }
 
-void	free_array(char **array)
-{
-	int		i;
 
-	i = 0;
-	while (array && array[i])
-		free (array[i++]);
-	free (array);
-}
 
 t_data	*ft_lstfirst(t_data *lst)
 {

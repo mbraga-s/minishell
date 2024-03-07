@@ -6,7 +6,7 @@
 /*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 12:31:02 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/07 04:22:35 by manumart         ###   ########.fr       */
+/*   Updated: 2024/03/07 04:51:56 by manumart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,16 @@ int	check_builtin(t_data *data)
 		else if (!ft_strncmp(data->args[0], "echo", 5))
 		{
 			exec_echo(data);
+			return (1);
+		}
+		else if (!ft_strncmp(data->args[0], "export", 7))
+		{
+			exec_export(data);
+			return (1);
+		}
+		else if (!ft_strncmp(data->args[0], "unset", 6))
+		{
+			exec_unset(data);
 			return (1);
 		}
 		else if (!ft_strncmp(data->args[0], "env", 4))

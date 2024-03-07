@@ -156,8 +156,8 @@ int	main(int argc, char **argv, char **env)
 			add_history(input);
 			tokens = lexer(input);
 			data = parser(tokens);
-			expander(data, env);
-			execution(data, msdata()->envp);
+			expander(data);
+			execution(data);
 			free_all(data);
 		}
 		free(input);
