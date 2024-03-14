@@ -1,26 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   exec_pwd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/07 04:23:48 by manumart          #+#    #+#             */
-/*   Updated: 2024/03/07 06:25:20 by manumart         ###   ########.fr       */
+/*   Created: 2024/03/07 07:08:52 by manumart          #+#    #+#             */
+/*   Updated: 2024/03/08 19:16:51 by manumart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
 
-void	*ft_calloc(size_t nmemb, size_t size)
+void	exec_pwd(void)
 {
-	void	*ptr;
+	char	cwd[PATH_MAX];
 
-	if (nmemb > 0 && size > __SIZE_MAX__ / nmemb)
-		return (NULL);
-	ptr = malloc(nmemb * size);
-	if (!ptr)
-		return (NULL);
-	ft_bzero(ptr, (nmemb * size));
-	return (ptr);
+	getcwd(cwd, sizeof(cwd));
+	ft_putstr(1, cwd);
+	write(1, "\n", 1);
 }

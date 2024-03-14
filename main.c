@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 16:58:29 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/07 03:13:46 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/08 19:17:20 by manumart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,11 @@ t_envs	*msdata(void)
 	return (&data);
 }
 
+char *ft_putstr(int fd,char *str)
+{
+	write(fd, str, ft_strlen(str));
+	return (str);
+}
 int	check_input(char *input)
 {
 	int		i;
@@ -75,7 +80,7 @@ void	miniloop(void)
 				inner_working(tokens);
 		}
 		else
-			write(2, "Input error: unclosed quotes\n", 29);
+			ft_putstr(2, "minishell: syntax error\n");
 	}
 	free(input);
 }

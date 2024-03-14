@@ -1,48 +1,50 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   heredoc.c                                          :+:      :+:    :+:   */
+/*   ex_builtins2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/22 18:07:27 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/08 19:11:49 by manumart         ###   ########.fr       */
+/*   Created: 2024/03/07 07:15:04 by manumart          #+#    #+#             */
+/*   Updated: 2024/03/07 07:17:16 by manumart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-int	openhdoc(char *str)
+int	is_valid(char *str)
 {
-	int	fd[2];
+	int	i;
 
-	if (pipe(fd) == -1)
-	{
-		perror(NULL);
+	i = 0;
+	if ((str[i] >= '0' && str[i] <= '9') || str[i] == '=')
 		return (0);
+	while (str[i] && str[i] != '=')
+	{
+		if (!ft_isalnum(str[i]) && str[i] != '_' && str[i] != '=')
+			return (0);
+		i++;
 	}
-	ft_putstr(fd[1], str);
-	close(fd[1]);
-	return (fd[0]);
+	return (1);
 }
 
-char	*ft_heredoc(char *str)
+int	digitquestionmark(int str)
 {
-	char	*ptr;
-	char	*input;
+	if (str >= '0' && str <= '9')
+		return (1);
+	return (0);
+}
 
-	ptr = NULL;
-	input = NULL;
-	input = readline("> ");
-	while (ft_strncmp(input, str, (ft_strlen(str) + 1)))
+int	searchforchar(char *str, char c)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
 	{
-		ptr = ft_strjoin(ptr, input);
-		free (input);
-		ptr = ft_strjoin(ptr, "\n");
-		input = readline("> ");
+		if (str[i] == c)
+			return (1);
+		i++;
 	}
-	free(input);
-	if (!ptr)
-		ptr = ft_strdup("");
-	return (ptr);
+	return (0);
 }

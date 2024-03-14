@@ -6,13 +6,13 @@
 /*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 12:31:02 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/07 04:51:56 by manumart         ###   ########.fr       */
+/*   Updated: 2024/03/07 08:25:58 by manumart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-//Checks if the cmd given is one of the built-ins and, if it is, runs it
+// Checks if the cmd given is one of the built-ins and, if it is, runs it
 
 int	check_builtin(t_data *data)
 {
@@ -57,23 +57,6 @@ int	check_builtin(t_data *data)
 	return (0);
 }
 
-int	is_builtin(t_data *data)
-{
-	if (data->args && data->args[0])
-	{
-		if (!ft_strncmp(data->args[0], "cd", 3))
-		{
-			exec_cd(data);
-			return (1);
-		}
-		else if (!ft_strncmp(data->args[0], "exit", 5))
-		{
-			exec_exit(data);
-			return (1);
-		}
-	}
-	return (0);
-}
 
 void	execution(t_data *data)
 {
@@ -90,7 +73,7 @@ void	execution(t_data *data)
 			exit(1);
 		}
 	}
-	else if (is_builtin(data))
+	else if (check_builtin(data))
 		return ;
 	data->pid = fork();
 	if (data->pid == 0)

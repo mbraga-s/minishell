@@ -1,26 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   exec_echo.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/07 04:23:48 by manumart          #+#    #+#             */
-/*   Updated: 2024/03/07 06:25:20 by manumart         ###   ########.fr       */
+/*   Created: 2024/03/07 07:09:52 by manumart          #+#    #+#             */
+/*   Updated: 2024/03/08 19:12:55 by manumart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
 
-void	*ft_calloc(size_t nmemb, size_t size)
+void	exec_echo(t_data *data)
 {
-	void	*ptr;
+	int	newline;
+	int	i;
 
-	if (nmemb > 0 && size > __SIZE_MAX__ / nmemb)
-		return (NULL);
-	ptr = malloc(nmemb * size);
-	if (!ptr)
-		return (NULL);
-	ft_bzero(ptr, (nmemb * size));
-	return (ptr);
+	newline = 0;
+	i = 1;
+	if (data->args[1])
+	{
+		if (!ft_strncmp(data->args[1], "-n", 2))
+			newline = 1;
+		else
+		{
+			while (data->args[i])
+			{
+				ft_putstr(1, data->args[i]);
+				i++;
+				if (data->args[i])
+					ft_putstr(1, " ");
+			}
+		}
+		if (newline == 0)
+			ft_putstr(1, "\n");
+	}
+	else
+		ft_putstr(1, "\n");
 }

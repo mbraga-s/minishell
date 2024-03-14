@@ -6,191 +6,206 @@
 /*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 11:43:38 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/07 04:51:32 by manumart         ###   ########.fr       */
+/*   Updated: 2024/03/08 19:17:01 by manumart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include <stdio.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <string.h>
+# include <fcntl.h>
 # include <limits.h>
 # include <linux/limits.h>
-# include <stdarg.h>
-# include <fcntl.h>
-# include <sys/types.h>
-# include <sys/stat.h>
-# include <sys/wait.h>
-# include <readline/readline.h>
 # include <readline/history.h>
+# include <readline/readline.h>
+# include <stdarg.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <string.h>
+# include <sys/stat.h>
+# include <sys/types.h>
+# include <sys/wait.h>
+# include <unistd.h>
 
-//struct used to store the command to execute, arguments for said command
+// struct used to store the command to execute, arguments for said command
 // the stdin and stdout of said command and a flag to recognise a pipe
 
 typedef struct s_data
 {
-	char			**args;
-	int				fd[2];
-	char			**infile;
-	char			**outfile;
-	char			**outflag;
-	char			**inflag;
-	int				pid;
-	struct s_data	*next;
-	struct s_data	*prev;
-}				t_data;
+	char				**args;
+	int					fd[2];
+	char				**infile;
+	char				**outfile;
+	char				**outflag;
+	char				**inflag;
+	int					pid;
+	struct s_data		*next;
+	struct s_data		*prev;
+}						t_data;
 
 typedef struct s_global
 {
-	int				status;
-}				t_global;
+	int					status;
+}						t_global;
 
 typedef struct s_envs
 {
-	char			**envp;
-}				t_envs;
+	char				**envp;
+}						t_envs;
 
 extern struct s_global	g_data;
 
-t_envs	*msdata(void);
+t_envs					*msdata(void);
 
-//utils.c
+// utils.c
 
-void	free_all(t_data *node);
+void					free_all(t_data *node);
 
-void	free_array(char **array);
+char					*rem_allquotes(char *str);
 
-t_data	*ft_lstfirst(t_data *lst);
+char					**dpdup(char **str);
 
-void	check_error(char *str);
+int						getdpsize(char **dp);
 
-char	**dup_array(char **env);
+void					free_array(char **array);
 
-//ex_utils1.c
+t_data					*ft_lstfirst(t_data *lst);
 
-int		pcheck(char *ptr);
+void					check_error(char *str);
 
-char	*pathtest(char *env, char *arg);
+char					**dup_array(char **env);
 
-char	*check_path(char *arg, char **envp);
+char *ft_putstr(int fd, char *str);
 
-int		dupcheck(int file_fd, int fd);
+// ex_utils1.c
 
-void	close_fd(int *fd);
+int						searchforchar(char *str, char c);
 
-//ex_utils2.c
+int						is_valid(char *str);
 
-int		file_check(int dups[2], t_data *data);
+int						pcheck(char *ptr);
 
-int		infile_check(int dups[2], t_data *data);
+char					*pathtest(char *env, char *arg);
 
-int		outfile_check(int dups[2], t_data *data);
+char					*check_path(char *arg, char **envp);
 
-//executor.c
+int						dupcheck(int file_fd, int fd);
 
-void	execution(t_data *data);
+void					addtoenv(char *arg);
 
-int		check_builtin(t_data *data);
+int						searchinenvp(char *input, char **envp);
 
-//builtins.c
+void					close_fd(int *fd);
 
-void	exec_pwd(void);
+// ex_utils2.c
 
-void	exec_cd(t_data *data);
+int						file_check(int dups[2], t_data *data);
 
-void	exec_exit(t_data *data);
+int						infile_check(int dups[2], t_data *data);
 
-void	exec_echo(t_data *data);
+int						outfile_check(int dups[2], t_data *data);
 
-void	exec_env(t_data *data);
+// executor.c
 
-int		searchforchar(char *str, char c);
+void					execution(t_data *data);
 
-void	exec_export(t_data *data);
+int						check_builtin(t_data *data);
 
-void exec_unset(t_data *data);
+// builtins.c
 
-//forks.c
+void					exec_pwd(void);
 
-void	first_fork(t_data *data, char **envp);
+void					exec_cd(t_data *data);
 
-void	mid_fork(t_data *data, char **envp);
+void					exec_exit(t_data *data);
 
-void	last_fork(t_data *data, char **envp);
+void					exec_echo(t_data *data);
 
-//expander.c && exp_utils1.c
+void					exec_env(t_data *data);
 
-void	expander(t_data *data);
+void					exec_export(t_data *data);
 
-char	*get_newenv(int len, int i, char *str, char **env);
+void					exec_unset(t_data *data);
 
-//parser.c
+// forks.c
 
-t_data	*parser(char **token);
+void					first_fork(t_data *data, char **envp);
 
-char	**add_args(char **args, char *token);
+void					mid_fork(t_data *data, char **envp);
 
-//heredoc.c
+void					last_fork(t_data *data, char **envp);
 
-char	*ft_heredoc(char *str);
+// expander.c && exp_utils1.c
 
-int		openhdoc(char *str);
+void					expander(t_data *data);
 
-//lexer.c
+char					*get_newenv(int len, int i, char *str, char **env);
 
-char	**lexer(char *str);
+// parser.c
 
-//syntax.c
+t_data					*parser(char **token);
 
-int		syntax_checker(char **tokens);
+char					**add_args(char **args, char *token);
 
-//libft
+// heredoc.c
 
-int		inv_comma(char const *ptr, int i, char c);
+char					*ft_heredoc(char *str);
 
-char	**ft_split(char const *s, char c);
+int						openhdoc(char *str);
 
-char	*ft_substr(const char *s, unsigned int start, size_t len);
+// lexer.c
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t size);
+char					**lexer(char *str);
 
-void	*ft_calloc(size_t nmemb, size_t size);
+// syntax.c
 
-void	ft_bzero(void *s, size_t n);
+int						syntax_checker(char **tokens);
 
-size_t	ft_strlen(const char *str);
+// libft
 
-t_data	*ft_lstnew(void);
+int						inv_comma(char const *ptr, int i, char c);
 
-t_data	*ft_lstadd_back(t_data **lst, t_data *new);
+char					**ft_split(char const *s, char c);
 
-int		ft_lstsize(t_data *lst);
+char					*ft_substr(const char *s, unsigned int start,
+							size_t len);
 
-t_data	*ft_lstlast(t_data *lst);
+size_t					ft_strlcpy(char *dst, const char *src, size_t size);
 
-int		ft_strncmp(const char *s1, const char *s2, size_t n);
+void					*ft_calloc(size_t nmemb, size_t size);
 
-char	*ft_strdup(const char *s);
+void					ft_bzero(void *s, size_t n);
 
-void	*ft_memcpy(void *dest, const void *src, size_t n);
+size_t					ft_strlen(const char *str);
 
-char	*ft_strjoin(char *s1, char *s2);
+t_data					*ft_lstnew(void);
 
-int		ft_isdigit(int c);
+t_data					*ft_lstadd_back(t_data **lst, t_data *new);
 
-int		ft_atoi(char *nptr);
+int						ft_lstsize(t_data *lst);
 
-char	*ft_strchr(const char *s, int c);
+t_data					*ft_lstlast(t_data *lst);
 
-int		ft_isalnum(int c);
+int						ft_strncmp(const char *s1, const char *s2, size_t n);
 
-int		ft_strdigit(char *str);
+char					*ft_strdup(const char *s);
 
-int		ft_isalpha(int c);
+void					*ft_memcpy(void *dest, const void *src, size_t n);
 
-char	*ft_itoa(int n);
+char					*ft_strjoin(char *s1, char *s2);
+
+int						ft_isdigit(int c);
+
+int						ft_atoi(char *nptr);
+
+char					*ft_strchr(const char *s, int c);
+
+int						ft_isalnum(int c);
+
+int						ft_strdigit(char *str);
+
+int						ft_isalpha(int c);
+
+char					*ft_itoa(int n);
 
 #endif

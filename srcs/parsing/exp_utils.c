@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exp_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:21:44 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/02/27 16:41:46 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/07 06:25:22 by manumart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	new_funct(char *ptr, char *nenv, int j)
 
 	h = 0;
 	while (nenv && nenv[h])
-			ptr[j++] = nenv[h++];
+		ptr[j++] = nenv[h++];
 	return (j);
 }
 
@@ -32,10 +32,10 @@ int	new_funct1(char *str, int j)
 	return (len);
 }
 
-//Allocates and 'builds' the string resulting from the replacement
-//of the $NAME with it's value
-//len indicates the size of $NAME (5 in this case) and nenv
-//is the value in the environment variables
+// Allocates and 'builds' the string resulting from the replacement
+// of the $NAME with it's value
+// len indicates the size of $NAME (5 in this case) and nenv
+// is the value in the environment variables
 
 char	*new_funct2(char *str, char *nenv, int pos, int len)
 {
@@ -58,7 +58,7 @@ char	*new_funct2(char *str, char *nenv, int pos, int len)
 	else if (!nenv)
 		i = i + (len);
 	while (str[i])
-			ptr[j++] = str[i++];
+		ptr[j++] = str[i++];
 	free(nenv);
 	free(str);
 	return (ptr);
@@ -85,15 +85,15 @@ char	*new_funct3(char *str, int pos, int len)
 		i = i + (len);
 	}
 	while (str[i])
-			ptr[j++] = str[i++];
+		ptr[j++] = str[i++];
 	free(temp);
 	free(str);
 	return (ptr);
 }
 
-//Runs through the string seaching for a $. When found, replaces
-//the expandable variable with it's value and returns the resulting
-//string
+// Runs through the string seaching for a $. When found, replaces
+// the expandable variable with it's value and returns the resulting
+// string
 
 char	*expand(char *str, char **env)
 {

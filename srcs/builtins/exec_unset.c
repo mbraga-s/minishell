@@ -1,26 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   exec_unset.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/07 04:23:48 by manumart          #+#    #+#             */
-/*   Updated: 2024/03/07 06:25:20 by manumart         ###   ########.fr       */
+/*   Created: 2024/03/07 07:08:21 by manumart          #+#    #+#             */
+/*   Updated: 2024/03/07 07:16:22 by manumart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
 
-void	*ft_calloc(size_t nmemb, size_t size)
+void	exec_unset(t_data *data)
 {
-	void	*ptr;
+	int	i;
+	int	output;
 
-	if (nmemb > 0 && size > __SIZE_MAX__ / nmemb)
-		return (NULL);
-	ptr = malloc(nmemb * size);
-	if (!ptr)
-		return (NULL);
-	ft_bzero(ptr, (nmemb * size));
-	return (ptr);
+	i = 1;
+	while (data->args[i])
+	{
+		output = searchinenvp(data->args[i], msdata()->envp);
+		if (output != -1)
+		{
+			free(msdata()->envp[output]);
+			msdata()->envp[output] = NULL;
+		}
+		i++;
+	}
 }
