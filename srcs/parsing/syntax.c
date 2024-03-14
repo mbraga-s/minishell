@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:54:25 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/02/27 16:33:21 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/11 18:53:08 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,63 +22,63 @@ void	syn_error(char **tokens, int i)
 	free_array(tokens);
 }
 
-int	syntax_part1(char **tokens, int *i)
+int	syntax_part1(char **tokens, int i)
 {
-	if ((!ft_strncmp(tokens[*i], "<", 2)) && ++*i)
+	if ((!ft_strncmp(tokens[i], "<", 2)) && ++i)
 	{
-		if (!tokens[*i] || (!ft_strncmp(tokens[*i], "|", 2)) || \
-			(!ft_strncmp(tokens[*i], ">", 1)) || \
-			(!ft_strncmp(tokens[*i], "<", 1)))
+		if (!tokens[i] || (!ft_strncmp(tokens[i], "|", 2)) || \
+			(!ft_strncmp(tokens[i], ">", 1)) || \
+			(!ft_strncmp(tokens[i], "<", 1)))
 		{
-			syn_error(tokens, (*i));
+			syn_error(tokens, (i));
 			return (0);
 		}
 	}
-	else if ((!ft_strncmp(tokens[*i], ">", 2)) && ++*i)
+	else if ((!ft_strncmp(tokens[i], ">", 2)) && ++i)
 	{
-		if (!tokens[*i] || (!ft_strncmp(tokens[*i], "|", 2)) || \
-			(!ft_strncmp(tokens[*i], ">", 1)) || \
-			(!ft_strncmp(tokens[*i], "<", 1)))
+		if (!tokens[i] || (!ft_strncmp(tokens[i], "|", 2)) || \
+			(!ft_strncmp(tokens[i], ">", 1)) || \
+			(!ft_strncmp(tokens[i], "<", 1)))
 		{
-			syn_error(tokens, (*i));
+			syn_error(tokens, (i));
 			return (0);
 		}
 	}
 	return (1);
 }
 
-int	syntax_part2(char **tokens, int *i)
+int	syntax_part2(char **tokens, int i)
 {
-	if ((!ft_strncmp(tokens[*i], "<<", 3)) && ++*i)
+	if ((!ft_strncmp(tokens[i], "<<", 3)) && ++i)
 	{
-		if (!tokens[*i] || (!ft_strncmp(tokens[*i], "|", 2)) || \
-			(!ft_strncmp(tokens[*i], ">", 1)) || \
-			(!ft_strncmp(tokens[*i], "<", 1)))
+		if (!tokens[i] || (!ft_strncmp(tokens[i], "|", 2)) || \
+			(!ft_strncmp(tokens[i], ">", 1)) || \
+			(!ft_strncmp(tokens[i], "<", 1)))
 		{
-			syn_error(tokens, (*i));
+			syn_error(tokens, (i));
 			return (0);
 		}
 	}
-	else if ((!ft_strncmp(tokens[*i], ">>", 3)) && ++*i)
+	else if ((!ft_strncmp(tokens[i], ">>", 3)) && ++i)
 	{
-		if (!tokens[*i] || (!ft_strncmp(tokens[*i], "|", 2)) || \
-			(!ft_strncmp(tokens[*i], ">", 1)) || \
-			(!ft_strncmp(tokens[*i], "<", 1)))
+		if (!tokens[i] || (!ft_strncmp(tokens[i], "|", 2)) || \
+			(!ft_strncmp(tokens[i], ">", 1)) || \
+			(!ft_strncmp(tokens[i], "<", 1)))
 		{
-			syn_error(tokens, (*i));
+			syn_error(tokens, (i));
 			return (0);
 		}
 	}
 	return (1);
 }
 
-int	syntax_part3(char **tokens, int *i)
+int	syntax_part3(char **tokens, int i)
 {
-	if ((!ft_strncmp(tokens[*i], "|", 2)) && ++*i)
+	if ((!ft_strncmp(tokens[i], "|", 2)) && ++i)
 	{
-		if (!tokens[*i] || (!ft_strncmp(tokens[*i], "|", 2)))
+		if (!tokens[i] || (!ft_strncmp(tokens[i], "|", 2)))
 		{
-			syn_error(tokens, (*i));
+			syn_error(tokens, (i));
 			return (0);
 		}
 	}
@@ -102,14 +102,13 @@ int	syntax_checker(char **tokens)
 	}
 	while (tokens && tokens[i])
 	{
-		if (!syntax_part1(tokens, &i))
+		if (!syntax_part1(tokens, i))
 			return (0);
-		else if (!syntax_part2(tokens, &i))
+		else if (!syntax_part2(tokens, i))
 			return (0);
-		else if (!syntax_part3(tokens, &i))
+		else if (!syntax_part3(tokens, i))
 			return (0);
-		else
-			i++;
+		i++;
 	}
 	return (1);
 }
