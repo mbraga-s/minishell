@@ -1,0 +1,6 @@
+*.out
+minishell
+*.a
+*.txt
+objects
+*.o

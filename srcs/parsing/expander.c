@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbraga-s <mbraga-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 12:31:37 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/07 04:31:10 by manumart         ###   ########.fr       */
+/*   Updated: 2024/03/15 19:00:57 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ char	*rem_quotes(char *str);
 
 char	*expand(char *str, char **envp);
 
+//Checks if an arguments becomes a NULL after expanding.
+//ex: "$VAR" and removes it from the args list.
 void	check_args(char **args, int pos)
 {
 	if (args[pos] && args[pos][0] == '\0')
@@ -30,8 +32,7 @@ void	check_args(char **args, int pos)
 	}
 }
 
-// Checks if there are quoted or expandable strings
-
+// Checks if there are quoted or expandable strings.
 void	expander(t_data *current)
 {
 	int	j;
@@ -61,8 +62,7 @@ void	expander(t_data *current)
 }
 
 // Removes quotes from the string by moving every character one position
-// to the left and setting the last 2 to NULLs
-
+// to the left and setting the last 2 to NULLs.
 char	*rem_quotes(char *str)
 {
 	int	i;

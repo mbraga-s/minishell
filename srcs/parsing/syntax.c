@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   syntax.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mbraga-s <mbraga-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:54:25 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/11 18:53:08 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/15 19:00:44 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
+//Prints the error given by the syntax checker.
 void	syn_error(char **tokens, int i)
 {
 	if (!tokens[i])
@@ -85,6 +86,8 @@ int	syntax_part3(char **tokens, int i)
 	return (1);
 }
 
+//Checks if the syntax in the input is correct.
+//If it isn't returns 0.
 int	syntax_checker(char **tokens)
 {
 	int	i;

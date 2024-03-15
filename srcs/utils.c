@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbraga-s <mbraga-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 17:56:04 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/08 19:11:38 by manumart         ###   ########.fr       */
+/*   Updated: 2024/03/14 19:37:07 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,25 +40,25 @@ t_data	*ft_lstfirst(t_data *lst)
 
 void	check_error(char *str)
 {
-	ft_putstr(2, str);
+	write(2, str, ft_strlen(str));
 	if (!ft_strchr(str, '/'))
 	{
-		ft_putstr(2, ": command not found\n");
+		write(2, ": command not found\n", 20);
 		g_data.status = 127;
 	}
 	else if (ft_strchr(str, '/') && access(str, X_OK) == 0)
 	{
-		ft_putstr(2, ": Is a directory\n");
+		write(2, ": Is a directory\n", 17);
 		g_data.status = 126;
 	}
 	else if (access(str, F_OK) != 0)
 	{
-		ft_putstr(2, ": No such file or directory\n");
+		write(2, ": No such file or directory\n", 28);
 		g_data.status = 127;
 	}
 	else if (access(str, X_OK) != 0)
 	{
-		ft_putstr(2, ": Permission denied\n");
+		write(2, ": Permission denied\n", 20);
 		g_data.status = 126;
 	}
 	else
@@ -83,4 +83,10 @@ char	**dup_array(char **env)
 		i++;
 	}
 	return (env_copy);
+}
+
+char	*ft_putstr(int fd,char *str)
+{
+	write(fd, str, ft_strlen(str));
+	return (str);
 }

@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbraga-s <mbraga-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 16:30:04 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/14 19:03:37 by manumart         ###   ########.fr       */
+/*   Updated: 2024/03/15 19:04:20 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-//add_args - appends a string to an already existing array of strings
-
+//Appends a string to an already existing array of strings.
 char	**add_args(char **args, char *token)
 {
 	int		i;
@@ -37,6 +36,7 @@ char	**add_args(char **args, char *token)
 	return (ptr);
 }
 
+//Checks for infiles, outfiles and appending.
 int	parser_pt1(char **token, t_data *data, int i)
 {
 	if (!ft_strncmp(token[i], "<", 2) && ++i)
@@ -60,6 +60,7 @@ int	parser_pt1(char **token, t_data *data, int i)
 	return (0);
 }
 
+//Checks for an here-doc operator.
 int	parser_pt2(char **token, t_data *data, int i)
 {
 	char	*heredoc;
@@ -76,8 +77,7 @@ int	parser_pt2(char **token, t_data *data, int i)
 	return (0);
 }
 
-//parser - takes the tokens given by lexer and assigns them to a linked list
-
+//Takes the tokens given by lexer and assigns them to a linked list.
 t_data	*parser(char **token)
 {
 	t_data	*data;

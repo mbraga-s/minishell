@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   exp_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbraga-s <mbraga-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:21:44 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/07 06:25:22 by manumart         ###   ########.fr       */
+/*   Updated: 2024/03/15 19:01:18 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
+//Copies the env value found (nenv) to the pointer given
+//starting at the position j.
 int	new_funct(char *ptr, char *nenv, int j)
 {
 	int	h;
@@ -22,6 +24,8 @@ int	new_funct(char *ptr, char *nenv, int j)
 	return (j);
 }
 
+//Returns the size of the expandable variable ($SMTH)
+//by running until a non-alphanumeric char is found.
 int	new_funct1(char *str, int j)
 {
 	int	len;
@@ -33,10 +37,9 @@ int	new_funct1(char *str, int j)
 }
 
 // Allocates and 'builds' the string resulting from the replacement
-// of the $NAME with it's value
+// of the $NAME with it's value.
 // len indicates the size of $NAME (5 in this case) and nenv
-// is the value in the environment variables
-
+// is the value in the environment variables.
 char	*new_funct2(char *str, char *nenv, int pos, int len)
 {
 	int		i;
@@ -64,6 +67,7 @@ char	*new_funct2(char *str, char *nenv, int pos, int len)
 	return (ptr);
 }
 
+//Replaces the $? with the appropriate value.
 char	*new_funct3(char *str, int pos, int len)
 {
 	int		i;
@@ -93,8 +97,7 @@ char	*new_funct3(char *str, int pos, int len)
 
 // Runs through the string seaching for a $. When found, replaces
 // the expandable variable with it's value and returns the resulting
-// string
-
+// string.
 char	*expand(char *str, char **env)
 {
 	int		i;

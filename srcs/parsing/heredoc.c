@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbraga-s <mbraga-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:07:27 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/08 19:11:49 by manumart         ###   ########.fr       */
+/*   Updated: 2024/03/15 19:00:40 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
+//Opens a pipe as a way to write to a process and writes the given string to it.
+//Returns the read end of the pipe.
 int	openhdoc(char *str)
 {
 	int	fd[2];
@@ -26,6 +28,7 @@ int	openhdoc(char *str)
 	return (fd[0]);
 }
 
+//Requests input as an here-doc and saves it in a very long string.
 char	*ft_heredoc(char *str)
 {
 	char	*ptr;

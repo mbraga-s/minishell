@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   ex_utils2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbraga-s <mbraga-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 15:41:51 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/07 04:28:06 by manumart         ###   ########.fr       */
+/*   Updated: 2024/03/15 19:06:48 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-//Checks if there is an infile and/or outfile on the node
-//If there is, opens them and dups the file descriptor to stdin or stdout
-//Works for multiple infiles and outfiles
 
 int	infile_check(int dups[2], t_data *data);
 
 int	outfile_check(int dups[2], t_data *data);
 
+//Checks if there is an infile and/or outfile on the node.
+//If there is, opens them and dups the file descriptor to stdin or stdout.
+//Works for multiple infiles and outfiles.
 int	file_check(int dups[2], t_data *data)
 {
 	if (infile_check(dups, data) && outfile_check(dups, data))
@@ -27,6 +27,7 @@ int	file_check(int dups[2], t_data *data)
 	return (0);
 }
 
+//Opens the infiles and the here-docs.
 int	infile_check(int dups[2], t_data *data)
 {
 	int	fd;
@@ -51,6 +52,7 @@ int	infile_check(int dups[2], t_data *data)
 	return (1);
 }
 
+//Opens the outfiles.
 int	outfile_check(int dups[2], t_data *data)
 {
 	int	fd;

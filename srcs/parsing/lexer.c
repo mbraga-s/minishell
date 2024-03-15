@@ -3,18 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbraga-s <mbraga-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 11:59:31 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/07 04:31:18 by manumart         ###   ########.fr       */
+/*   Updated: 2024/03/15 19:06:21 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-//count_op - runs through the string and counts each operator found
-//Probably needs fix to account for >> and <<
-
+//Runs through the string and counts each operator found.
 int	count_op(char *str)
 {
 	int		i;
@@ -39,9 +37,8 @@ int	count_op(char *str)
 	return (count);
 }
 
-//alloc_sep - allocates the memory for new string with spaces
-// between each operator (strlen + operator x 2 + \0)
-
+//Allocates the memory for new string with spaces
+//between each operator (strlen + operator x 2 + \0).
 char	*alloc_sep(char *str)
 {
 	int		len;
@@ -56,9 +53,8 @@ char	*alloc_sep(char *str)
 	return (ptr);
 }
 
-//separate - function that adds a space before and after each operator
-// takes into account if it's just > or if it's >> and ignores stuff in ""
-
+//Adds a space before and after each operator.
+//Takes into account if it's just > or if it's >> and ignores stuff in "".
 char	*separate(char *str, char *ptr)
 {
 	int		i;
@@ -87,8 +83,7 @@ char	*separate(char *str, char *ptr)
 	}
 	return (ptr);
 }
-//lexer - runs everything else, separate then split, and frees everything.
-
+//Runs everything else, separate then split, and frees everything.
 char	**lexer(char *str)
 {
 	char	*ptr;
@@ -101,30 +96,3 @@ char	**lexer(char *str)
 	free (sep);
 	return (lex);
 }
-// main for testing lexer
-
-/* int	main(int argc, char **argv)
-{
-	char	**lex;
-	int		i;
-
-	i = 0;
-	lex = NULL;
-	if (argc == 2)
-	{
-		lex = lexer(argv[1]);
-		while (lex[i])
-		{
-			printf("%s\n", lex[i]);
-			i++;
-		}
-		i = 0;
-		while (lex[i])
-		{
-			free(lex[i]);
-			i++;
-		}
-		free(lex);
-	}
-	return (0);
-} */
