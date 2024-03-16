@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 11:59:31 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/16 18:21:47 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/16 18:36:30 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,8 @@ char	**lexer(char *str)
 	char	**lex;
 
 	ptr = alloc_sep(str);
+	if (!ptr)
+		return (NULL);
 	sep = separate(str, ptr);
 	lex = ft_split(sep, ' ');
 	free (sep);
