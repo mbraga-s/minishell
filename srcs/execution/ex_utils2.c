@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ex_utils2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbraga-s <mbraga-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 15:41:51 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/15 19:06:48 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/16 18:23:06 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
-
 
 int	infile_check(int dups[2], t_data *data);
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 11:43:38 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/08 19:17:01 by manumart         ###   ########.fr       */
+/*   Updated: 2024/03/16 18:22:32 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void					check_error(char *str);
 
 char					**dup_array(char **env);
 
-char *ft_putstr(int fd, char *str);
+char					*ft_putstr(int fd, char *str);
 
 // ex_utils1.c
 

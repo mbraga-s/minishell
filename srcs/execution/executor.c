@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 12:31:02 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/07 08:25:58 by manumart         ###   ########.fr       */
+/*   Updated: 2024/03/16 18:22:10 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ int	check_builtin(t_data *data)
 	}
 	return (0);
 }
-
 
 void	execution(t_data *data)
 {

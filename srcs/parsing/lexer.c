@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbraga-s <mbraga-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 11:59:31 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/15 19:06:21 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/16 18:21:47 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ char	*separate(char *str, char *ptr)
 	}
 	return (ptr);
 }
+
 //Runs everything else, separate then split, and frees everything.
 char	**lexer(char *str)
 {
