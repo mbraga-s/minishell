@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 16:58:29 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/08 19:17:20 by manumart         ###   ########.fr       */
+/*   Updated: 2024/03/16 18:11:10 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,6 @@ t_envs	*msdata(void)
 	return (&data);
 }
 
-char *ft_putstr(int fd,char *str)
-{
-	write(fd, str, ft_strlen(str));
-	return (str);
-}
 int	check_input(char *input)
 {
 	int		i;
