@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   forks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:41:19 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/07 04:28:21 by manumart         ###   ########.fr       */
+/*   Updated: 2024/03/18 16:24:12 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	first_fork(t_data *data, char **envp)
 	}
 	if (file_check(dups, data) && data->args && data->args[0])
 	{
-		if (!check_builtin(data))
+		if (!check_builtin(data, 1))
 		{
 			path = check_path(data->args[0], envp);
 			execve(path, data->args, envp);
@@ -53,7 +53,7 @@ void	mid_fork(t_data *data, char **envp)
 	close_fd(data->fd);
 	if (file_check(dups, data) && data->args && data->args[0])
 	{
-		if (!check_builtin(data))
+		if (!check_builtin(data, 1))
 		{
 			path = check_path(data->args[0], envp);
 			execve(path, data->args, envp);
@@ -79,7 +79,7 @@ void	last_fork(t_data *data, char **envp)
 	close_fd(data->prev->fd);
 	if (file_check(dups, data) && data->args && data->args[0])
 	{
-		if (!check_builtin(data))
+		if (!check_builtin(data, 1))
 		{
 			path = check_path(data->args[0], envp);
 			execve(path, data->args, envp);

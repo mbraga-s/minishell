@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pwd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 07:08:52 by manumart          #+#    #+#             */
-/*   Updated: 2024/03/08 19:16:51 by manumart         ###   ########.fr       */
+/*   Updated: 2024/03/18 16:28:59 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void	exec_pwd(void)
+void	exec_pwd(int fd)
 {
 	char	cwd[PATH_MAX];
 
 	getcwd(cwd, sizeof(cwd));
-	ft_putstr(1, cwd);
-	write(1, "\n", 1);
+	ft_putstr(fd, cwd);
+	write(fd, "\n", 1);
 }

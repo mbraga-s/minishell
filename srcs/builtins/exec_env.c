@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 07:07:19 by manumart          #+#    #+#             */
-/*   Updated: 2024/03/08 19:13:31 by manumart         ###   ########.fr       */
+/*   Updated: 2024/03/18 16:26:17 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	searchinenvp(char *input, char **envp)
 }
 
 
-void	exec_env(t_data *data)
+void	exec_env(t_data *data, int fd)
 {
 	int	i;
 
@@ -43,8 +43,8 @@ void	exec_env(t_data *data)
 	{
 		while (msdata()->envp[i])
 		{
-			ft_putstr(1, rem_allquotes(msdata()->envp[i]));
-			ft_putstr(1, "\n");
+			ft_putstr(fd, rem_allquotes(msdata()->envp[i]));
+			ft_putstr(fd, "\n");
 			i++;
 		}
 	}

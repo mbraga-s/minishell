@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbraga-s <mbraga-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 11:43:38 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/18 16:02:22 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/18 16:31:07 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,29 +99,29 @@ void					close_fd(int *fd);
 
 int						file_check(int dups[2], t_data *data);
 
-int						infile_check(int dups[2], t_data *data);
+// ex_utils3.c
 
-int						outfile_check(int dups[2], t_data *data);
+int						btn_redirect(t_data *data);
 
 // executor.c
 
 void					execution(t_data *data);
 
-int						check_builtin(t_data *data);
+int						check_builtin(t_data *data, int fd);
 
 // builtins.c
 
-void					exec_pwd(void);
+void					exec_pwd(int fd);
 
-void					exec_cd(t_data *data);
+void					exec_cd(t_data *data, int fd);
 
 void					exec_exit(t_data *data);
 
-void					exec_echo(t_data *data);
+void					exec_echo(t_data *data, int fd);
 
-void					exec_env(t_data *data);
+void					exec_env(t_data *data, int fd);
 
-void					exec_export(t_data *data);
+void					exec_export(t_data *data, int fd);
 
 void					exec_unset(t_data *data);
 

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 07:09:06 by manumart          #+#    #+#             */
-/*   Updated: 2024/03/08 19:12:35 by manumart         ###   ########.fr       */
+/*   Updated: 2024/03/18 16:25:40 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void	exec_cd(t_data *data)
+void	exec_cd(t_data *data, int fd)
 {
 	int	i;
 
@@ -26,8 +26,8 @@ void	exec_cd(t_data *data)
 		else if (!ft_strncmp(data->args[1], "-", 2))
 		{
 			chdir(getenv("OLDPWD"));
-			ft_putstr(1, getenv("OLDPWD"));
-			ft_putstr(1, "\n");
+			ft_putstr(fd, getenv("OLDPWD"));
+			ft_putstr(fd, "\n");
 		}
 		else if (!access(data->args[1], F_OK))
 			chdir(data->args[1]);

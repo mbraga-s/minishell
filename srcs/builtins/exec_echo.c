@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   exec_echo.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 07:09:52 by manumart          #+#    #+#             */
-/*   Updated: 2024/03/08 19:12:55 by manumart         ###   ########.fr       */
+/*   Updated: 2024/03/18 16:25:54 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void	exec_echo(t_data *data)
+void	exec_echo(t_data *data, int fd)
 {
 	int	newline;
 	int	i;
@@ -27,15 +27,15 @@ void	exec_echo(t_data *data)
 		{
 			while (data->args[i])
 			{
-				ft_putstr(1, data->args[i]);
+				ft_putstr(fd, data->args[i]);
 				i++;
 				if (data->args[i])
-					ft_putstr(1, " ");
+					ft_putstr(fd, " ");
 			}
 		}
 		if (newline == 0)
-			ft_putstr(1, "\n");
+			ft_putstr(fd, "\n");
 	}
 	else
-		ft_putstr(1, "\n");
+		ft_putstr(fd, "\n");
 }

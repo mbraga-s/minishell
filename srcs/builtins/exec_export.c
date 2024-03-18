@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_export.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 07:06:23 by manumart          #+#    #+#             */
-/*   Updated: 2024/03/08 19:14:06 by manumart         ###   ########.fr       */
+/*   Updated: 2024/03/18 16:28:42 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	**sortenvp(char **envpsorted, int envp_size)
 	return (envpsorted);
 }
 
-void	printenvpsorted(char **envpsorted)
+void	printenvpsorted(char **envpsorted, int fd)
 {
 	int	i;
 	int	j;
@@ -50,32 +50,32 @@ void	printenvpsorted(char **envpsorted)
 	{
 		flag = 0;
 		j = 0;
-		ft_putstr(1, "declare -x ");
+		ft_putstr(fd, "declare -x ");
 		while (envpsorted[i][j] != '\0')
 		{
-			ft_putstr(1, &envpsorted[i][j]);
+			ft_putstr(fd, &envpsorted[i][j]);
 			if (flag == 0 && envpsorted[i][j] == '=')
 			{
-				ft_putstr(1, "\"");
+				ft_putstr(fd, "\"");
 				flag = 1;
 			}
 			if (flag == 1 && envpsorted[i][j + 1] == '\0')
-				ft_putstr(1, "\"");
+				ft_putstr(fd, "\"");
 			j++;
 		}
-		ft_putstr(1, "\n");
+		ft_putstr(fd, "\n");
 		i++;
 	}
 }
 
-void	exportonly(char **envp)
+void	exportonly(char **envp, int fd)
 {
 	char	**envpsorted;
 	int		envp_size;
 
 	envp_size = getdpsize(envp);
 	envpsorted = dpdup(envp);
-	printenvpsorted(sortenvp(envpsorted, envp_size));
+	printenvpsorted(sortenvp(envpsorted, envp_size), fd);
 	free_array(envpsorted);
 }
 
@@ -119,13 +119,13 @@ void	addtoenv(char *arg)
 	free(temparg);
 }
 
-void	exec_export(t_data *data)
+void	exec_export(t_data *data, int fd)
 {
 	int	i;
 
 	i = 1;
 	if (!data->args[1] || data->args[1][0] == '\0')
-		exportonly(msdata()->envp);
+		exportonly(msdata()->envp, fd);
 	else
 	{
 		while (data->args[i])

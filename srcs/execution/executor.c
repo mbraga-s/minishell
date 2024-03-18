@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbraga-s <mbraga-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 12:31:02 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/18 15:54:58 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/18 16:32:38 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,26 +35,26 @@ char	**builtin_buffer(void)
 }
 
 //Runs the required built-in function
-void	run_builtin(int i, t_data *data)
+void	run_builtin(int i, t_data *data, int fd)
 {
 	if (i == 0)
-		exec_cd(data);
+		exec_cd(data, fd);
 	else if (i == 1)
-		exec_echo(data);
+		exec_echo(data, fd);
 	else if (i == 2)
-		exec_env(data);
+		exec_env(data, fd);
 	else if (i == 3)
 		exec_exit(data);
 	else if (i == 4)
-		exec_export(data);
+		exec_export(data, fd);
 	else if (i == 5)
-		exec_pwd();
+		exec_pwd(fd);
 	else if (i == 6)
 		exec_unset(data);
 }
 
 // Checks if the cmd given is one of the built-ins and, if it is, runs it
-int	check_builtin(t_data *data)
+int	check_builtin(t_data *data, int fd)
 {
 	char	**buffer;
 	int		i;
@@ -72,7 +72,7 @@ int	check_builtin(t_data *data)
 	free_array(buffer);
 	if (i == 7)
 		return (0);
-	run_builtin(i, data);
+	run_builtin(i, data, fd);
 	return (1);
 }
 
@@ -106,6 +106,7 @@ void	execution(t_data *data)
 {
 	t_data	*current;
 	int		status;
+	int		btn_fd;
 
 	status = 0;
 	current = data;
@@ -119,7 +120,15 @@ void	execution(t_data *data)
 	}
 	else if (is_builtin(data))
 	{
-		printf("I'm a builtin... being implemented!\n");
+		btn_fd = btn_redirect(data);
+		if (btn_fd == 0)
+		{
+			g_data.status = 1;
+			return ;
+		}
+		check_builtin(data, btn_fd);
+		if (btn_fd > 2)
+			close(btn_fd);
 		return ;
 	}
 	data->pid = fork();
