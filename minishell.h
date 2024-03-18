@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 11:43:38 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/18 16:31:07 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/18 16:36:58 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,11 +103,15 @@ int						file_check(int dups[2], t_data *data);
 
 int						btn_redirect(t_data *data);
 
+// ex_utils4.c
+
+int						check_builtin(t_data *data, int fd);
+
+int						is_builtin(t_data *data);
+
 // executor.c
 
 void					execution(t_data *data);
-
-int						check_builtin(t_data *data, int fd);
 
 // builtins.c
 
