@@ -4,3 +4,4 @@ minishell
 *.txt
 objects
 *.o
+testing.c

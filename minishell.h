@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mbraga-s <mbraga-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 11:43:38 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/16 18:22:32 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/18 16:02:22 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,6 @@ void					free_array(char **array);
 t_data					*ft_lstfirst(t_data *lst);
 
 void					check_error(char *str);
-
-char					**dup_array(char **env);
 
 char					*ft_putstr(int fd, char *str);
 

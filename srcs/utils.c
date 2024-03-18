@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mbraga-s <mbraga-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 17:56:04 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/16 18:11:20 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/18 16:02:18 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,26 +63,6 @@ void	check_error(char *str)
 	}
 	else
 		perror("");
-}
-
-char	**dup_array(char **env)
-{
-	int		i;
-	char	**env_copy;
-
-	i = 0;
-	if (!env)
-		return (NULL);
-	while (env[i])
-		i++;
-	env_copy = ft_calloc(i + 1, sizeof(char *));
-	i = 0;
-	while (env[i])
-	{
-		env_copy[i] = ft_strdup(env[i]);
-		i++;
-	}
-	return (env_copy);
 }
 
 char	*ft_putstr(int fd, char *str)
