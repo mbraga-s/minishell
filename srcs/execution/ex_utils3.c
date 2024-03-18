@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 16:05:34 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/18 16:14:39 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/18 17:29:37 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,19 @@ int	btn_outfile(t_data *data);
 //Checks if there is an infile and/or outfile for the built-in.
 int	btn_redirect(t_data *data)
 {
-	int fd;
+	int	fd;
 
 	fd = 1;
 	if (!btn_infile(data))
+	{
+		g_data.status = 1;
 		return (0);
+	}
 	fd = btn_outfile(data);
 	if (fd)
 		return (fd);
-	else
-		return (0);
+	g_data.status = 1;
+	return (0);
 }
 
 //Opens the infiles and the here-docs.

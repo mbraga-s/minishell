@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbraga-s <mbraga-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 16:58:29 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/18 14:58:41 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/18 17:30:31 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	check_input(char *input)
 	{
 		if (input[i] == 39 || input[i] == 34)
 		{
-			if (searchforchar(&input[i + 1], input[i]) != -1) //SEARCHFORCHAR OUTPUT CHANGED - DOESN'T RETURN i
+			if (searchforchar(&input[i + 1], input[i]) != -1)
 				i = i + searchforchar(&input[i + 1], input[i]) + 1;
 			else
 				return (0);

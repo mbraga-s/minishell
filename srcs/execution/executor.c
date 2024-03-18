@@ -6,52 +6,34 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 12:31:02 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/18 16:36:07 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/18 17:29:12 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void	execution(t_data *data)
+//Error management for pipe creation
+void	pipe_protect(t_data *data)
 {
-	t_data	*current;
-	int		status;
-	int		btn_fd;
+	if (pipe(data->fd) == -1)
+	{
+		perror(NULL);
+		g_data.status = 1;
+		exit(g_data.status);
+	}
+}
 
-	status = 0;
-	current = data;
-	if (data->next)
-	{
-		if (pipe(data->fd) == -1)
-		{
-			perror(NULL);
-			exit(1);
-		}
-	}
-	else if (is_builtin(data))
-	{
-		btn_fd = btn_redirect(data);
-		if (btn_fd == 0)
-		{
-			g_data.status = 1;
-			return ;
-		}
-		check_builtin(data, btn_fd);
-		if (btn_fd > 2)
-			close(btn_fd);
-		return ;
-	}
+//Runs the forks and executes the pipe loop making sure
+//no more than 2 pipes are open at a time.
+void	execute_forks(t_data *data)
+{
 	data->pid = fork();
 	if (data->pid == 0)
 		first_fork(data, msdata()->envp);
 	data = data->next;
 	while (data && data->next)
 	{
-		if (pipe(data->fd) == -1)
-		{
-			perror(NULL);
-			exit(1);
-		}
+		pipe_protect(data);
 		data->pid = fork();
 		if (data->pid == 0)
 			mid_fork(data, msdata()->envp);
@@ -65,11 +47,35 @@ void	execution(t_data *data)
 			last_fork(data, msdata()->envp);
 		close_fd(data->prev->fd);
 	}
-	while (current)
+}
+
+//Minishell's executor.
+//Runs the builtin check, forks and waits for all processes to end.
+void	execution(t_data *data)
+{
+	int		status;
+	int		btn_fd;
+
+	status = 0;
+	if (data->next)
+		pipe_protect(data);
+	else if (is_builtin(data))
 	{
-		waitpid(current->pid, &status, 0);
+		btn_fd = btn_redirect(data);
+		if (btn_fd == 0)
+			return ;
+		check_builtin(data, btn_fd);
+		if (btn_fd > 2)
+			close(btn_fd);
+		return ;
+	}
+	execute_forks(data);
+	data = ft_lstfirst(data);
+	while (data)
+	{
+		waitpid(data->pid, &status, 0);
 		if (WIFEXITED(status))
 			g_data.status = WEXITSTATUS(status);
-		current = current->next;
+		data = data->next;
 	}
 }

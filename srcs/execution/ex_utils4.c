@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 16:35:47 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/18 16:36:15 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/18 17:30:06 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@ char	**builtin_buffer(void)
 	array = ft_calloc(8, sizeof(char *));
 	if (!array)
 		return (NULL);
-	array[i] = ft_strdup("cd"); // int 0
-	array[++i] = ft_strdup("echo"); // int 1
-	array[++i] = ft_strdup("env"); // int 2
-	array[++i] = ft_strdup("exit"); // int 3
-	array[++i] = ft_strdup("export"); // int 4
-	array[++i] = ft_strdup("pwd"); // int 5
-	array[++i] = ft_strdup("unset"); // int 6
+	array[i] = ft_strdup("cd");
+	array[++i] = ft_strdup("echo");
+	array[++i] = ft_strdup("env");
+	array[++i] = ft_strdup("exit");
+	array[++i] = ft_strdup("export");
+	array[++i] = ft_strdup("pwd");
+	array[++i] = ft_strdup("unset");
 	array[++i] = NULL;
 	return (array);
 }
@@ -81,23 +81,23 @@ int	check_builtin(t_data *data, int fd)
 int	is_builtin(t_data *data)
 {
 	int		i;
-	char	**buffer;
+	char	**buff;
 
 	i = 0;
-	buffer = NULL;
+	buff = NULL;
 	if (data->args && data->args[0])
 	{
-		buffer = builtin_buffer();
-		while (buffer && buffer[i])
+		buff = builtin_buffer();
+		while (buff && buff[i])
 		{
-			if (!ft_strncmp(data->args[0], buffer[i], (ft_strlen(buffer[i]) + 1)))
+			if (!ft_strncmp(data->args[0], buff[i], (ft_strlen(buff[i]) + 1)))
 			{
-				free_array(buffer);
+				free_array(buff);
 				return (1);
 			}
 			i++;
 		}
 	}
-	free_array(buffer);
+	free_array(buff);
 	return (0);
 }
