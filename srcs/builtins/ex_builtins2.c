@@ -6,7 +6,7 @@
 /*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 07:15:04 by manumart          #+#    #+#             */
-/*   Updated: 2024/03/07 07:17:16 by manumart         ###   ########.fr       */
+/*   Updated: 2024/03/19 09:30:34 by manumart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,32 @@ int	searchforchar(char *str, char c)
 		i++;
 	}
 	return (0);
+}
+
+char	*ft_strjoinwofree(char *s1, char *s2)
+{
+	int		i;
+	int		j;
+	char	*ptr;
+
+	i = 0;
+	j = 0;
+	ptr = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+	if (!ptr)
+		return (0);
+	while (s1 && s1[i])
+	{
+		ptr[i] = s1[i];
+		i++;
+	}
+	while (s2[j])
+	{
+		ptr[i] = s2[j];
+		i++;
+		if (s2[j] == '\n')
+			break ;
+		j++;
+	}
+	ptr[i] = '\0';
+	return (ptr);
 }

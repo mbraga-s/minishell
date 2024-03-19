@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbraga-s <mbraga-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 17:56:04 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/14 19:37:07 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/16 11:26:09 by manumart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,3 @@ char	**dup_array(char **env)
 	return (env_copy);
 }
 
-char	*ft_putstr(int fd,char *str)
-{
-	write(fd, str, ft_strlen(str));
-	return (str);
-}

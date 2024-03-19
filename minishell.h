@@ -6,7 +6,7 @@
 /*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 11:43:38 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/08 19:17:01 by manumart         ###   ########.fr       */
+/*   Updated: 2024/03/19 11:21:40 by manumart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <readline/readline.h>
 # include <stdarg.h>
 # include <stdio.h>
+# include <signal.h>
 # include <stdlib.h>
 # include <string.h>
 # include <sys/stat.h>
@@ -52,6 +53,7 @@ typedef struct s_envs
 {
 	char				**envp;
 }						t_envs;
+
 
 extern struct s_global	g_data;
 
@@ -96,6 +98,8 @@ void					addtoenv(char *arg);
 int						searchinenvp(char *input, char **envp);
 
 void					close_fd(int *fd);
+
+void	replace_variablefor(char **env, char *arg, int output);
 
 // ex_utils2.c
 
@@ -161,6 +165,10 @@ char					**lexer(char *str);
 
 int						syntax_checker(char **tokens);
 
+// signals.c
+
+void 					siginthandler(int signum);
+
 // libft
 
 int						inv_comma(char const *ptr, int i, char c);
@@ -193,6 +201,8 @@ char					*ft_strdup(const char *s);
 void					*ft_memcpy(void *dest, const void *src, size_t n);
 
 char					*ft_strjoin(char *s1, char *s2);
+
+char					*ft_strjoinwofree(char *s1, char *s2);
 
 int						ft_isdigit(int c);
 
