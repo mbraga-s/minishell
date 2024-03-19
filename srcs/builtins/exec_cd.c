@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 07:09:06 by manumart          #+#    #+#             */
-/*   Updated: 2024/03/19 13:47:55 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/19 13:53:41 by manumart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void cderror(char *path)
 	ft_putstr(2, path);
 	ft_putstr(2, ": No such file or directory\n");
 }
-void	exec_cd(t_data *data)
+void	exec_cd(t_data *data,int fd)
 {
 	int		i;
 	
@@ -86,8 +86,8 @@ void	exec_cd(t_data *data)
 		else if (!ft_strncmp(data->args[1], "-", 2))
 		{
 			chdirandupdate(findvariableinenv("OLDPWD"));
-			ft_putstr(1, findvariableinenv("OLDPWD"));
-			write(1, "\n", 1);
+			ft_putstr(fd, findvariableinenv("OLDPWD"));
+			write(fd, "\n", 1);
 		}
 		else if (!access(data->args[1], F_OK))
 			chdirandupdate(data->args[1]);

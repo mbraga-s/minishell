@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbraga-s <mbraga-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:07:27 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/15 19:00:40 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/19 13:55:37 by manumart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	openhdoc(char *str)
 		perror(NULL);
 		return (0);
 	}
-	ft_putstr(fd[1], str);
+	write(fd[1], str,ft_strlen(str));
 	close(fd[1]);
 	return (fd[0]);
 }

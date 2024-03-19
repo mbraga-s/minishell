@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_export.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 07:06:23 by manumart          #+#    #+#             */
-/*   Updated: 2024/03/19 13:47:37 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/19 13:59:17 by manumart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	exportonly(char **envp, int fd)
 	envpsorted = dpdup(envp);
 	envp_size = getdpsize(envpsorted);
 	envpsorted = sortenvp(envpsorted, envp_size);
-	printenvpsorted(envpsorted);
+	printenvpsorted(envpsorted,fd);
 	free_array(envpsorted);
 }
 
@@ -132,14 +132,9 @@ void	exec_export(t_data *data, int fd)
 		while (data->args[i])
 		{
 			if (is_valid(data->args[i]))
-			{
 				addtoenv(data->args[i]);
-				printf("dei certo\n");
-			}
 			else
-			{
 				exporterror(data->args[i]);
-			}
 			i++;
 		}
 	}
