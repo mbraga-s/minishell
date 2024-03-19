@@ -6,7 +6,7 @@
 /*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 07:09:06 by manumart          #+#    #+#             */
-/*   Updated: 2024/03/19 13:53:41 by manumart         ###   ########.fr       */
+/*   Updated: 2024/03/19 16:09:49 by manumart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*findvariableinenv(char *var)
 	char	*temp2;
 
 	i = 0;
-	while (msdata()->envp[i])
+	while (msdata()->envp && msdata()->envp[i])
 	{
 		if (!ft_strncmp(msdata()->envp[i], var, ft_strlen(var)))
 		{
@@ -36,7 +36,7 @@ void updatepaths(char *PWD, char *OLDPWD)
 {
     int i = 0;
 
-    while (msdata()->envp[i] != NULL) 
+    while (msdata()->envp && msdata()->envp[i] != NULL) 
 	{
         if (!ft_strncmp(msdata()->envp[i], "PWD", 3)) 
 		{
@@ -50,6 +50,10 @@ void updatepaths(char *PWD, char *OLDPWD)
         }
         i++;
     }
+	if(!findvariableinenv("PWD"))
+		msdata()->envp = add_args(msdata()->envp,ft_strjoinwofree("PWD=",PWD));
+	if(!findvariableinenv("OLDPWD"))
+		msdata()->envp = add_args(msdata()->envp,ft_strjoinwofree("OLDPWD=",OLDPWD));
 }
 
 void chdirandupdate(char *path)
@@ -69,8 +73,13 @@ void chdirandupdate(char *path)
 void cderror(char *path)
 {
 	ft_putstr(2, "cd : ");
-	ft_putstr(2, path);
-	ft_putstr(2, ": No such file or directory\n");
+	if(!ft_strncmp(path, "-", 2))
+		ft_putstr(2, "OLDPWD not set\n");
+	else
+	{
+		ft_putstr(2, path);
+		ft_putstr(2, ": No such file or directory\n");
+	}
 }
 void	exec_cd(t_data *data,int fd)
 {
@@ -83,7 +92,7 @@ void	exec_cd(t_data *data,int fd)
 	{
 		if (!data->args[1] || !ft_strncmp(data->args[1], "--", 3))
 			chdirandupdate(findvariableinenv("HOME"));
-		else if (!ft_strncmp(data->args[1], "-", 2))
+		else if (!ft_strncmp(data->args[1], "-", 2) && findvariableinenv("OLDPWD"))
 		{
 			chdirandupdate(findvariableinenv("OLDPWD"));
 			ft_putstr(fd, findvariableinenv("OLDPWD"));

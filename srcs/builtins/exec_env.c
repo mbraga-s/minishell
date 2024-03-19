@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 07:07:19 by manumart          #+#    #+#             */
-/*   Updated: 2024/03/18 16:26:17 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/19 15:17:11 by manumart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	exec_env(t_data *data, int fd)
 	}
 	else
 	{
-		while (msdata()->envp[i])
+		while (msdata()->envp && msdata()->envp[i])
 		{
 			ft_putstr(fd, rem_allquotes(msdata()->envp[i]));
 			ft_putstr(fd, "\n");

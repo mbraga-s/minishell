@@ -6,7 +6,7 @@
 /*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 07:06:23 by manumart          #+#    #+#             */
-/*   Updated: 2024/03/19 13:59:17 by manumart         ###   ########.fr       */
+/*   Updated: 2024/03/19 16:21:26 by manumart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	printenvpsorted(char **envpsorted, int fd)
 		ft_putstr(fd, "declare -x ");
 		while (envpsorted[i][j] != '\0')
 		{
-			write(1, &envpsorted[i][j],1);
+			write(1, &envpsorted[i][j], 1);
 			if (flag == 0 && envpsorted[i][j] == '=')
 			{
 				ft_putstr(fd, "\"");
@@ -70,13 +70,13 @@ void	printenvpsorted(char **envpsorted, int fd)
 
 void	exportonly(char **envp, int fd)
 {
-	char	**envpsorted;\
+	char	**envpsorted;
 	int		envp_size;
 
 	envpsorted = dpdup(envp);
 	envp_size = getdpsize(envpsorted);
 	envpsorted = sortenvp(envpsorted, envp_size);
-	printenvpsorted(envpsorted,fd);
+	printenvpsorted(envpsorted, fd);
 	free_array(envpsorted);
 }
 
@@ -97,27 +97,29 @@ void	addtoenv(char *arg)
 {
 	int		output;
 	char	**temp;
-	char	*temparg;
+	char	*tmp2;
 
-	temparg = ft_strdup(arg);
+	tmp2 = ft_strdup(arg);
 	temp = ft_split(arg, '=');
-	output = searchinenvp(temp[0], msdata()->envp);
-	if (output != -1)
+	if (msdata()->envp)
 	{
-		if (ft_strncmp(temparg, msdata()->envp[output],
-				ft_strlen(temparg)) == 0)
+		output = searchinenvp(temp[0], msdata()->envp);
+		if (output != -1)
 		{
+			if (ft_strncmp(tmp2, msdata()->envp[output], ft_strlen(tmp2)) == 0)
+			{
+				free_array(temp);
+				free(tmp2);
+				return ;
+			}
+			replace_variablefor(msdata()->envp, rem_allquotes(tmp2), output);
 			free_array(temp);
-			free(temparg);
 			return ;
 		}
-		replace_variablefor(msdata()->envp, rem_allquotes(temparg), output);
-		free_array(temp);
-		return ;
 	}
-	msdata()->envp = add_args(msdata()->envp, temparg);
+	msdata()->envp = add_args(msdata()->envp, tmp2);
 	free_array(temp);
-	free(temparg);
+	free(tmp2);
 }
 
 void	exec_export(t_data *data, int fd)
@@ -125,7 +127,7 @@ void	exec_export(t_data *data, int fd)
 	int	i;
 
 	i = 1;
-	if (!data->args[1] || data->args[1][0] == '\0')
+	if ((!data->args[1] || data->args[1][0] == '\0') && msdata()->envp)
 		exportonly(msdata()->envp, fd);
 	else
 	{

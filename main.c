@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 16:58:29 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/19 14:25:49 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/19 14:36:59 by manumart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,10 +87,7 @@ int	main(int argc, char **argv, char **env)
 	
 	signal(SIGINT, siginthandler);
 	signal(SIGQUIT, SIG_IGN);
-	if (!env || !*env)
-	{
-		return (1);
-	}
+	
 	msdata()->envp = dpdup(env);
 	while (1)
 		miniloop();
