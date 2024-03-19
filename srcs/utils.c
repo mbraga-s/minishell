@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 17:56:04 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/18 17:25:56 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/19 13:48:34 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,23 @@ void	check_error(char *str)
 		perror("");
 }
 
-char	*ft_putstr(int fd, char *str)
+char	**dup_array(char **env)
 {
-	write(fd, str, ft_strlen(str));
-	return (str);
+	int		i;
+	char	**env_copy;
+
+	i = 0;
+	if (!env)
+		return (NULL);
+	while (env[i])
+		i++;
+	env_copy = ft_calloc(i + 1, sizeof(char *));
+	i = 0;
+	while (env[i])
+	{
+		env_copy[i] = ft_strdup(env[i]);
+		i++;
+	}
+	return (env_copy);
 }
+

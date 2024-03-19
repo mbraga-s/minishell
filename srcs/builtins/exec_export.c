@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 07:06:23 by manumart          #+#    #+#             */
-/*   Updated: 2024/03/18 16:28:42 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/19 13:47:37 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	printenvpsorted(char **envpsorted, int fd)
 		ft_putstr(fd, "declare -x ");
 		while (envpsorted[i][j] != '\0')
 		{
-			ft_putstr(fd, &envpsorted[i][j]);
+			write(1, &envpsorted[i][j],1);
 			if (flag == 0 && envpsorted[i][j] == '=')
 			{
 				ft_putstr(fd, "\"");
@@ -70,12 +70,13 @@ void	printenvpsorted(char **envpsorted, int fd)
 
 void	exportonly(char **envp, int fd)
 {
-	char	**envpsorted;
+	char	**envpsorted;\
 	int		envp_size;
 
-	envp_size = getdpsize(envp);
 	envpsorted = dpdup(envp);
-	printenvpsorted(sortenvp(envpsorted, envp_size), fd);
+	envp_size = getdpsize(envpsorted);
+	envpsorted = sortenvp(envpsorted, envp_size);
+	printenvpsorted(envpsorted);
 	free_array(envpsorted);
 }
 

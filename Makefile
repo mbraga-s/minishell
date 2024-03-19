@@ -16,7 +16,7 @@ SRC_PATH = ./srcs
 OBJ_PATH = ./objects
 
 SRCS_BUILTINS = ex_builtins ex_builtins2 exec_cd exec_echo exec_env exec_exit exec_export exec_pwd exec_unset
-SRCS = utils
+SRCS = utils signals
 SRCS_LIBFT = ft_bzero ft_calloc ft_split ft_strlcpy ft_strlen ft_substr ft_lstadd_back ft_lstnew ft_lstlast ft_strncmp ft_strdup ft_memcpy ft_strjoin ft_strdigit ft_atoi ft_strchr ft_isalnum ft_isalpha ft_isdigit ft_itoa
 SRCS_EXECUTION = executor forks ex_utils1 ex_utils2 ex_utils3 ex_utils4
 SRCS_PARSING = lexer parser syntax expander exp_utils exp_utils1 heredoc

@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 16:58:29 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/18 17:30:31 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/19 13:47:21 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,10 @@ int	main(int argc, char **argv, char **env)
 {
 	(void)argc;
 	(void)argv;
-	msdata()->envp = dpdup(env);
+	
+	signal(SIGINT, siginthandler);
+	signal(SIGQUIT, SIG_IGN);
+	msdata()->envp = dup_array(env);
 	while (1)
 		miniloop();
 }
