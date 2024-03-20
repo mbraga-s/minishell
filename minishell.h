@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 11:43:38 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/20 16:33:15 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/20 17:38:53 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,9 +144,11 @@ void					last_fork(t_data *data, char **envp);
 
 void					expander(t_data *data);
 
-char					*get_newenv(int len, int i, char *str, char **env);
+char					*get_nenv(int len, int i, char *str, char **env);
 
 int						getunquotedlen(char *str);
+
+int						new_funct4(int flag, char *str, int i);
 
 // parser.c
 

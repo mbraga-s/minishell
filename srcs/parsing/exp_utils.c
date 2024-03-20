@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:21:44 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/20 15:26:02 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/20 17:38:28 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	new_funct1(char *str, int j)
 // of the $NAME with it's value.
 // len indicates the size of $NAME (5 in this case) and nenv
 // is the value in the environment variables.
-char	*new_funct2(char *str, char *nenv, int pos, int len)
+char	*n_ft2(char *str, char *nenv, int pos, int len)
 {
 	int		i;
 	int		j;
@@ -101,29 +101,22 @@ char	*new_funct3(char *str, int pos, int len)
 char	*expand(char *str, char **env)
 {
 	int		i;
-	int		j;
 	int		len;
-	char	*nenv;
 	int		flag;
 
 	i = 0;
 	flag = 0;
 	while (str && str[i] != '\0')
 	{
-		if (str[i] == 34 && flag == 0)
-			flag = 1;
-		else if (str[i] == 34 && flag == 1)
-			flag = 0;
+		flag = new_funct4(flag, str, i);
 		if (str[i] == 39 && flag == 0)
 			i = i + inv_comma(str, i, str[i]);
 		if (str[i] == 36 && str[i + 1] != 63)
 		{
-			j = i + 1;
-			len = new_funct1(str, j);
+			len = new_funct1(str, i + 1);
 			if (len > 0)
 			{
-				nenv = get_newenv(len, i, str, env);
-				str = new_funct2(str, nenv, i, (len + 1));
+				str = n_ft2(str, get_nenv(len, i, str, env), i, (len + 1));
 				i--;
 			}
 		}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exp_utils1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbraga-s <mbraga-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 16:40:27 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/15 19:06:30 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/20 17:38:23 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 //Finds the value of the expandable variable in the env variables
 //and returns a pointer to dup of that variable.
-char	*get_newenv(int len, int i, char *str, char **env)
+char	*get_nenv(int len, int i, char *str, char **env)
 {
 	char	*temp;
 	char	*new_env;
@@ -33,4 +33,13 @@ char	*get_newenv(int len, int i, char *str, char **env)
 		new_env = ft_strdup(&env[j][len + 1]);
 	free(temp);
 	return (new_env);
+}
+
+int	new_funct4(int flag, char *str, int i)
+{
+	if (str[i] == 34 && flag == 0)
+			flag = 1;
+	else if (str[i] == 34 && flag == 1)
+		flag = 0;
+	return (flag);
 }
