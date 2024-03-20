@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 12:31:37 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/20 16:27:24 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/20 16:41:16 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,26 +68,15 @@ char	*rem_quotes(char *str)
 	while (str && str[i])
 	{
 		if ((str[i] == 34 || str[i] == 39) && flag == 0)
-		{
 			flag = (int)str[i];
-			i++;
-		}
-		else if (str[i] == 34 && flag == 34)
-		{
+		else if ((str[i] == 34 && flag == 34) || (str[i] == 39 && flag == 39))
 			flag = 0;
-			i++;
-		}
-		else if (str[i] == 39 && flag == 39)
-		{
-			flag = 0;
-			i++;
-		}
 		else
 		{
 			ptr[len] = str[i];
 			len++;
-			i++;
 		}
+		i++;
 	}
 	free (str);
 	return (ptr);
