@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 11:43:38 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/19 16:31:54 by manumart         ###   ########.fr       */
+/*   Updated: 2024/03/20 16:33:15 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ typedef struct s_envs
 	char				**envp;
 }						t_envs;
 
-
 extern struct s_global	g_data;
 
 t_envs					*msdata(void);
@@ -97,7 +96,7 @@ int						searchinenvp(char *input, char **envp);
 
 void					close_fd(int *fd);
 
-void	replace_variablefor(char **env, char *arg, int output);
+void					replace_variablefor(char **env, char *arg, int output);
 
 // ex_utils2.c
 
@@ -147,6 +146,8 @@ void					expander(t_data *data);
 
 char					*get_newenv(int len, int i, char *str, char **env);
 
+int						getunquotedlen(char *str);
+
 // parser.c
 
 t_data					*parser(char **token);
@@ -169,7 +170,7 @@ int						syntax_checker(char **tokens);
 
 // signals.c
 
-void 					siginthandler(int signum);
+void					siginthandler(int signum);
 
 // libft
 

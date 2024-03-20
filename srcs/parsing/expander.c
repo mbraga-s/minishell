@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 12:31:37 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/20 14:51:24 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/20 16:27:24 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	expander(t_data *current)
 		while (current->args && current->args[j])
 		{
 			current->args[j] = expand(current->args[j], msdata()->envp);
+			current->args[j] = rem_quotes(current->args[j]);
 			check_args(current->args, j);
 			j++;
 		}
@@ -54,19 +55,70 @@ void	expander(t_data *current)
 // to the left and setting the last 2 to NULLs.
 char	*rem_quotes(char *str)
 {
-	int	i;
-	int	len;
+	int		i;
+	int		len;
+	int		flag;
+	char	*ptr;
 
-	len = ft_strlen(str);
+	len = getunquotedlen(str);
+	ptr = ft_calloc(len + 1, sizeof(char));
 	i = 0;
-	if (!str)
-		return (NULL);
-	while (str[i] && i < (len - 2))
+	len = 0;
+	flag = 0;
+	while (str && str[i])
 	{
-		str[i] = str[i + 1];
+		if ((str[i] == 34 || str[i] == 39) && flag == 0)
+		{
+			flag = (int)str[i];
+			i++;
+		}
+		else if (str[i] == 34 && flag == 34)
+		{
+			flag = 0;
+			i++;
+		}
+		else if (str[i] == 39 && flag == 39)
+		{
+			flag = 0;
+			i++;
+		}
+		else
+		{
+			ptr[len] = str[i];
+			len++;
+			i++;
+		}
+	}
+	free (str);
+	return (ptr);
+}
+
+//Returns the supposed len of a string after being unquoted.
+int	getunquotedlen(char *str)
+{
+	int	len;
+	int	flag;
+	int	i;
+
+	len = 0;
+	i = 0;
+	flag = 0;
+	while (str && str[i])
+	{
+		if ((str[i] == 34 || str[i] == 39) && flag == 0)
+			flag = (int)str[i];
+		else if (str[i] == 34 && flag == 34)
+		{
+			len = len - 2;
+			flag = 0;
+		}
+		else if (str[i] == 39 && flag == 39)
+		{
+			len = len - 2;
+			flag = 0;
+		}
+		len++;
 		i++;
 	}
-	str[i++] = '\0';
-	str[i++] = '\0';
-	return (str);
+	return (len);
 }

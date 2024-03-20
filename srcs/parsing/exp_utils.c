@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exp_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbraga-s <mbraga-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:21:44 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/15 19:01:18 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/20 15:26:02 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,10 +104,18 @@ char	*expand(char *str, char **env)
 	int		j;
 	int		len;
 	char	*nenv;
+	int		flag;
 
 	i = 0;
+	flag = 0;
 	while (str && str[i] != '\0')
 	{
+		if (str[i] == 34 && flag == 0)
+			flag = 1;
+		else if (str[i] == 34 && flag == 1)
+			flag = 0;
+		if (str[i] == 39 && flag == 0)
+			i = i + inv_comma(str, i, str[i]);
 		if (str[i] == 36 && str[i + 1] != 63)
 		{
 			j = i + 1;
