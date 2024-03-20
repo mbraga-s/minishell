@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbraga-s <mbraga-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 12:31:37 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/15 19:00:57 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/20 14:51:24 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,19 +42,8 @@ void	expander(t_data *current)
 		j = 0;
 		while (current->args && current->args[j])
 		{
-			if (current->args[j][0] == 34)
-			{
-				current->args[j] = rem_quotes(current->args[j]);
-				current->args[j] = expand(current->args[j], msdata()->envp);
-				check_args(current->args, j);
-			}
-			else if (current->args[j][0] == 39)
-				current->args[j] = rem_quotes(current->args[j]);
-			else
-			{
-				current->args[j] = expand(current->args[j], msdata()->envp);
-				check_args(current->args, j);
-			}
+			current->args[j] = expand(current->args[j], msdata()->envp);
+			check_args(current->args, j);
 			j++;
 		}
 		current = current->next;

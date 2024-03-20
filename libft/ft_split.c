@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 19:34:57 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/07 04:25:25 by manumart         ###   ########.fr       */
+/*   Updated: 2024/03/20 15:15:30 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,11 @@ int	ft_wlen(char const *s, char c, int i)
 	len = 0;
 	while (s[i] && s[i] != c)
 	{
+		if (s[i] == 34 || s[i] == 39)
+		{
+			len = len + inv_comma(s, i, s[i]);
+			i = i + inv_comma(s, i, s[i]);
+		}
 		i++;
 		len++;
 	}
@@ -98,16 +103,8 @@ char	**ft_split(char const *s, char c)
 	{
 		while (s[i] == c)
 			i++;
-		if (s[i] == 34 || s[i] == 39)
-		{
-			ptr[k++] = ft_substr(s, (i), inv_comma(s, i, s[i]) + 2);
-			i = i + inv_comma(s, i, s[i]) + 2;
-		}
-		else
-		{
-			ptr[k++] = ft_substr(s, i, ft_wlen(s, c, i));
-			i = i + ft_wlen(s, c, i);
-		}
+		ptr[k++] = ft_substr(s, i, ft_wlen(s, c, i));
+		i = i + ft_wlen(s, c, i);
 	}
 	return (ptr);
 }
