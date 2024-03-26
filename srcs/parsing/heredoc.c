@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:07:27 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/26 17:43:20 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/26 18:40:05 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,14 @@ int	ft_heredoc(char *str)
 		input_error();
 	while (ft_strncmp(input, str, (ft_strlen(str) + 1)))
 	{
+		write(fd[1], input, ft_strlen(input));
 		free(input);
 		input = readline("> ");
 		if (!input)
 			input_error();
 		input = rem_quotes(expand(input, msdata()->envp));
-		write(fd[1], input, ft_strlen(input));
+		write(fd[1], "\n", 1);
 	}
-	write(fd[1], "\n", 1);
 	close(fd[1]);
 	free(input);
 	return (fd[0]);

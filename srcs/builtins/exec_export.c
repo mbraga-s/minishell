@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 07:06:23 by manumart          #+#    #+#             */
-/*   Updated: 2024/03/26 15:16:48 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/26 18:50:28 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void	exporterror(char *arg)
 	ft_putstr(2, "export: \'");
 	ft_putstr(2, arg);
 	ft_putstr(2, "\': not a valid identifier\n");
+	g_data.status = 1;
 }
 
 void	replace_variablefor(char **env, char *arg, int output)

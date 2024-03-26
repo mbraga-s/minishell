@@ -5,3 +5,5 @@ minishell
 objects
 *.o
 testing.c
+test.c
+minishell_tester
