@@ -6,7 +6,7 @@
 /*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 16:58:29 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/26 14:54:36 by manumart         ###   ########.fr       */
+/*   Updated: 2024/03/26 15:35:00 by manumart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,6 @@ void	miniloop(void)
 	char	**tokens;
 
 	tokens = NULL;
-	signal(SIGINT, siginthandler);
-	signal(SIGQUIT, sigquithandler);
 	input = readline("\x1B[36mminishell$ \x1B[0m");
 	signal(SIGINT, siginthandler2);
 	if (!input)
@@ -89,5 +87,9 @@ int	main(int argc, char **argv, char **env)
 	(void)argv;
 	msdata()->envp = dpdup(env);
 	while (1)
+	{
+		signal(SIGINT, siginthandler);
+		signal(SIGQUIT, sigquithandler);
 		miniloop();
+	}
 }

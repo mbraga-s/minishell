@@ -6,7 +6,7 @@
 /*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 11:17:45 by manumart          #+#    #+#             */
-/*   Updated: 2024/03/26 15:32:49 by manumart         ###   ########.fr       */
+/*   Updated: 2024/03/26 15:36:29 by manumart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	siginthandler(int signum)
 		rl_redisplay();
 	}
 }
+
 void	siginthandler2(int signum)
 {
 	(void)signum;
@@ -37,10 +38,9 @@ void	siginthandler2(int signum)
 void	sigheredochandler(int signum)
 {
 	(void)signum;
-    if(signum = SIGINT)
-    {
-                
-    }
+	if (signum = SIGINT)
+	{
+	}
 }
 
 void	sigquithandler(int signum)

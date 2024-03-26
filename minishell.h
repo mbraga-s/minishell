@@ -6,7 +6,7 @@
 /*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 11:43:38 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/26 15:30:11 by manumart         ###   ########.fr       */
+/*   Updated: 2024/03/26 15:35:34 by manumart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,8 @@ void					exec_export(t_data *data, int fd);
 
 void					exec_unset(t_data *data);
 
+char					**sortenvp(char **envpsorted, int envp_size);
+
 // forks.c
 
 void					first_fork(t_data *data, char **envp);
@@ -213,7 +215,7 @@ void					*ft_memcpy(void *dest, const void *src, size_t n);
 
 char					*ft_strjoin(char *s1, char *s2);
 
-char					*ft_strjoinwofree(char *s1, char *s2);
+char					*ft_stjnf(char *s1, char *s2);
 
 int						ft_isdigit(int c);
 

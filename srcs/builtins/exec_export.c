@@ -3,41 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   exec_export.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 07:06:23 by manumart          #+#    #+#             */
-/*   Updated: 2024/03/26 14:47:34 by manumart         ###   ########.fr       */
+/*   Updated: 2024/03/26 15:16:48 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
-
-char	**sortenvp(char **envpsorted, int envp_size)
-{
-	int		swapped;
-	int		i;
-	char	*temp;
-
-	swapped = 1;
-	while (swapped)
-	{
-		swapped = 0;
-		i = 0;
-		while (i < envp_size - 1)
-		{
-			if (ft_strncmp(envpsorted[i], envpsorted[i + 1], envp_size) > 0)
-			{
-				swapped = 1;
-				temp = envpsorted[i];
-				envpsorted[i] = envpsorted[i + 1];
-				envpsorted[i + 1] = temp;
-			}
-			i++;
-		}
-		envp_size--;
-	}
-	return (envpsorted);
-}
 
 void	printenvpsorted(char **envpsorted, int fd)
 {
