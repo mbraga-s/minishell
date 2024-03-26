@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 11:43:38 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/26 14:49:21 by manumart         ###   ########.fr       */
+/*   Updated: 2024/03/26 15:20:48 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,8 @@ void					exec_export(t_data *data, int fd);
 
 void					exec_unset(t_data *data);
 
+char					**sortenvp(char **envpsorted, int envp_size);
+
 // forks.c
 
 void					first_fork(t_data *data, char **envp);
@@ -177,6 +179,7 @@ void					siginthandler(int signum);
 void					siginthandler2(int signum);
 
 void					sigquithandler(int signum);
+
 // libft
 
 int						inv_comma(char const *ptr, int i, char c);
@@ -210,7 +213,7 @@ void					*ft_memcpy(void *dest, const void *src, size_t n);
 
 char					*ft_strjoin(char *s1, char *s2);
 
-char					*ft_strjoinwofree(char *s1, char *s2);
+char					*ft_stjnf(char *s1, char *s2);
 
 int						ft_isdigit(int c);
 

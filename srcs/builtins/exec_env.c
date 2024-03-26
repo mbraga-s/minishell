@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 07:07:19 by manumart          #+#    #+#             */
-/*   Updated: 2024/03/26 14:47:16 by manumart         ###   ########.fr       */
+/*   Updated: 2024/03/26 15:15:42 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,23 +35,23 @@ void	addtoenv(char *arg)
 
 	tmp2 = ft_strdup(arg);
 	temp = ft_split(arg, '=');
-	if (msdata()->envp)
+	if ((msdata()->envp))
 	{
-		output = searchinenvp(temp[0], msdata()->envp);
+		output = searchinenvp(temp[0], (msdata()->envp));
 		if (output != -1)
 		{
-			if (ft_strncmp(tmp2, msdata()->envp[output], ft_strlen(tmp2)) == 0)
+			if (!(ft_strncmp(tmp2, (msdata()->envp)[output], ft_strlen(tmp2))))
 			{
 				free_array(temp);
 				free(tmp2);
 				return ;
 			}
-			replace_variablefor(msdata()->envp, rem_allquotes(tmp2), output);
+			replace_variablefor((msdata()->envp), rem_allquotes(tmp2), output);
 			free_array(temp);
 			return ;
 		}
 	}
-	msdata()->envp = add_args(msdata()->envp, tmp2);
+	(msdata()->envp) = add_args((msdata()->envp), tmp2);
 	free_array(temp);
 	free(tmp2);
 }
@@ -69,9 +69,9 @@ void	exec_env(t_data *data, int fd)
 	}
 	else
 	{
-		while (msdata()->envp && msdata()->envp[i])
+		while (msdata()->envp && ((msdata()->envp)[i]))
 		{
-			ft_putstr(fd, rem_allquotes(msdata()->envp[i]));
+			ft_putstr(fd, rem_allquotes((msdata()->envp)[i]));
 			ft_putstr(fd, "\n");
 			i++;
 		}

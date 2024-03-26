@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 07:09:06 by manumart          #+#    #+#             */
-/*   Updated: 2024/03/26 14:45:59 by manumart         ###   ########.fr       */
+/*   Updated: 2024/03/26 15:21:17 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,36 +42,34 @@ void	updatepaths(char *PWD, char *OLDPWD)
 		if (!ft_strncmp(msdata()->envp[i], "PWD", 3))
 		{
 			free(msdata()->envp[i]);
-			msdata()->envp[i] = ft_strjoinwofree("PWD=", PWD);
+			(msdata()->envp)[i] = ft_stjnf("PWD=", PWD);
 		}
 		else if (!ft_strncmp(msdata()->envp[i], "OLDPWD", 6))
 		{
-			free(msdata()->envp[i]);
-			msdata()->envp[i] = ft_strjoinwofree("OLDPWD=", OLDPWD);
+			free((msdata()->envp)[i]);
+			(msdata()->envp)[i] = ft_stjnf("OLDPWD=", OLDPWD);
 		}
 		i++;
 	}
 	if (!findvariableinenv("PWD"))
-		msdata()->envp = add_args(msdata()->envp, ft_strjoinwofree("PWD=",
-					PWD));
+		(msdata()->envp) = add_args(msdata()->envp, ft_stjnf("PWD=", PWD));
 	if (!findvariableinenv("OLDPWD"))
-		msdata()->envp = add_args(msdata()->envp, ft_strjoinwofree("OLDPWD=",
-					OLDPWD));
+		(msdata()->envp) = add_args(msdata()->envp, ft_stjnf("OLDPWD=", OLDPWD));
 }
 
 void	chdirandupdate(char *path)
 {
-	char	OLDPWD[PATH_MAX];
-	char	PWD[PATH_MAX];
+	char	oldpwd[PATH_MAX];
+	char	pwd[PATH_MAX];
 
-	getcwd(OLDPWD, sizeof(OLDPWD));
+	getcwd(oldpwd, sizeof(oldpwd));
 	if (chdir(path) != 0)
 	{
 		perror("chdir");
 		return ;
 	}
-	getcwd(PWD, sizeof(PWD));
-	updatepaths(PWD, OLDPWD);
+	getcwd(pwd, sizeof(pwd));
+	updatepaths(pwd, oldpwd);
 }
 
 void	cderror(char *path)
@@ -85,6 +83,7 @@ void	cderror(char *path)
 		ft_putstr(2, ": No such file or directory\n");
 	}
 }
+
 void	exec_cd(t_data *data, int fd)
 {
 	int	i;

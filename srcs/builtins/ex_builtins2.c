@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ex_builtins2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 07:15:04 by manumart          #+#    #+#             */
-/*   Updated: 2024/03/26 14:49:08 by manumart         ###   ########.fr       */
+/*   Updated: 2024/03/26 15:18:42 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	searchforchar(char *str, char c)
 	return (-1);
 }
 
-char	*ft_strjoinwofree(char *s1, char *s2)
+char	*ft_stjnf(char *s1, char *s2)
 {
 	int		i;
 	int		j;
@@ -75,4 +75,31 @@ char	*ft_strjoinwofree(char *s1, char *s2)
 	}
 	ptr[i] = '\0';
 	return (ptr);
+}
+
+char	**sortenvp(char **envpsorted, int envp_size)
+{
+	int		swapped;
+	int		i;
+	char	*temp;
+
+	swapped = 1;
+	while (swapped)
+	{
+		swapped = 0;
+		i = 0;
+		while (i < envp_size - 1)
+		{
+			if (ft_strncmp(envpsorted[i], envpsorted[i + 1], envp_size) > 0)
+			{
+				swapped = 1;
+				temp = envpsorted[i];
+				envpsorted[i] = envpsorted[i + 1];
+				envpsorted[i + 1] = temp;
+			}
+			i++;
+		}
+		envp_size--;
+	}
+	return (envpsorted);
 }
