@@ -6,7 +6,7 @@
 /*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 11:17:45 by manumart          #+#    #+#             */
-/*   Updated: 2024/03/22 17:08:21 by manumart         ###   ########.fr       */
+/*   Updated: 2024/03/25 16:17:56 by manumart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,11 @@ void siginthandler(int signum)
         rl_redisplay();
     }
 }
-
-void sigquithandler(int signum)
-{
-    int pid;
-    
-    pid = waitpid(-1, NULL, 0);
+void siginthandler2(int signum)
+{    
     (void)signum;
-    if(pid == -1)
-    {
-        
-    }
+        write(1, "\n", 1);
+        rl_on_new_line();
+        rl_replace_line("", 0);
 }
+

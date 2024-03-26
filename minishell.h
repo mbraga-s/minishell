@@ -6,7 +6,7 @@
 /*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 11:43:38 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/21 15:02:50 by manumart         ###   ########.fr       */
+/*   Updated: 2024/03/25 15:56:09 by manumart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,6 +173,8 @@ int						syntax_checker(char **tokens);
 // signals.c
 
 void					siginthandler(int signum);
+
+void 					siginthandler2(int signum);
 
 void 					sigquithandler(int signum);
 // libft
