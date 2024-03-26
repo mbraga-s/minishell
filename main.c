@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 16:58:29 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/26 14:51:50 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/26 15:36:02 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ struct s_global	g_data;
 
 t_envs	*msdata(void)
 {
-	static t_envs	data;
+	static t_envs	envs;
 
-	return (&data);
+	return (&envs);
 }
 
 int	check_input(char *input)

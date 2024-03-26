@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbraga-s <mbraga-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 16:30:04 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/15 19:04:20 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/26 15:38:35 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ t_data	*parser(char **token)
 
 	i = 0;
 	data = ft_lstnew();
+	msdata()->strut = data;
 	while (token[i])
 	{
 		while (token[i] && ft_strncmp(token[i], "|", 2))
