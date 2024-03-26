@@ -6,31 +6,36 @@
 /*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 11:17:45 by manumart          #+#    #+#             */
-/*   Updated: 2024/03/25 16:17:56 by manumart         ###   ########.fr       */
+/*   Updated: 2024/03/26 14:49:58 by manumart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void siginthandler(int signum)
+void	siginthandler(int signum)
 {
-    int pid;
-    
-    pid = waitpid(-1, NULL, 0);
-    (void)signum;
-    if(pid == -1)
-    {
-        write(1, "\n", 1);
-        rl_on_new_line();
-        rl_replace_line("", 0);
-        rl_redisplay();
-    }
+	int	pid;
+
+	pid = waitpid(-1, NULL, 0);
+	(void)signum;
+	if (pid == -1)
+	{
+		write(1, "\n", 1);
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
+	}
 }
-void siginthandler2(int signum)
-{    
-    (void)signum;
-        write(1, "\n", 1);
-        rl_on_new_line();
-        rl_replace_line("", 0);
+void	siginthandler2(int signum)
+{
+	(void)signum;
+	write(1, "\n", 1);
+	rl_on_new_line();
+	rl_replace_line("", 0);
 }
 
+void	sigquithandler(int signum)
+{
+	(void)signum;
+	ft_putstr(1, "exit");
+}

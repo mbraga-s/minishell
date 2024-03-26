@@ -6,7 +6,7 @@
 /*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 07:09:06 by manumart          #+#    #+#             */
-/*   Updated: 2024/03/19 16:09:49 by manumart         ###   ########.fr       */
+/*   Updated: 2024/03/26 14:45:59 by manumart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,48 +32,52 @@ char	*findvariableinenv(char *var)
 	return (NULL);
 }
 
-void updatepaths(char *PWD, char *OLDPWD) 
+void	updatepaths(char *PWD, char *OLDPWD)
 {
-    int i = 0;
+	int	i;
 
-    while (msdata()->envp && msdata()->envp[i] != NULL) 
+	i = 0;
+	while (msdata()->envp && msdata()->envp[i] != NULL)
 	{
-        if (!ft_strncmp(msdata()->envp[i], "PWD", 3)) 
+		if (!ft_strncmp(msdata()->envp[i], "PWD", 3))
 		{
-            free(msdata()->envp[i]);
-            msdata()->envp[i] = ft_strjoinwofree("PWD=",PWD);
-        }
-        else if (!ft_strncmp(msdata()->envp[i], "OLDPWD", 6)) 
+			free(msdata()->envp[i]);
+			msdata()->envp[i] = ft_strjoinwofree("PWD=", PWD);
+		}
+		else if (!ft_strncmp(msdata()->envp[i], "OLDPWD", 6))
 		{
-            free(msdata()->envp[i]);
-            msdata()->envp[i] = ft_strjoinwofree("OLDPWD=",OLDPWD);
-        }
-        i++;
-    }
-	if(!findvariableinenv("PWD"))
-		msdata()->envp = add_args(msdata()->envp,ft_strjoinwofree("PWD=",PWD));
-	if(!findvariableinenv("OLDPWD"))
-		msdata()->envp = add_args(msdata()->envp,ft_strjoinwofree("OLDPWD=",OLDPWD));
+			free(msdata()->envp[i]);
+			msdata()->envp[i] = ft_strjoinwofree("OLDPWD=", OLDPWD);
+		}
+		i++;
+	}
+	if (!findvariableinenv("PWD"))
+		msdata()->envp = add_args(msdata()->envp, ft_strjoinwofree("PWD=",
+					PWD));
+	if (!findvariableinenv("OLDPWD"))
+		msdata()->envp = add_args(msdata()->envp, ft_strjoinwofree("OLDPWD=",
+					OLDPWD));
 }
 
-void chdirandupdate(char *path)
+void	chdirandupdate(char *path)
 {
-	char OLDPWD[PATH_MAX];
-	char PWD[PATH_MAX];
+	char	OLDPWD[PATH_MAX];
+	char	PWD[PATH_MAX];
 
 	getcwd(OLDPWD, sizeof(OLDPWD));
-	if (chdir(path) != 0) {
-        perror("chdir");
-        return;
-    }
-	getcwd(PWD, sizeof(PWD));	
+	if (chdir(path) != 0)
+	{
+		perror("chdir");
+		return ;
+	}
+	getcwd(PWD, sizeof(PWD));
 	updatepaths(PWD, OLDPWD);
 }
 
-void cderror(char *path)
+void	cderror(char *path)
 {
 	ft_putstr(2, "cd : ");
-	if(!ft_strncmp(path, "-", 2))
+	if (!ft_strncmp(path, "-", 2))
 		ft_putstr(2, "OLDPWD not set\n");
 	else
 	{
@@ -81,10 +85,10 @@ void cderror(char *path)
 		ft_putstr(2, ": No such file or directory\n");
 	}
 }
-void	exec_cd(t_data *data,int fd)
+void	exec_cd(t_data *data, int fd)
 {
-	int		i;
-	
+	int	i;
+
 	i = 0;
 	while (data->args[i])
 		i++;
@@ -92,7 +96,8 @@ void	exec_cd(t_data *data,int fd)
 	{
 		if (!data->args[1] || !ft_strncmp(data->args[1], "--", 3))
 			chdirandupdate(findvariableinenv("HOME"));
-		else if (!ft_strncmp(data->args[1], "-", 2) && findvariableinenv("OLDPWD"))
+		else if (!ft_strncmp(data->args[1], "-", 2)
+			&& findvariableinenv("OLDPWD"))
 		{
 			chdirandupdate(findvariableinenv("OLDPWD"));
 			ft_putstr(fd, findvariableinenv("OLDPWD"));

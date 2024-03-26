@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   exp_utils1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 16:40:27 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/20 17:38:23 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/26 14:46:50 by manumart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-//Finds the value of the expandable variable in the env variables
-//and returns a pointer to dup of that variable.
+// Finds the value of the expandable variable in the env variables
+// and returns a pointer to dup of that variable.
 char	*get_nenv(int len, int i, char *str, char **env)
 {
 	char	*temp;
@@ -38,7 +38,7 @@ char	*get_nenv(int len, int i, char *str, char **env)
 int	new_funct4(int flag, char *str, int i)
 {
 	if (str[i] == 34 && flag == 0)
-			flag = 1;
+		flag = 1;
 	else if (str[i] == 34 && flag == 1)
 		flag = 0;
 	return (flag);

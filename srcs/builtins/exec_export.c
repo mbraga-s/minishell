@@ -6,7 +6,7 @@
 /*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 07:06:23 by manumart          #+#    #+#             */
-/*   Updated: 2024/03/19 16:21:26 by manumart         ###   ########.fr       */
+/*   Updated: 2024/03/26 14:47:34 by manumart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,35 +91,6 @@ void	replace_variablefor(char **env, char *arg, int output)
 {
 	free(env[output]);
 	env[output] = arg;
-}
-
-void	addtoenv(char *arg)
-{
-	int		output;
-	char	**temp;
-	char	*tmp2;
-
-	tmp2 = ft_strdup(arg);
-	temp = ft_split(arg, '=');
-	if (msdata()->envp)
-	{
-		output = searchinenvp(temp[0], msdata()->envp);
-		if (output != -1)
-		{
-			if (ft_strncmp(tmp2, msdata()->envp[output], ft_strlen(tmp2)) == 0)
-			{
-				free_array(temp);
-				free(tmp2);
-				return ;
-			}
-			replace_variablefor(msdata()->envp, rem_allquotes(tmp2), output);
-			free_array(temp);
-			return ;
-		}
-	}
-	msdata()->envp = add_args(msdata()->envp, tmp2);
-	free_array(temp);
-	free(tmp2);
 }
 
 void	exec_export(t_data *data, int fd)

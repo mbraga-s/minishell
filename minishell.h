@@ -6,7 +6,7 @@
 /*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 11:43:38 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/25 15:56:09 by manumart         ###   ########.fr       */
+/*   Updated: 2024/03/26 14:49:21 by manumart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@
 # include <linux/limits.h>
 # include <readline/history.h>
 # include <readline/readline.h>
+# include <signal.h>
 # include <stdarg.h>
 # include <stdio.h>
-# include <signal.h>
 # include <stdlib.h>
 # include <string.h>
 # include <sys/stat.h>
@@ -174,9 +174,9 @@ int						syntax_checker(char **tokens);
 
 void					siginthandler(int signum);
 
-void 					siginthandler2(int signum);
+void					siginthandler2(int signum);
 
-void 					sigquithandler(int signum);
+void					sigquithandler(int signum);
 // libft
 
 int						inv_comma(char const *ptr, int i, char c);

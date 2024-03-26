@@ -10,6 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
+$(VERBOSE).SILENT:
 NAME = minishell
 
 SRC_PATH = ./srcs
@@ -48,6 +49,7 @@ RM = rm -fr
 all: $(NAME)
 
 $(NAME): $(LIB)
+	@echo "\e[0;32m Project : ($(NAME)) compiled successfully\033[0m"
 	$(CC) $(CFLAGS) $(LIB) -lreadline -o $(NAME)
 
 $(LIB): $(OBJS)

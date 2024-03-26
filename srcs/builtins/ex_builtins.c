@@ -6,7 +6,7 @@
 /*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 06:56:30 by manumart          #+#    #+#             */
-/*   Updated: 2024/03/19 09:30:18 by manumart         ###   ########.fr       */
+/*   Updated: 2024/03/26 14:45:51 by manumart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,4 +85,3 @@ char	*rem_allquotes(char *str)
 	str[j] = '\0';
 	return (str);
 }
-
