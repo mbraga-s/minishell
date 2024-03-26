@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:07:27 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/20 15:18:42 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/26 15:29:56 by manumart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ char	*ft_heredoc(char *str)
 
 	ptr = NULL;
 	input = NULL;
+	signal(SIGQUIT, sigquithandler);
+	signal(SIGINT, sigheredochandler);
 	input = readline("> ");
 	while (ft_strncmp(input, str, (ft_strlen(str) + 1)))
 	{

@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 11:43:38 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/26 15:38:20 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/26 15:42:20 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,6 +180,8 @@ void					siginthandler(int signum);
 void					siginthandler2(int signum);
 
 void					sigquithandler(int signum);
+
+void					sigheredochandler(int signum);
 
 // libft
 

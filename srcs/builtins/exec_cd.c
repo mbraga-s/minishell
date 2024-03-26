@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 07:09:06 by manumart          #+#    #+#             */
-/*   Updated: 2024/03/26 15:21:17 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/26 15:35:57 by manumart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ void	updatepaths(char *PWD, char *OLDPWD)
 	if (!findvariableinenv("PWD"))
 		(msdata()->envp) = add_args(msdata()->envp, ft_stjnf("PWD=", PWD));
 	if (!findvariableinenv("OLDPWD"))
-		(msdata()->envp) = add_args(msdata()->envp, ft_stjnf("OLDPWD=", OLDPWD));
+		(msdata()->envp) = add_args(msdata()->envp, ft_stjnf("OLDPWD=",
+					OLDPWD));
 }
 
 void	chdirandupdate(char *path)
