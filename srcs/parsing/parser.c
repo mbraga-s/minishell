@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbraga-s <mbraga-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 16:30:04 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/15 19:04:20 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/26 15:28:29 by manumart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	parser_pt2(char **token, t_data *data, int i)
 	heredoc = NULL;
 	if (!ft_strncmp(token[i], "<<", 3) && ++i)
 	{
-		heredoc = ft_heredoc(token[i]);
+		heredoc = ft_heredoc(token[i],data);
 		data->infile = add_args(data->infile, heredoc);
 		free(heredoc);
 		data->inflag = add_args(data->inflag, "1");

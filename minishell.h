@@ -6,7 +6,7 @@
 /*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 11:43:38 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/26 14:49:21 by manumart         ###   ########.fr       */
+/*   Updated: 2024/03/26 15:30:11 by manumart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,6 +177,9 @@ void					siginthandler(int signum);
 void					siginthandler2(int signum);
 
 void					sigquithandler(int signum);
+
+void					sigheredochandler(int signum);
+
 // libft
 
 int						inv_comma(char const *ptr, int i, char c);

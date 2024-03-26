@@ -6,7 +6,7 @@
 /*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 11:17:45 by manumart          #+#    #+#             */
-/*   Updated: 2024/03/26 14:49:58 by manumart         ###   ########.fr       */
+/*   Updated: 2024/03/26 15:32:49 by manumart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,15 @@ void	siginthandler2(int signum)
 	write(1, "\n", 1);
 	rl_on_new_line();
 	rl_replace_line("", 0);
+}
+
+void	sigheredochandler(int signum)
+{
+	(void)signum;
+    if(signum = SIGINT)
+    {
+                
+    }
 }
 
 void	sigquithandler(int signum)
