@@ -3,51 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:07:27 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/26 15:29:56 by manumart         ###   ########.fr       */
+/*   Updated: 2024/03/26 17:20:05 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-//Opens a pipe as a way to write to a process and writes the given string to it.
+//Opens a pipe as a way to write to a process and writes the input to it.
 //Returns the read end of the pipe.
-int	openhdoc(char *str)
+int	ft_heredoc(char *str)
 {
-	int	fd[2];
+	char	*input;
+	int		fd[2];
 
 	if (pipe(fd) == -1)
 	{
 		perror(NULL);
 		return (0);
 	}
-	write(fd[1], str, ft_strlen(str));
-	close(fd[1]);
-	return (fd[0]);
-}
-
-//Requests input as an here-doc and saves it in a very long string.
-char	*ft_heredoc(char *str)
-{
-	char	*ptr;
-	char	*input;
-
-	ptr = NULL;
 	input = NULL;
+	input = readline("> ");
 	signal(SIGQUIT, sigquithandler);
 	signal(SIGINT, sigheredochandler);
-	input = readline("> ");
 	while (ft_strncmp(input, str, (ft_strlen(str) + 1)))
 	{
-		ptr = ft_strjoin(ptr, input);
-		free (input);
-		ptr = ft_strjoin(ptr, "\n");
+		free(input);
 		input = readline("> ");
+		input = expand(input, msdata()->envp);
+		input = rem_quotes(input);
+		write(fd[1], input, ft_strlen(input));
 	}
+	write(fd[1], "\n", 1);
+	close(fd[1]);
 	free(input);
-	if (!ptr)
-		ptr = ft_strdup("");
-	return (ptr);
+	return (fd[0]);
 }

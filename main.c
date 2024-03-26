@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 16:58:29 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/26 15:41:36 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/26 17:22:51 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	inner_working(char **tokens)
 
 	data = NULL;
 	data = parser(tokens);
+	msdata()->strut = data;
 	expander(data);
 	execution(data);
 	free_all(data);

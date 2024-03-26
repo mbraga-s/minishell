@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:41:19 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/18 16:24:12 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/26 17:24:00 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ void	first_fork(t_data *data, char **envp)
 		}
 	}
 	close_fd(dups);
-	data = ft_lstfirst(data);
-	free_all(data);
+	free_all(ft_lstfirst(data));
+	free_array(msdata()->envp);
 	free(path);
 	exit(g_data.status);
 }
@@ -63,6 +63,7 @@ void	mid_fork(t_data *data, char **envp)
 	close_fd(dups);
 	data = ft_lstfirst(data);
 	free_all(data);
+	free_array(msdata()->envp);
 	free(path);
 	exit(g_data.status);
 }
@@ -89,6 +90,7 @@ void	last_fork(t_data *data, char **envp)
 	close_fd(dups);
 	data = ft_lstfirst(data);
 	free_all(data);
+	free_array(msdata()->envp);
 	free(path);
 	exit(g_data.status);
 }

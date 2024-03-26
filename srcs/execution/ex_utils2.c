@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 15:41:51 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/26 16:34:49 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/26 17:08:25 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ int	infile_check(int dups[2], t_data *data)
 {
 	int		fd;
 	int		i;
-	char	*str;
 
 	i = 0;
 	while (data->infile && data->infile[i])
@@ -39,11 +38,7 @@ int	infile_check(int dups[2], t_data *data)
 		if (!ft_strncmp(data->inflag[i], "0", 1))
 			fd = open(data->infile[i], O_RDONLY);
 		else
-		{
-			str = expand((ft_heredoc(data->infile[i])), msdata()->envp);
-			str = rem_quotes(str);
-			fd = openhdoc(str);
-		}
+			fd = ft_heredoc(data->infile[i]);
 		if (fd < 0)
 		{
 			perror(data->infile[i]);

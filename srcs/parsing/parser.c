@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 16:30:04 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/26 16:28:34 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/26 17:22:32 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,14 +63,9 @@ int	parser_pt1(char **token, t_data *data, int i)
 //Checks for an here-doc operator.
 int	parser_pt2(char **token, t_data *data, int i)
 {
-	//char	*heredoc;
-
-	//heredoc = NULL;
 	if (!ft_strncmp(token[i], "<<", 3) && ++i)
 	{
-		//heredoc = ft_heredoc(token[i]);
 		data->infile = add_args(data->infile, token[i]);
-		//free(heredoc);
 		data->inflag = add_args(data->inflag, "1");
 		return (1);
 	}
@@ -85,7 +80,6 @@ t_data	*parser(char **token)
 
 	i = 0;
 	data = ft_lstnew();
-	msdata()->strut = data;
 	while (token[i])
 	{
 		while (token[i] && ft_strncmp(token[i], "|", 2))

@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 11:17:45 by manumart          #+#    #+#             */
-/*   Updated: 2024/03/26 16:42:17 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/26 17:16:13 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	sigheredochandler(int signum)
 	while (i < FOPEN_MAX)
 		close(i++);
 	free_all(msdata()->strut);
+	free_array(msdata()->envp);
 	write(1, "\n", 1);
 	exit(130);
 }

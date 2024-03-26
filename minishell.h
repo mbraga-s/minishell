@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 11:43:38 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/26 16:36:46 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/26 17:08:47 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,9 +165,7 @@ char					**add_args(char **args, char *token);
 
 // heredoc.c
 
-char					*ft_heredoc(char *str);
-
-int						openhdoc(char *str);
+int						ft_heredoc(char *str);
 
 // lexer.c
 
