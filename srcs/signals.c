@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 11:17:45 by manumart          #+#    #+#             */
-/*   Updated: 2024/03/26 15:36:29 by manumart         ###   ########.fr       */
+/*   Updated: 2024/03/26 16:42:17 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,15 @@ void	siginthandler2(int signum)
 
 void	sigheredochandler(int signum)
 {
+	int	i;
+
 	(void)signum;
-	if (signum = SIGINT)
-	{
-	}
+	i = 3;
+	while (i < FOPEN_MAX)
+		close(i++);
+	free_all(msdata()->strut);
+	write(1, "\n", 1);
+	exit(130);
 }
 
 void	sigquithandler(int signum)
