@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 12:31:37 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/20 16:41:16 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/27 14:43:36 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,30 @@ void	check_args(char **args, int pos)
 	}
 }
 
+//Part of the expander function in order to comply with norm
+void	expander1(t_data *current)
+{
+	int	j;
+
+	j = 0;
+	while (current->infile && current->infile[j])
+	{
+		current->infile[j] = expand(current->infile[j], msdata()->envp);
+		current->infile[j] = rem_quotes(current->infile[j]);
+		check_args(current->infile, j);
+		j++;
+	}
+	j = 0;
+	while (current->outfile && current->outfile[j])
+	{
+		current->outfile[j] = expand(current->outfile[j], msdata()->envp);
+		current->outfile[j] = rem_quotes(current->outfile[j]);
+		check_args(current->outfile, j);
+		j++;
+	}
+
+}
+
 // Checks if there are quoted or expandable strings.
 void	expander(t_data *current)
 {
@@ -39,6 +63,7 @@ void	expander(t_data *current)
 
 	while (current)
 	{
+
 		j = 0;
 		while (current->args && current->args[j])
 		{
@@ -47,6 +72,7 @@ void	expander(t_data *current)
 			check_args(current->args, j);
 			j++;
 		}
+		expander1(current);
 		current = current->next;
 	}
 }

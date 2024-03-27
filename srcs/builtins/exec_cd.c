@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 07:09:06 by manumart          #+#    #+#             */
-/*   Updated: 2024/03/26 15:35:57 by manumart         ###   ########.fr       */
+/*   Updated: 2024/03/27 14:46:42 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-char	*findvariableinenv(char *var)
+char	*findvinenv(char *var)
 {
 	int		i;
 	char	*temp;
@@ -51,9 +51,9 @@ void	updatepaths(char *PWD, char *OLDPWD)
 		}
 		i++;
 	}
-	if (!findvariableinenv("PWD"))
+	if (!findvinenv("PWD"))
 		(msdata()->envp) = add_args(msdata()->envp, ft_stjnf("PWD=", PWD));
-	if (!findvariableinenv("OLDPWD"))
+	if (!findvinenv("OLDPWD"))
 		(msdata()->envp) = add_args(msdata()->envp, ft_stjnf("OLDPWD=",
 					OLDPWD));
 }
@@ -82,6 +82,7 @@ void	cderror(char *path)
 	{
 		ft_putstr(2, path);
 		ft_putstr(2, ": No such file or directory\n");
+		g_data.status = 1;
 	}
 }
 
@@ -95,12 +96,11 @@ void	exec_cd(t_data *data, int fd)
 	if (i <= 2)
 	{
 		if (!data->args[1] || !ft_strncmp(data->args[1], "--", 3))
-			chdirandupdate(findvariableinenv("HOME"));
-		else if (!ft_strncmp(data->args[1], "-", 2)
-			&& findvariableinenv("OLDPWD"))
+			chdirandupdate(findvinenv("HOME"));
+		else if (!ft_strncmp(data->args[1], "-", 2) && findvinenv("OLDPWD"))
 		{
-			chdirandupdate(findvariableinenv("OLDPWD"));
-			ft_putstr(fd, findvariableinenv("OLDPWD"));
+			chdirandupdate(findvinenv("OLDPWD"));
+			ft_putstr(fd, findvinenv("OLDPWD"));
 			write(fd, "\n", 1);
 		}
 		else if (!access(data->args[1], F_OK))
@@ -109,5 +109,8 @@ void	exec_cd(t_data *data, int fd)
 			cderror(data->args[1]);
 	}
 	else
+	{
 		ft_putstr(2, "cd: too many arguments\n");
+		g_data.status = 1;
+	}
 }
