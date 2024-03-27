@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 16:58:29 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/27 14:35:41 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/27 17:28:26 by manumart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void	miniloop(void)
 
 	tokens = NULL;
 	input = readline("\x1B[36mminishell$ \x1B[0m");
+	signal(SIGQUIT, sigquithandler);
 	signal(SIGINT, siginthandler2);
 	if (!input)
 	{
@@ -91,7 +92,7 @@ int	main(int argc, char **argv, char **env)
 	while (1)
 	{
 		signal(SIGINT, siginthandler);
-		signal(SIGQUIT, sigquithandler);
+		signal(SIGQUIT, SIG_IGN);
 		miniloop();
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 12:31:37 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/27 14:43:36 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/27 17:29:53 by manumart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ char	*rem_quotes(char *str);
 
 char	*expand(char *str, char **envp);
 
-//Checks if an arguments becomes a NULL after expanding.
-//ex: "$VAR" and removes it from the args list.
+// Checks if an arguments becomes a NULL after expanding.
+// ex: "$VAR" and removes it from the args list.
 void	check_args(char **args, int pos)
 {
 	if (args[pos] && args[pos][0] == '\0')
@@ -32,7 +32,7 @@ void	check_args(char **args, int pos)
 	}
 }
 
-//Part of the expander function in order to comply with norm
+// Part of the expander function in order to comply with norm
 void	expander1(t_data *current)
 {
 	int	j;
@@ -53,7 +53,6 @@ void	expander1(t_data *current)
 		check_args(current->outfile, j);
 		j++;
 	}
-
 }
 
 // Checks if there are quoted or expandable strings.
@@ -63,7 +62,6 @@ void	expander(t_data *current)
 
 	while (current)
 	{
-
 		j = 0;
 		while (current->args && current->args[j])
 		{
@@ -104,11 +102,11 @@ char	*rem_quotes(char *str)
 		}
 		i++;
 	}
-	free (str);
+	free(str);
 	return (ptr);
 }
 
-//Returns the supposed len of a string after being unquoted.
+// Returns the supposed len of a string after being unquoted.
 int	getunquotedlen(char *str)
 {
 	int	len;

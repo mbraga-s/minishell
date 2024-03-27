@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 11:17:45 by manumart          #+#    #+#             */
-/*   Updated: 2024/03/26 17:31:49 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/27 17:28:47 by manumart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,12 @@ void	sigheredochandler(int signum)
 		close(i++);
 	free_all(msdata()->strut);
 	free_array(msdata()->envp);
+	write(1, "^C", 2);
 	exit(130);
 }
 
 void	sigquithandler(int signum)
 {
 	(void)signum;
-	ft_putstr(2, "warning: here-document delimited by EOF.\n");
+	ft_putstr(2, "Quit (core dumped)\n");
 }
