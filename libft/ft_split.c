@@ -6,14 +6,13 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 19:34:57 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/20 15:15:30 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/27 15:20:34 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
 //inv_comma - runs the string when the first " or ' is found until the next one.
-
 int	inv_comma(char const *ptr, int i, char c)
 {
 	int	count;
@@ -36,9 +35,9 @@ int	inv_comma(char const *ptr, int i, char c)
 		return (0);
 }
 
+
 //ft_wcount - counts number of words in the string using char c as separator
 // and running inv_comma when " or ' is found to skip that part.
-
 int	ft_wcount(char const *s, char c)
 {
 	int	i;
@@ -63,8 +62,8 @@ int	ft_wcount(char const *s, char c)
 	}
 	return (count);
 }
-//ft_wlen - counts the size of the word, using char c (separator) as end point.
 
+//ft_wlen - counts the size of the word, using char c (separator) as end point.
 int	ft_wlen(char const *s, char c, int i)
 {
 	int	len;
@@ -74,8 +73,8 @@ int	ft_wlen(char const *s, char c, int i)
 	{
 		if (s[i] == 34 || s[i] == 39)
 		{
-			len = len + inv_comma(s, i, s[i]);
-			i = i + inv_comma(s, i, s[i]);
+			len = len + inv_comma(s, i, s[i]) + 1;
+			i = i + inv_comma(s, i, s[i]) + 1;
 		}
 		i++;
 		len++;
@@ -83,11 +82,11 @@ int	ft_wlen(char const *s, char c, int i)
 	return (len);
 }
 
+
 //ft_split - breaks the string into several using char c as separator and
 // using inv_comma to respect " and ' functionality.
 //Check earlier versions of this function to better understand what's happening
 // because to follow norm, code had to become a bit spaghetti
-
 char	**ft_split(char const *s, char c)
 {
 	char	**ptr;
