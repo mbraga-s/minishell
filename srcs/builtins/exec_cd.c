@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 07:09:06 by manumart          #+#    #+#             */
-/*   Updated: 2024/04/01 14:23:29 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/04/01 14:45:44 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void	chdirandupdate(char *path)
 	char	oldpwd[PATH_MAX];
 	char	pwd[PATH_MAX];
 
+	ft_bzero(oldpwd, PATH_MAX);
 	getcwd(oldpwd, sizeof(oldpwd));
 	if (chdir(path) != 0)
 	{
