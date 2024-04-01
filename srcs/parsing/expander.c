@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 12:31:37 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/27 17:29:53 by manumart         ###   ########.fr       */
+/*   Updated: 2024/04/01 14:30:00 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*expand(char *str, char **envp);
 
 // Checks if an arguments becomes a NULL after expanding.
 // ex: "$VAR" and removes it from the args list.
-void	check_args(char **args, int pos)
+int	check_args(char **args, int pos)
 {
 	if (args[pos] && args[pos][0] == '\0')
 	{
@@ -29,7 +29,10 @@ void	check_args(char **args, int pos)
 			pos++;
 		}
 		args[pos] = NULL;
+		return (0);
 	}
+	else
+		return (1);
 }
 
 // Part of the expander function in order to comply with norm
@@ -42,16 +45,16 @@ void	expander1(t_data *current)
 	{
 		current->infile[j] = expand(current->infile[j], msdata()->envp);
 		current->infile[j] = rem_quotes(current->infile[j]);
-		check_args(current->infile, j);
-		j++;
+		if (check_args(current->infile, j))
+			j++;
 	}
 	j = 0;
 	while (current->outfile && current->outfile[j])
 	{
 		current->outfile[j] = expand(current->outfile[j], msdata()->envp);
 		current->outfile[j] = rem_quotes(current->outfile[j]);
-		check_args(current->outfile, j);
-		j++;
+		if (check_args(current->outfile, j))
+			j++;
 	}
 }
 
@@ -67,8 +70,8 @@ void	expander(t_data *current)
 		{
 			current->args[j] = expand(current->args[j], msdata()->envp);
 			current->args[j] = rem_quotes(current->args[j]);
-			check_args(current->args, j);
-			j++;
+			if (check_args(current->args, j))
+				j++;
 		}
 		expander1(current);
 		current = current->next;

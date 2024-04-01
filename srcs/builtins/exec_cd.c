@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 07:09:06 by manumart          #+#    #+#             */
-/*   Updated: 2024/03/27 14:46:42 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/04/01 14:23:29 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*findvinenv(char *var)
 		if (!ft_strncmp(msdata()->envp[i], var, ft_strlen(var)))
 		{
 			temp = ft_strchr(msdata()->envp[i], '=');
-			temp2 = ft_strdup(temp + 1);
+			temp2 = temp + 1;
 			return (temp2);
 		}
 		i++;
