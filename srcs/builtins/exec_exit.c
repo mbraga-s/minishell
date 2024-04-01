@@ -3,14 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   exec_exit.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 07:09:19 by manumart          #+#    #+#             */
-/*   Updated: 2024/03/27 14:16:16 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/04/01 19:59:05 by manumart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+
+void	exit_error(t_data *data)
+{
+	ft_putstr(2, "exit :");
+	ft_putstr(2, data->args[1]);
+	ft_putstr(2, ": numeric argument required\n");
+	g_data.status = 2;
+}
 
 void	exec_exit(t_data *data)
 {
@@ -24,12 +32,7 @@ void	exec_exit(t_data *data)
 	if (i <= 2)
 	{
 		if (i == 2 && ft_strdigit(data->args[1]))
-		{
-			ft_putstr(2, "exit :");
-			ft_putstr(2, data->args[1]);
-			ft_putstr(2, ": numeric argument required\n");
-			g_data.status = 2;
-		}
+			exit_error(data);
 		else if (i == 2 && !ft_strdigit(data->args[1]))
 			g_data.status = ft_atoi(data->args[1]);
 		free_array(msdata()->envp);
