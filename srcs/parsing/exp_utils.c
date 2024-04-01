@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:21:44 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/20 17:38:28 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/04/01 15:34:10 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ char	*expand(char *str, char **env)
 	{
 		flag = new_funct4(flag, str, i);
 		if (str[i] == 39 && flag == 0)
-			i = i + inv_comma(str, i, str[i]);
+			i = i + inv_comma(str, i, str[i]) + 1;
 		if (str[i] == 36 && str[i + 1] != 63)
 		{
 			len = new_funct1(str, i + 1);
