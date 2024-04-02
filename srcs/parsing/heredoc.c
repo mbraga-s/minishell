@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:07:27 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/04/02 14:43:43 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/04/02 18:25:57 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,9 @@ int	ft_heredoc(char *str)
 	char	*input;
 	int		fd[2];
 
+	msdata()->here_flag = 1;
 	if (pipe(fd) == -1)
-	{
-		perror(NULL);
-		return (0);
-	}
+		return (perror(NULL), 0);
 	signal(SIGINT, sigheredochandler);
 	while (1)
 	{
@@ -45,5 +43,6 @@ int	ft_heredoc(char *str)
 	}
 	close(fd[1]);
 	free(input);
+	msdata()->here_flag = 0;
 	return (fd[0]);
 }

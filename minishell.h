@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 11:43:38 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/04/02 12:25:09 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/04/02 18:22:55 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef struct s_envs
 {
 	char				**envp;
 	t_data				*strut;
+	int					here_flag;
 }						t_envs;
 
 extern struct s_global	g_data;
