@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 15:41:51 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/04/02 14:39:53 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/04/02 16:19:54 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	infile_check(int dups[2], t_data *data)
 	int		i;
 
 	i = -1;
-	while (data->infile && data->infile[i++])
+	while (data->infile && data->infile[++i])
 	{
 		if (!ft_strncmp(data->inflag[i], "0", 1))
 			fd = open(data->infile[i], O_RDONLY);
@@ -55,7 +55,7 @@ int	infile_check(int dups[2], t_data *data)
 			break ;
 		close(fd);
 	}
-	if (data->infile)
+	if (data->infile && data->infile[0])
 	{
 		dups[0] = dupcheck(fd, dups[0]);
 		close(fd);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_unset.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 07:08:21 by manumart          #+#    #+#             */
-/*   Updated: 2024/03/26 14:46:20 by manumart         ###   ########.fr       */
+/*   Updated: 2024/04/02 16:31:26 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	exec_unset(t_data *data)
 		output = searchinenvp(data->args[i], msdata()->envp);
 		if (output != -1)
 		{
+			free(msdata()->envp[output]);
 			while (msdata()->envp[output + 1])
 			{
 				msdata()->envp[output] = msdata()->envp[output + 1];

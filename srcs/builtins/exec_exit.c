@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 07:09:19 by manumart          #+#    #+#             */
-/*   Updated: 2024/04/02 15:28:58 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/04/02 16:50:31 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,13 @@ void	exec_exit(t_data *data)
 		else if (i == 2 && !ft_strdigit(data->args[1]) && 
 			(ft_atoi(data->args[1]) > 0))
 			g_data.status = ft_atoi(data->args[1]);
-		else if (i == 2 && !ft_strdigit(data->args[1]) && 
-			(ft_atoi(data->args[1]) < 0))
+		else
 			g_data.status = 156;
 		free_array(msdata()->envp);
 		free_all(ft_lstfirst(data));
+		i = -1;
+		while (++i < FOPEN_MAX)
+			close(i);
 		exit(g_data.status);
 	}
 	ft_putstr(2, "exit: too many arguments\n");
