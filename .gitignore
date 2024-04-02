@@ -7,3 +7,4 @@ objects
 testing.c
 test.c
 minishell_tester
+mn_tester

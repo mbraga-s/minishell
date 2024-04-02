@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 11:13:33 by manumart          #+#    #+#             */
-/*   Updated: 2024/03/27 14:12:30 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/04/02 15:05:26 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_strdigit(char *str)
 	flag = 0;
 	while (str && str[i])
 	{
-		if (str[i] == 43 && flag == 0)
+		if ((str[i] == 43 || str[i] == 45) && flag == 0)
 			flag = 1;
 		else if (str[i] < '0' || str[i] > '9')
 			return (1);

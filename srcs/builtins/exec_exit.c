@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_exit.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 07:09:19 by manumart          #+#    #+#             */
-/*   Updated: 2024/04/01 19:59:05 by manumart         ###   ########.fr       */
+/*   Updated: 2024/04/02 15:03:27 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,16 @@ void	exec_exit(t_data *data)
 	{
 		if (i == 2 && ft_strdigit(data->args[1]))
 			exit_error(data);
-		else if (i == 2 && !ft_strdigit(data->args[1]))
+		else if (i == 2 && !ft_strdigit(data->args[1]) && 
+				(ft_atoi(data->args[1]) > 0))
 			g_data.status = ft_atoi(data->args[1]);
+		else if (i == 2 && !ft_strdigit(data->args[1]) && 
+				(ft_atoi(data->args[1]) < 0))
+			g_data.status = 156;
 		free_array(msdata()->envp);
 		free_all(ft_lstfirst(data));
 		exit(g_data.status);
 	}
-	else
-	{
-		ft_putstr(2, "exit: too many arguments\n");
-		g_data.status = 1;
-	}
+	ft_putstr(2, "exit: too many arguments\n");
+	g_data.status = 1;
 }
