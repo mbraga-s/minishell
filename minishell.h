@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 11:43:38 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/26 17:08:47 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/04/02 12:25:09 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,10 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <unistd.h>
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 10
+# endif
 
 // struct used to store the command to execute, arguments for said command
 // the stdin and stdout of said command and a flag to recognise a pipe
@@ -233,5 +237,7 @@ int						ft_strdigit(char *str);
 int						ft_isalpha(int c);
 
 char					*ft_itoa(int n);
+
+char					*get_next_line(int fd);
 
 #endif
