@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:07:27 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/04/03 12:48:44 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/04/03 14:31:30 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	ft_here_fork(char *str, int pipe_fds[2], t_data *data)
 		if (!input)
 			input_error(pipe_fds, data);
 		input = rem_quotes(expand(input, msdata()->envp));
-		if (!ft_strncmp(input, str, (ft_strlen(str))) 
+		if (!ft_strncmp(input, str, (ft_strlen(str)))
 			&& (ft_strlen(input) - 1 == ft_strlen(str)))
 			break ;
 		write(pipe_fds[1], input, ft_strlen(input));

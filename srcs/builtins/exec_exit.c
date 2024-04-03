@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 07:09:19 by manumart          #+#    #+#             */
-/*   Updated: 2024/04/02 16:50:31 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/04/03 14:31:59 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	exec_exit(t_data *data)
 	{
 		if (i == 2 && ft_strdigit(data->args[1]))
 			exit_error(data);
-		else if (i == 2 && !ft_strdigit(data->args[1]) && 
+		else if (i == 2 && !ft_strdigit(data->args[1]) && \
 			(ft_atoi(data->args[1]) > 0))
 			g_data.status = ft_atoi(data->args[1]);
 		else
