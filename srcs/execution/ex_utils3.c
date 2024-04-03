@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 16:05:34 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/26 17:09:53 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/04/03 12:39:09 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	btn_infile(t_data *data)
 		if (!ft_strncmp(data->inflag[i], "0", 1))
 			fd = open(data->infile[i], O_RDONLY);
 		else
-			fd = ft_heredoc(data->infile[i]);
+			fd = ft_heredoc(data->infile[i], data);
 		if (fd < 0)
 		{
 			perror(data->infile[i]);
