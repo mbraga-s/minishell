@@ -7,7 +7,7 @@ The minishell project requires students to build their own simple shell (using b
 The bulk of the work was divided as follows:
 >[Miguel](https://github.com/mbraga-s):
 >
->Checking Input, Parsing, Expansions, Redirections and Execution 
+>Checking Input, Parsing, Expansions, Redirections, Execution and Signal Handling
 >
 >[Manuel](https://github.com/manuelm-git):
 >
