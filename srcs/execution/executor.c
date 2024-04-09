@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 12:31:02 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/18 17:29:12 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/04/09 15:07:30 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,37 @@ void	execute_forks(t_data *data)
 	}
 }
 
+//Handles the signals comming from the child process
+void	exec_signal_handle(t_data	*data)
+{
+	int		status;
+
+	while (data)
+	{
+		waitpid(data->pid, &status, 0);
+		if (WIFSIGNALED(status))
+		{
+			if (status == 2)
+				g_data.status = 130;
+			else if (status == 3)
+				g_data.status = 131;
+		}
+		if (WIFEXITED(status))
+			g_data.status = WEXITSTATUS(status);
+		data = data->next;
+	}
+	if (g_data.status == 130)
+		ft_putstr(1, "\n");
+	else if (g_data.status == 131)
+		ft_putstr(2, "Quit (core dumped)\n");
+}
+
 //Minishell's executor.
 //Runs the builtin check, forks and waits for all processes to end.
 void	execution(t_data *data)
 {
-	int		status;
 	int		btn_fd;
 
-	status = 0;
 	if (data->next)
 		pipe_protect(data);
 	else if (is_builtin(data))
@@ -71,11 +94,5 @@ void	execution(t_data *data)
 	}
 	execute_forks(data);
 	data = ft_lstfirst(data);
-	while (data)
-	{
-		waitpid(data->pid, &status, 0);
-		if (WIFEXITED(status))
-			g_data.status = WEXITSTATUS(status);
-		data = data->next;
-	}
+	exec_signal_handle(data);
 }

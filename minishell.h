@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 11:43:38 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/04/03 12:35:19 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/04/09 15:35:21 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,13 +182,11 @@ int						syntax_checker(char **tokens);
 
 // signals.c
 
-void					siginthandler(int signum);
+void					signalhandlechild(t_data *data);
 
-void					siginthandler2(int signum);
+void					sigintmain(int signum);
 
-void					sigquithandler(int signum);
-
-void					sigheredochandler(int signum);
+void					siginthd(int signum);
 
 // libft
 

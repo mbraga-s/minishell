@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 15:41:51 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/04/03 12:30:25 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/04/09 15:16:19 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	outfile_check(int dups[2], t_data *data);
 //Works for multiple infiles and outfiles.
 int	file_check(int dups[2], t_data *data)
 {
+	signalhandlechild(data);
 	if (infile_check(dups, data) && outfile_check(dups, data))
 		return (1);
 	return (0);

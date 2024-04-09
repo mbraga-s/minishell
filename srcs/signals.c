@@ -3,22 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 11:17:45 by manumart          #+#    #+#             */
-/*   Updated: 2024/03/27 17:28:47 by manumart         ###   ########.fr       */
+/*   Updated: 2024/04/09 17:47:18 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	siginthandler(int signum)
+void	sigintmain(int signum)
 {
-	int	pid;
-
-	pid = waitpid(-1, NULL, 0);
-	(void)signum;
-	if (pid == -1)
+	if (signum == 2)
 	{
 		write(1, "\n", 1);
 		rl_on_new_line();
@@ -27,30 +23,39 @@ void	siginthandler(int signum)
 	}
 }
 
-void	siginthandler2(int signum)
-{
-	(void)signum;
-	write(1, "\n", 1);
-	rl_on_new_line();
-	rl_replace_line("", 0);
-}
-
-void	sigheredochandler(int signum)
+void	siginthd(int signum)
 {
 	int	i;
 
 	(void)signum;
-	i = 3;
+	i = 0;
 	while (i < FOPEN_MAX)
 		close(i++);
 	free_all(msdata()->strut);
 	free_array(msdata()->envp);
-	write(1, "^C", 2);
 	exit(130);
 }
 
-void	sigquithandler(int signum)
+void	signalhandlechild(t_data *data)
 {
-	(void)signum;
-	ft_putstr(2, "Quit (core dumped)\n");
+	int	flag;
+	int	i;
+
+	flag = 0;
+	data = ft_lstfirst(data);
+	while (data)
+	{
+		i = -1;
+		while (data->infile && data->infile[++i])
+		{
+			if (!ft_strncmp(data->inflag[i], "1", 1))
+				flag = 1;
+		}
+		data = data->next;
+	}
+	signal(SIGINT, siginthd);
+	if (flag == 0)
+		signal(SIGQUIT, SIG_DFL);
+	else if (flag == 1)
+		signal(SIGQUIT, SIG_IGN);
 }
