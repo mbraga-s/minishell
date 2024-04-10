@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 11:17:45 by manumart          #+#    #+#             */
-/*   Updated: 2024/04/09 17:47:18 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/04/10 20:02:51 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	siginthd(int signum)
 	exit(130);
 }
 
-void	signalhandlechild(t_data *data)
+/* void	signalhandlechild(t_data *data)
 {
 	int	flag;
 	int	i;
@@ -59,3 +59,4 @@ void	signalhandlechild(t_data *data)
 	else if (flag == 1)
 		signal(SIGQUIT, SIG_IGN);
 }
+ */

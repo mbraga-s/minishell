@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ex_utils1.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbraga-s <mbraga-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:45:54 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/15 19:08:53 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/04/11 00:01:43 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-//closes a pair of file descriptors
+//Closes a pair of file descriptors
 void	close_fd(int *fd)
 {
 	close(fd[0]);
@@ -26,7 +26,15 @@ int	dupcheck(int file_fd, int fd)
 
 	i = dup2(file_fd, fd);
 	if (i == -1)
+	{
+		perror(NULL);
+		free_all(msdata()->strut);
+		free_array(msdata()->envp);
+		i = -1;
+		while (++i < FOPEN_MAX)
+			close(i);
 		exit(1);
+	}
 	return (i);
 }
 

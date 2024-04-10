@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 11:43:38 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/04/10 15:14:12 by manumart         ###   ########.fr       */
+/*   Updated: 2024/04/10 20:14:07 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ typedef struct s_data
 	char				**outfile;
 	char				**outflag;
 	char				**inflag;
+	int					fd_in;
+	int					fd_out;
 	int					pid;
 	struct s_data		*next;
 	struct s_data		*prev;
@@ -57,7 +59,6 @@ typedef struct s_envs
 {
 	char				**envp;
 	t_data				*strut;
-	int					here_flag;
 }						t_envs;
 
 extern struct s_global	g_data;
@@ -182,11 +183,17 @@ int						syntax_checker(char **tokens);
 
 // signals.c
 
-void					signalhandlechild(t_data *data);
+//void					signalhandlechild(t_data *data);
 
 void					sigintmain(int signum);
 
 void					siginthd(int signum);
+
+// redirections.c
+
+void					redirections(t_data *data);
+
+void					close_all(t_data *data);
 
 // libft
 

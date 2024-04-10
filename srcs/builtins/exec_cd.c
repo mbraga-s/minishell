@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 07:09:06 by manumart          #+#    #+#             */
-/*   Updated: 2024/04/10 19:00:12 by manumart         ###   ########.fr       */
+/*   Updated: 2024/04/11 00:05:37 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	chdirandupdate(char *path)
 		return ;
 	}
 	getcwd(pwd, sizeof(pwd));
-	if(pwd[0] && oldpwd[0])
+	if (pwd[0] && oldpwd[0])
 		updatepaths(pwd, oldpwd);
 	else
 	{

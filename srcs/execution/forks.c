@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:41:19 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/04/10 15:35:08 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/04/11 00:06:54 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,14 @@ void	first_fork(t_data *data, char **envp)
 	{
 		if (!check_builtin(data, 1) && data->args[0])
 		{
+			close_all(data);
 			path = check_path(data->args[0], envp);
 			execve(path, data->args, envp);
 			check_error(data->args[0]);
 		}
 	}
 	close_fd(dups);
+	close_all(data);
 	free_stuff(path);
 	exit(g_data.status);
 }
@@ -60,16 +62,15 @@ void	mid_fork(t_data *data, char **envp)
 	{
 		if (!check_builtin(data, 1))
 		{
+			close_all(data);
 			path = check_path(data->args[0], envp);
 			execve(path, data->args, envp);
 			check_error(data->args[0]);
 		}
 	}
 	close_fd(dups);
-	data = ft_lstfirst(data);
-	free_all(data);
-	free_array(msdata()->envp);
-	free(path);
+	close_all(data);
+	free_stuff(path);
 	exit(g_data.status);
 }
 
@@ -87,15 +88,14 @@ void	last_fork(t_data *data, char **envp)
 	{
 		if (!check_builtin(data, 1))
 		{
+			close_all(data);
 			path = check_path(data->args[0], envp);
 			execve(path, data->args, envp);
 			check_error(data->args[0]);
 		}
 	}
 	close_fd(dups);
-	data = ft_lstfirst(data);
-	free_all(data);
-	free_array(msdata()->envp);
-	free(path);
+	close_all(data);
+	free_stuff(path);
 	exit(g_data.status);
 }
