@@ -6,7 +6,7 @@
 /*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 07:09:06 by manumart          #+#    #+#             */
-/*   Updated: 2024/04/10 14:36:04 by manumart         ###   ########.fr       */
+/*   Updated: 2024/04/10 15:14:09 by manumart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	chdirandupdate(char *path)
 	char	oldpwd[PATH_MAX];
 	char	pwd[PATH_MAX];
 
-	ft_bzero(oldpwd, PATH_MAX); 
+	ft_bzero(oldpwd, PATH_MAX);
 	getcwd(oldpwd, sizeof(oldpwd));
 	if (!path)
 	{

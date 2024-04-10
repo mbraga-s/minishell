@@ -6,7 +6,7 @@
 /*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 16:58:29 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/04/10 15:10:53 by manumart         ###   ########.fr       */
+/*   Updated: 2024/04/10 15:15:16 by manumart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,7 @@ void	miniloop(void)
 	char	**tokens;
 
 	tokens = NULL;
-	// input = readline("\x1B[36mminishell$ \x1B[0m");
-	input = readline("$");
+	input = readline("$minishell: ");
 	signal(SIGINT, SIG_IGN);
 	if (!input)
 	{
