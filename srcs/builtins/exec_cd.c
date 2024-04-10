@@ -6,7 +6,7 @@
 /*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 07:09:06 by manumart          #+#    #+#             */
-/*   Updated: 2024/04/10 15:14:09 by manumart         ###   ########.fr       */
+/*   Updated: 2024/04/10 19:00:12 by manumart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,13 @@ void	chdirandupdate(char *path)
 		return ;
 	}
 	getcwd(pwd, sizeof(pwd));
-	updatepaths(pwd, oldpwd);
+	if(pwd[0] && oldpwd[0])
+		updatepaths(pwd, oldpwd);
+	else
+	{
+		ft_putstr(2, "cd: error retrieving path\n");
+		g_data.status = 1;
+	}
 }
 
 void	cderror(char *path)
