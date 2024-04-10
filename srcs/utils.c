@@ -66,26 +66,6 @@ void	check_error(char *str)
 		perror("");
 }
 
-char	**dup_array(char **env)
-{
-	int		i;
-	char	**env_copy;
-
-	i = 0;
-	if (!env)
-		return (NULL);
-	while (env[i])
-		i++;
-	env_copy = ft_calloc(i + 1, sizeof(char *));
-	i = 0;
-	while (env[i])
-	{
-		env_copy[i] = ft_strdup(env[i]);
-		i++;
-	}
-	return (env_copy);
-}
-
 char	*ft_putstr(int fd, char *str)
 {
 	write(fd, str, ft_strlen(str));

@@ -6,80 +6,98 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 16:05:34 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/04/03 12:39:09 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/04/11 00:25:57 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-int	btn_infile(t_data *data);
-
-int	btn_outfile(t_data *data);
-
-//Checks if there is an infile and/or outfile for the built-in.
-int	btn_redirect(t_data *data)
+//Creates an array with the names of each built-in function
+//to use in a smaller checker for those strings.
+char	**builtin_buffer(void)
 {
-	int	fd;
-
-	fd = 1;
-	if (!btn_infile(data))
-	{
-		g_data.status = 1;
-		return (0);
-	}
-	fd = btn_outfile(data);
-	if (fd)
-		return (fd);
-	g_data.status = 1;
-	return (0);
-}
-
-//Opens the infiles and the here-docs.
-int	btn_infile(t_data *data)
-{
-	int	fd;
-	int	i;
+	int		i;
+	char	**array;
 
 	i = 0;
-	while (data->infile && data->infile[i])
+	array = ft_calloc(8, sizeof(char *));
+	if (!array)
+		return (NULL);
+	array[i] = ft_strdup("cd");
+	array[++i] = ft_strdup("echo");
+	array[++i] = ft_strdup("env");
+	array[++i] = ft_strdup("exit");
+	array[++i] = ft_strdup("export");
+	array[++i] = ft_strdup("pwd");
+	array[++i] = ft_strdup("unset");
+	array[++i] = NULL;
+	return (array);
+}
+
+//Runs the required built-in function
+void	run_builtin(int i, t_data *data, int fd)
+{
+	if (i == 0)
+		exec_cd(data, fd);
+	else if (i == 1)
+		exec_echo(data, fd);
+	else if (i == 2)
+		exec_env(data, fd);
+	else if (i == 3)
+		exec_exit(data);
+	else if (i == 4)
+		exec_export(data, fd);
+	else if (i == 5)
+		exec_pwd(fd);
+	else if (i == 6)
+		exec_unset(data);
+}
+
+// Checks if the cmd given is one of the built-ins and, if it is, runs it
+int	check_builtin(t_data *data, int fd)
+{
+	char	**buffer;
+	int		i;
+
+	i = 0;
+	if (!(data->args) || !(data->args[0]))
+		return (0);
+	buffer = builtin_buffer();
+	while (buffer && buffer[i])
 	{
-		if (!ft_strncmp(data->inflag[i], "0", 1))
-			fd = open(data->infile[i], O_RDONLY);
-		else
-			fd = ft_heredoc(data->infile[i], data);
-		if (fd < 0)
-		{
-			perror(data->infile[i]);
-			return (0);
-		}
-		close(fd);
+		if (!ft_strncmp(data->args[0], buffer[i], (ft_strlen(buffer[i]) + 1)))
+			break ;
 		i++;
 	}
+	free_array(buffer);
+	if (i == 7)
+		return (0);
+	run_builtin(i, data, fd);
 	return (1);
 }
 
-//Opens the outfiles.
-int	btn_outfile(t_data *data)
+//Checks if a function is a built-in by comparing it with the builtin buffer.
+//If it is a built-in, returns 1. Returns 0 if it isn't. 
+int	is_builtin(t_data *data)
 {
-	int	fd;
-	int	i;
+	int		i;
+	char	**buff;
 
 	i = 0;
-	fd = 1;
-	while (data->outfile && data->outfile[i])
+	buff = NULL;
+	if (data->args && data->args[0])
 	{
-		if (!ft_strncmp(data->outflag[i], "0", 1))
-			fd = open(data->outfile[i], O_RDWR | O_CREAT | O_TRUNC, 0644);
-		else
-			fd = open(data->outfile[i], O_RDWR | O_CREAT | O_APPEND, 0644);
-		if (fd < 0)
+		buff = builtin_buffer();
+		while (buff && buff[i])
 		{
-			perror(data->outfile[i]);
-			return (0);
+			if (!ft_strncmp(data->args[0], buff[i], (ft_strlen(buff[i]) + 1)))
+			{
+				free_array(buff);
+				return (1);
+			}
+			i++;
 		}
-		if (data->outfile[i + 1])
-			close(fd);
-		i++;
 	}
-	return (fd);
+	free_array(buff);
+	return (0);
 }

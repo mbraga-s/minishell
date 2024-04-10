@@ -6,11 +6,15 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:45:54 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/04/11 00:01:43 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/04/11 00:29:50 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+
+char	*pathtest(char *env, char *arg);
+
+int		pcheck(char *ptr);
 
 //Closes a pair of file descriptors
 void	close_fd(int *fd)

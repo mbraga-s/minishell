@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 12:31:02 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/04/10 21:00:22 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/04/11 00:20:32 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,18 +78,14 @@ void	exec_signal_handle(t_data	*data)
 //Runs the builtin check, forks and waits for all processes to end.
 void	execution(t_data *data)
 {
-	int		btn_fd;
-
 	if (data->next)
 		pipe_protect(data);
 	else if (is_builtin(data))
 	{
-		btn_fd = btn_redirect(data);
-		if (btn_fd == 0)
+		if (data->fd_in == -1)
 			return ;
-		check_builtin(data, btn_fd);
-		if (btn_fd > 2)
-			close(btn_fd);
+		check_builtin(data, data->fd_out);
+		close_all(data);
 		return ;
 	}
 	execute_forks(data);

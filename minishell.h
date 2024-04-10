@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 11:43:38 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/04/10 20:14:07 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/04/11 00:34:44 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,51 +69,25 @@ t_envs					*msdata(void);
 
 void					free_all(t_data *node);
 
-char					*rem_allquotes(char *str);
-
-char					**dpdup(char **str);
-
-int						getdpsize(char **dp);
-
-void					free_array(char **array);
-
 t_data					*ft_lstfirst(t_data *lst);
-
-void					check_error(char *str);
 
 char					*ft_putstr(int fd, char *str);
 
+void					check_error(char *str);
+
 // ex_utils1.c
-
-int						searchforchar(char *str, char c);
-
-int						is_valid(char *str);
-
-int						pcheck(char *ptr);
-
-char					*pathtest(char *env, char *arg);
-
-char					*check_path(char *arg, char **envp);
 
 int						dupcheck(int file_fd, int fd);
 
-void					addtoenv(char *arg);
-
-int						searchinenvp(char *input, char **envp);
-
 void					close_fd(int *fd);
 
-void					replace_variablefor(char **env, char *arg, int output);
+char					*check_path(char *arg, char **envp);
 
 // ex_utils2.c
 
 int						file_check(int dups[2], t_data *data);
 
 // ex_utils3.c
-
-int						btn_redirect(t_data *data);
-
-// ex_utils4.c
 
 int						check_builtin(t_data *data, int fd);
 
@@ -140,6 +114,26 @@ void					exec_export(t_data *data, int fd);
 void					exec_unset(t_data *data);
 
 char					**sortenvp(char **envpsorted, int envp_size);
+
+// builtin_utils
+
+int						searchforchar(char *str, char c);
+
+int						is_valid(char *str);
+
+void					addtoenv(char *arg);
+
+int						searchinenvp(char *input, char **envp);
+
+void					replace_variablefor(char **env, char *arg, int output);
+
+char					*rem_allquotes(char *str);
+
+char					**dpdup(char **str);
+
+int						getdpsize(char **dp);
+
+void					free_array(char **array);
 
 // forks.c
 
@@ -182,8 +176,6 @@ char					**lexer(char *str);
 int						syntax_checker(char **tokens);
 
 // signals.c
-
-//void					signalhandlechild(t_data *data);
 
 void					sigintmain(int signum);
 
