@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 12:31:02 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/04/09 15:07:30 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/04/10 10:17:14 by manumart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,9 @@ void	exec_signal_handle(t_data	*data)
 		waitpid(data->pid, &status, 0);
 		if (WIFSIGNALED(status))
 		{
-			if (status == 2)
+			if (status == 130)
 				g_data.status = 130;
-			else if (status == 3)
+			else if (status == 131)
 				g_data.status = 131;
 		}
 		if (WIFEXITED(status))
