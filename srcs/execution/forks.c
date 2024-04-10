@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:41:19 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/04/10 15:12:21 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/04/10 15:35:08 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,6 @@ void	first_fork(t_data *data, char **envp)
 	}
 	if (file_check(dups, data) && data->args)
 	{
-		if (!data->args[0])
-			g_data.status = 127;
 		if (!check_builtin(data, 1) && data->args[0])
 		{
 			path = check_path(data->args[0], envp);
