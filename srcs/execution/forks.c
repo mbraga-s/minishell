@@ -6,11 +6,18 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:41:19 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/04/09 17:16:10 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/04/10 15:12:21 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+
+void	free_stuff(char *path)
+{
+	free_all(msdata()->strut);
+	free_array(msdata()->envp);
+	free(path);
+}
 
 void	first_fork(t_data *data, char **envp)
 {
@@ -25,9 +32,11 @@ void	first_fork(t_data *data, char **envp)
 		dups[1] = dupcheck(data->fd[1], 1);
 		close_fd(data->fd);
 	}
-	if (file_check(dups, data) && data->args && data->args[0])
+	if (file_check(dups, data) && data->args)
 	{
-		if (!check_builtin(data, 1))
+		if (!data->args[0])
+			g_data.status = 127;
+		if (!check_builtin(data, 1) && data->args[0])
 		{
 			path = check_path(data->args[0], envp);
 			execve(path, data->args, envp);
@@ -35,9 +44,7 @@ void	first_fork(t_data *data, char **envp)
 		}
 	}
 	close_fd(dups);
-	free_all(ft_lstfirst(data));
-	free_array(msdata()->envp);
-	free(path);
+	free_stuff(path);
 	exit(g_data.status);
 }
 
