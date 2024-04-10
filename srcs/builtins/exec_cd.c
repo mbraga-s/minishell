@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 07:09:06 by manumart          #+#    #+#             */
-/*   Updated: 2024/04/01 14:45:44 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/04/10 14:36:04 by manumart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,14 @@ void	chdirandupdate(char *path)
 	char	oldpwd[PATH_MAX];
 	char	pwd[PATH_MAX];
 
-	ft_bzero(oldpwd, PATH_MAX);
+	ft_bzero(oldpwd, PATH_MAX); 
 	getcwd(oldpwd, sizeof(oldpwd));
+	if (!path)
+	{
+		ft_putstr(2, "cd: HOME not set\n");
+		g_data.status = 1;
+		return ;
+	}
 	if (chdir(path) != 0)
 	{
 		perror("chdir");
