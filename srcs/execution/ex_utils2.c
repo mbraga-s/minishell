@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 15:41:51 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/04/11 01:16:38 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/04/11 01:30:46 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	out_check(t_data *data)
 	int	i;
 
 	i = -1;
-	fd = 0;
+	fd = 1;
 	while (data->outfile && data->outfile[++i])
 	{
 		if (!ft_strncmp(data->outflag[i], "0", 1))
