@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 15:41:51 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/04/11 00:13:07 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/04/11 01:16:38 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	file_check(int dups[2], t_data *data)
 	{
 		dups[0] = dupcheck(data->fd_in, dups[0]);
 	}
-	if (data->fd_out > 0)
+	if (data->fd_out > 1)
 	{
 		dups[1] = dupcheck(data->fd_out, dups[1]);
 	}
@@ -104,7 +104,7 @@ void	close_all(t_data *data)
 	{
 		if (data->fd_in > 0)
 			close(data->fd_in);
-		if (data->fd_out > 0)
+		if (data->fd_out > 1)
 			close(data->fd_out);
 		data = data->next;
 	}

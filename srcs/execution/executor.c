@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 12:31:02 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/04/11 00:20:32 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/04/11 01:14:44 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ void	execution(t_data *data)
 	{
 		if (data->fd_in == -1)
 			return ;
+		printf("%d\n\n", data->fd_out);
 		check_builtin(data, data->fd_out);
 		close_all(data);
 		return ;
