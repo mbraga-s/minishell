@@ -7,14 +7,14 @@ The minishell project requires students to build their own simple shell (using b
 The bulk of the work was divided as follows:
 >[Miguel](https://github.com/mbraga-s):
 >
->Checking Input, Parsing, Expansions, Redirections, Execution and Signal Handling
+>Parsing, Expansions, Redirections, Execution and Signal Handling
 >
 >[Manuel](https://github.com/manuelm-git):
 >
 >Built-ins, Environment Variables and Signal Handling
 
 
-**This project and Readme are still in development - everything here is subject to change so take what you see here '*with a grain of salt*'.**
+**This Readme is still in development - everything here is subject to change so take what you see here '*with a grain of salt*'.**
   
 
 ## Index
@@ -47,7 +47,7 @@ III. [Structure](#structure)
 
 <div  align="center">  <strong>
 
-INPUT → LEXER → SYNTAX CHECKER → PARSER → EXPANDER  → EXECUTOR
+INPUT → LEXER → SYNTAX CHECKER → PARSER → EXPANDER → REDIRECTIONS → EXECUTOR
 
 </strong>  </div>
 
@@ -55,7 +55,7 @@ In this *README*, we'll look into the following example to illustrate how the in
 
 <div  align="center">
 
-`<infile cat|"wc -w">>outfile`
+`<infile cat|grep "else if" | wc -l >>$USER$NOEXIST.txt`
 
 </div>
 
@@ -65,7 +65,7 @@ The lexer's function is to tokenize the received input. It does this by separati
 
 <div  align="center">
 
-`<infile grep $USER|wc -w>>outfile` → ` < infile grep $USER | "wc -w" >> outfile` → `<` `infile` `grep` `$USER` `|` `wc` `-w` `>>` `outfile`
+`<infile cat|grep "else if" | wc -l >>$USER$NOEXIST.txt` → ` < infile cat | grep "else if"  |  wc -l  >> $USER$NOEXIST.txt` → `<` `infile` `cat` `|` `grep` `"else if"` `|` `wc` `-l` `>>` `$USER$NOEXIST.txt`
 
 </div>
 
@@ -95,6 +95,8 @@ The parser assigns the tokens provided by the lexer (and checked by the syntax c
     	char		**inflag;	// array using "0" and "1" as flags depending of the type of infile
     	char		**outfile;	// same as infile but for files to write to
     	char		**outflag;	// same as inflag but for the outfiles
+    	int		fd_in;		// for the fd of an infile to be stored
+    	int		fd_out;		// for the fd of an outfile to be stored
     	int		pid;		// for the pid of the fork to be stored
     	struct s_data	*next;		// pointer to the next node of the list
     	struct s_data	*prev;		// pointer to the previous node of the list
@@ -107,40 +109,41 @@ Tokens are assigned following these rules:
  3. if an **operator token** is found and it is a pipe ( | ) a new node is created, and the *next* and *prev* pointers are set accordingly.
 
 ```
-data1							data2
-{							{
-	char		**args = [grep, $USER]			char		**args = [wc, -w]
-	int		fd[2] = [0 , 1]				int		fd[2] = [0 , 1]
-	char		**infile = [infile]			char		**infile = NULL
-	char		**inflag = [0]				char		**inflag = NULL
-	char		**outfile = NULL			char		**outfile = [outfile]
-	char		**outflag = NULL			char		**outflag = [1]
-	int		pid = 0					int		pid = 0
-	struct s_data	*next = &data2				struct s_data	*next = NULL
-	struct s_data	*prev = NULL				struct s_data	*prev = &data1
-}							}	
+data1							data2							data3
+{							{							{
+	char		**args = [cat]				char		**args = [grep, "else if"]		char		**args = [wc, -l]
+	int		fd[2] = [0 , 1]				int		fd[2] = [0 , 1]				int		fd[2] = [0 , 1]
+	char		**infile = [infile]			char		**infile = NULL				char		**infile = NULL
+	char		**inflag = [0]				char		**inflag = NULL				char		**inflag = NULL
+	char		**outfile = NULL			char		**outfile = NULL			char		**outfile = [$USER$NOEXIST.txt]
+	char		**outflag = NULL			char		**outflag = [1]				char		**outflag = [1]
+	int		fd_in = 0				int		fd_in = 0				int		fd_in = 0
+	int		fd_out = 1				int		fd_out = 1				int		fd_out = 1
+	int		pid = 0					int		pid = 0					int		pid = 0
+	struct s_data	*next = &data2				struct s_data	*next = &data3				struct s_data	*next = NULL
+	struct s_data	*prev = NULL				struct s_data	*prev = &data1				struct s_data	*prev = &data2
+}							}							}
 ```
 
 ### Expander
 
-After the linked list is constructed, each string in the *args* array of each node is checked for single or double quotations and for expandable arguments — arguments starting with a *$* that are not in between single quotes.
+After the linked list is constructed, each string in the *args* array of each node, as well as in the *infile* and *outfile* arrays,  is checked for single or double quotations and for expandable arguments — arguments starting with a *$* that are not in between single quotes.
 
 Any quoted string has its quotes removed, and if an expandable argument is found, it's checked against the environment variables. If it's found, the expandable argument is replaced with the value of the variable. If it isn't found, then it's removed (from the string if it's in one, or from the array if the expandable argument is the string).
 
 ```
-data1							data2
-{							{
-	char		**args = [grep, mbraga-s]		char		**args = [wc, -w]
-	int		fd[2] = [0 , 1]				int		fd[2] = [0 , 1]
-	char		**infile = [infile]			char		**infile = NULL
-	char		**inflag = [0]				char		**inflag = NULL
-	char		**outfile = NULL			char		**outfile = [outfile]
-	char		**outflag = NULL			char		**outflag = [1]
-	int		pid = 0					int		pid = 0
-	struct s_data	*next = &data2				struct s_data	*next = NULL
-	struct s_data	*prev = NULL				struct s_data	*prev = &data1
-}							}	
+data1							data2							data3
+{							{							{
+	char		**args = [cat]				char		**args = [grep, "else if"]		char		**args = [wc, -l]
+	int		fd[2] = [0 , 1]				int		fd[2] = [0 , 1]				int		fd[2] = [0 , 1]
+	char		**infile = [infile]			char		**infile = NULL				char		**infile = NULL
+	char		**inflag = [0]				char		**inflag = NULL				char		**inflag = NULL
+	char		**outfile = NULL			char		**outfile = NULL			char		**outfile = [mbraga-s.txt]
+	char		**outflag = NULL			char		**outflag = [1]				char		**outflag = [1]
+	int		fd_in = 0				int		fd_in = 0				int		fd_in = 0
+	int		fd_out = 1				int		fd_out = 1				int		fd_out = 1
+	int		pid = 0					int		pid = 0					int		pid = 0
+	struct s_data	*next = &data2				struct s_data	*next = &data3				struct s_data	*next = NULL
+	struct s_data	*prev = NULL				struct s_data	*prev = &data1				struct s_data	*prev = &data2
+}							}							}
 ```
-
-### Executor
->In development
