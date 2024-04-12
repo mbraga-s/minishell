@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 12:31:02 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/04/11 01:31:24 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/04/12 15:52:35 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,10 @@ void	exec_signal_handle(t_data	*data)
 		if (WIFSIGNALED(status))
 		{
 			if (status == 130)
+			{
 				g_data.status = 130;
+				ft_putstr(1, "\n");
+			}
 			else if (status == 131)
 				g_data.status = 131;
 		}
@@ -68,9 +71,7 @@ void	exec_signal_handle(t_data	*data)
 			g_data.status = WEXITSTATUS(status);
 		data = data->next;
 	}
-	if (g_data.status == 130)
-		ft_putstr(1, "\n");
-	else if (g_data.status == 131)
+	if (g_data.status == 131)
 		ft_putstr(2, "Quit (core dumped)\n");
 }
 

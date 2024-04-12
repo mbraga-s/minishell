@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 11:43:38 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/04/11 00:34:44 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/04/12 15:28:22 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ typedef struct s_envs
 {
 	char				**envp;
 	t_data				*strut;
+	int					hd_signal;
 }						t_envs;
 
 extern struct s_global	g_data;
@@ -180,6 +181,8 @@ int						syntax_checker(char **tokens);
 void					sigintmain(int signum);
 
 void					siginthd(int signum);
+
+void					signalhandlechild(void);
 
 // redirections.c
 

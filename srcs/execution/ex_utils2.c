@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 15:41:51 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/04/11 01:30:46 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/04/12 15:15:17 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,11 @@
 //Works for multiple infiles and outfiles.
 int	file_check(int dups[2], t_data *data)
 {
-	if (data->fd_in == -1 || data->fd_out == -1)
+	signalhandlechild();
+	if (data->fd_in < 0 || data->fd_out < 0)
 	{
-		g_data.status = 1;
+		if (data->fd_in == -1 || data->fd_out == -1)
+			g_data.status = 1;
 		return (0);
 	}
 	if (data->fd_in > 0)
@@ -50,8 +52,9 @@ int	in_check(t_data *data)
 			fd = ft_heredoc(data->infile[i], data);
 		if (fd < 0)
 		{
-			perror(data->infile[i]);
-			return (-1);
+			if (fd == -1)
+				perror(data->infile[i]);
+			return (fd);
 		}
 		if (!(data->infile[i + 1]))
 			break ;

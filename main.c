@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 16:58:29 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/04/10 20:29:41 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/04/12 15:28:56 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,12 @@ void	inner_working(char **tokens)
 	data = NULL;
 	data = parser(tokens);
 	msdata()->strut = data;
+	msdata()->hd_signal = 0;
 	expander(data);
-	redirections(data);
 	g_data.status = 0;
-	execution(data);
+	redirections(data);
+	if (msdata()->hd_signal == 0)
+		execution(data);
 	free_all(data);
 }
 

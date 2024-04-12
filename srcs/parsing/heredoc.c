@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:07:27 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/04/11 00:07:04 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/04/12 15:29:59 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,13 @@ int	ft_heredoc(char *str, t_data *data)
 	if (pid == 0)
 		ft_here_fork(str, fd, data);
 	waitpid(pid, &status, 0);
+	if (WIFEXITED(status) && WEXITSTATUS(status) == 130)
+	{
+		g_data.status = WEXITSTATUS(status);
+		close_fd(fd);
+		msdata()->hd_signal = 1;
+		return (-2);
+	}
 	close(fd[1]);
 	return (fd[0]);
 }
