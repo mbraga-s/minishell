@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   syntax.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbraga-s <mbraga-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:54:25 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/15 19:00:44 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/04/12 16:42:06 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,13 @@
 void	syn_error(char **tokens, int i)
 {
 	if (!tokens[i])
-		printf("syntax error near unexpected token `newline'\n");
+		ft_putstr(2, "syntax error near unexpected token `newline'\n");
 	else
-		printf("syntax error near unexpected token `%s'\n", tokens[i]);
+	{
+		ft_putstr(2, "syntax error near unexpected token `");
+		ft_putstr(2, tokens[i]);
+		ft_putstr(2, "'\n");
+	}
 	g_data.status = 2;
 	free_array(tokens);
 }

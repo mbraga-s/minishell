@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 15:41:51 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/04/12 15:15:17 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/04/12 16:32:40 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,10 @@ int	out_check(t_data *data)
 		else if (!ft_strncmp(data->outflag[i], "1", 1))
 			fd = open(data->outfile[i], O_RDWR | O_CREAT | O_APPEND, 0644);
 		if (fd < 0)
+		{
+			perror(data->outfile[i]);
 			return (-1);
+		}
 		if (!(data->outfile[i + 1]))
 			break ;
 		close(fd);

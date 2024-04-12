@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 12:31:02 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/04/12 15:52:35 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/04/12 16:23:38 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,11 @@ void	execution(t_data *data)
 		pipe_protect(data);
 	else if (is_builtin(data))
 	{
-		if (data->fd_in == -1)
+		if (data->fd_in == -1 || data->fd_out == -1)
+		{
+			g_data.status = 1;
 			return ;
+		}
 		check_builtin(data, data->fd_out);
 		close_all(data);
 		return ;
