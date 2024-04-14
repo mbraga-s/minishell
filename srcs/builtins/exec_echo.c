@@ -3,14 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   exec_echo.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 07:09:52 by manumart          #+#    #+#             */
-/*   Updated: 2024/03/27 14:22:05 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/04/14 12:15:55 by manumart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+
+int	findonly(char c, char c2, char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == c || str[i] == c2)
+			i++;
+		else
+			return (1);
+	}
+	return (0);
+}
 
 void	exec_echo(t_data *data, int fd)
 {
@@ -21,7 +36,8 @@ void	exec_echo(t_data *data, int fd)
 	i = 1;
 	if (data->args[1])
 	{
-		if (!ft_strncmp(data->args[1], "-n", 2))
+		if (!findonly('-', 'n', data->args[1]) && !ft_strncmp(data->args[1],
+				"-n", 2))
 		{
 			newline = 1;
 			i++;
