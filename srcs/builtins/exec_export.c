@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 07:06:23 by manumart          #+#    #+#             */
-/*   Updated: 2024/03/26 18:50:28 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/04/14 17:56:08 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,14 @@ void	exportonly(char **envp, int fd)
 	char	**envpsorted;
 	int		envp_size;
 
-	envpsorted = dpdup(envp);
-	envp_size = getdpsize(envpsorted);
-	envpsorted = sortenvp(envpsorted, envp_size);
-	printenvpsorted(envpsorted, fd);
-	free_array(envpsorted);
+	if (envp && envp[0] != NULL)
+	{
+		envpsorted = dpdup(envp);
+		envp_size = getdpsize(envpsorted);
+		envpsorted = sortenvp(envpsorted, envp_size);
+		printenvpsorted(envpsorted, fd);
+		free_array(envpsorted);
+	}
 }
 
 void	exporterror(char *arg)

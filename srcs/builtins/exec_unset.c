@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 07:08:21 by manumart          #+#    #+#             */
-/*   Updated: 2024/04/02 16:31:26 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/04/14 17:39:46 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	exec_unset(t_data *data)
 	int	output;
 
 	i = 1;
-	while (data->args[i])
+	while (data->args[i] && msdata()->envp)
 	{
 		output = searchinenvp(data->args[i], msdata()->envp);
 		if (output != -1)
