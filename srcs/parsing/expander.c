@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 12:31:37 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/04/01 14:30:00 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/04/14 14:25:16 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,17 +44,21 @@ void	expander1(t_data *current)
 	while (current->infile && current->infile[j])
 	{
 		current->infile[j] = expand(current->infile[j], msdata()->envp);
-		current->infile[j] = rem_quotes(current->infile[j]);
 		if (check_args(current->infile, j))
+		{
+			current->infile[j] = rem_quotes(current->infile[j]);
 			j++;
+		}
 	}
 	j = 0;
 	while (current->outfile && current->outfile[j])
 	{
 		current->outfile[j] = expand(current->outfile[j], msdata()->envp);
-		current->outfile[j] = rem_quotes(current->outfile[j]);
 		if (check_args(current->outfile, j))
+		{
+			current->outfile[j] = rem_quotes(current->outfile[j]);
 			j++;
+		}
 	}
 }
 
@@ -69,9 +73,11 @@ void	expander(t_data *current)
 		while (current->args && current->args[j])
 		{
 			current->args[j] = expand(current->args[j], msdata()->envp);
-			current->args[j] = rem_quotes(current->args[j]);
 			if (check_args(current->args, j))
+			{
+				current->args[j] = rem_quotes(current->args[j]);
 				j++;
+			}
 		}
 		expander1(current);
 		current = current->next;
