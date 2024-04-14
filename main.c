@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 16:58:29 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/04/14 15:15:48 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/04/14 16:05:10 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,8 @@ int	main(int argc, char **argv, char **env)
 	(void)argc;
 	(void)argv;
 	msdata()->envp = dpdup(env);
-	if(msdata()->envp)
-		getSHLVL();
+	if (msdata()->envp)
+		getshlvl();
 	while (1)
 	{
 		signal(SIGINT, sigintmain);
