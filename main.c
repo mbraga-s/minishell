@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 16:58:29 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/04/12 15:28:56 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/04/14 15:07:03 by manumart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,8 @@ int	main(int argc, char **argv, char **env)
 	(void)argc;
 	(void)argv;
 	msdata()->envp = dpdup(env);
+	if(msdata()->envp)
+		getSHLVL();
 	while (1)
 	{
 		signal(SIGINT, sigintmain);

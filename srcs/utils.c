@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 17:56:04 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/26 14:56:15 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/04/14 15:06:11 by manumart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,19 @@ char	*ft_putstr(int fd, char *str)
 {
 	write(fd, str, ft_strlen(str));
 	return (str);
+}
+
+void getSHLVL(void)
+{
+	int findSHLVL;
+	char **temp;
+	char *str;
+	
+	findSHLVL = searchinenvp("SHLVL",msdata()->envp);
+	temp = ft_split(msdata()->envp[findSHLVL], '=');
+	msdata()->SHLVL = temp[1][0]++;
+	str = ft_stjnf("SHLVL=",temp[1]);
+	addtoenv(str);
+	free(str);
+	free_array(temp);
 }

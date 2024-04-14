@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: manumart <manumart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 11:43:38 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/04/12 15:28:22 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/04/14 14:46:04 by manumart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ typedef struct s_envs
 	char				**envp;
 	t_data				*strut;
 	int					hd_signal;
+	int					SHLVL;
 }						t_envs;
 
 extern struct s_global	g_data;
@@ -75,6 +76,8 @@ t_data					*ft_lstfirst(t_data *lst);
 char					*ft_putstr(int fd, char *str);
 
 void					check_error(char *str);
+
+void						getSHLVL(void);
 
 // ex_utils1.c
 
