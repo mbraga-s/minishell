@@ -16,32 +16,23 @@ The bulk of the work was divided as follows:
 
 **This Readme is still in development - everything here is subject to change so take what you see here '*with a grain of salt*'.**
   
+## Intro
 
-## Index
-
-I. [Usage](#usage)
-
+I.	Usage
+```
+> make
+> ./minishell
+```
   
 
-II.[Features](#features)
+II.	Features
 
-  
-
-III. [Structure](#structure)
-
-  
-
-## Usage
-
->In development
-
-## Features
-
->In development
-
-### Built-in Functions
-
->In development
+ - Working here-doc
+ - Infile / outfile redirections + appending
+ - Built-in functions (echo, cd, export, unset, env, exit, pwd)
+ - Command execution with several pipes
+ - Basic signal handling
+ - Expandible arguments
 
 ## Structure
 
@@ -147,5 +138,38 @@ data1							data2							data3
 	struct s_data	*prev = NULL				struct s_data	*prev = &data1				struct s_data	*prev = &data2
 }							}							}
 ```
-### Executor
+### Redirections
 >In development
+### Executor
+The executor starts by seeing if the *data* list has more than one node. If it has, it opens a pipe (saving the corresponding file descriptors in *fd[2]* and runs the rest of the executor - which is explained further. If not, no pipes need to be opened, and the first string of the *args* array is checked for a built-in command. 
+In case a built-in command is found, the corresponding built-in function is called and the executor ends. Otherwise, or if there is a pipe, the executor calls the **execute_forks** function:
+
+```
+void	execute_forks(t_data *data)
+{
+	data->pid = fork(); //Creates the first fork and runs the corresponding command
+	if (data->pid == 0)
+		first_fork(data, msdata()->envp);
+	data = data->next; //Moves to the next node of the list
+	while (data && data->next) //Runs a loop creating forks, and pipes as long as there is a next node.
+	{
+		pipe_protect(data);
+		data->pid = fork();
+		if (data->pid == 0)
+			mid_fork(data, msdata()->envp);
+		close_fd(data->prev->fd);
+		data = data->next;
+	}
+	if (data) //Creates the last fork of the list
+	{
+		data->pid = fork();
+		if (data->pid == 0)
+			last_fork(data, msdata()->envp);
+		close_fd(data->prev->fd);
+	}
+}
+```
+This simple function allows all pipes/forks to be handled correctly, making sure that there are never more than 2 pipes open in our main process - which allows for a clean handling of file descriptors. 
+It also makes sure that all forks are running simultaneously and that no nasty things (such as waiting for a process/fork to end before running the next one) happen.
+
+Each fork creation saves its process id (*pid*) on the corresponding node, allowing us to wait for all processes and to catch their exit codes.
